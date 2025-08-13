@@ -10,3 +10,1282 @@ in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
  7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
  8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 12:33:57 --> Error connecting to the database: mysqli_sql_exception: Unknown database 'pruebasphp' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'pruebasPHP', 3306, '', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\EstoLlanos\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\EstoLlanos\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\EstoLlanos\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(11): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+#8 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#9 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Unknown database 'pruebasphp' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\EstoLlanos\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\EstoLlanos\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(11): CodeIgniter\BaseModel->findAll()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#8 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-08-13 12:33:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Unknown database 'pruebasphp'
+[Method: GET, Route: usuarios]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(614): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `usuarios`
+ORDER BY `fecha_nacimiento` ASC', [], false)
+ 3 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Controllers\UsuariosController.php(11): CodeIgniter\BaseModel->findAll()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 12:56:36 --> CodeIgniter\Database\Exceptions\DatabaseException: You must set the database table to be used with your query.
+[Method: GET, Route: usuarios]
+in SYSTEMPATH\Database\BaseConnection.php on line 944.
+ 1 SYSTEMPATH\Model.php(713): CodeIgniter\Database\BaseConnection->table(null)
+ 2 SYSTEMPATH\Model.php(917): CodeIgniter\Model->builder()
+ 3 APPPATH\Controllers\UsuariosController.php(11): CodeIgniter\Model->__call('orderBy', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 13:19:02 --> Error: Cannot use object of type stdClass as array
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 38.
+ 1 SYSTEMPATH\View\View.php(226): include()
+ 2 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 3 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 4 APPPATH\Controllers\UsuariosController.php(16): view('UsuariosView/usuarios', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:02:39 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:02:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'ricardo@gmail.com' for key 'email'
+[Method: POST, Route: crear]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 2 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 15:02:39 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'ricardo@gmail.com' for key 'email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceño\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:02:39\', 1, \'100\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceño\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:02:39\', 1, \'100\')')
+ 3 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 4 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 15:02:39 --> [Caused by] mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceño\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:02:39\', 1, \'100\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceño\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:02:39\', 1, \'100\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceño\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:02:39\', 1, \'100\')')
+ 4 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 5 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:03:15 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:03:15 --> CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'ricardo@gmail.com' for key 'email'
+[Method: POST, Route: crear]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 2 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 15:03:15 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Duplicate entry 'ricardo@gmail.com' for key 'email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceno\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:03:15\', 1, \'12\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceno\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:03:15\', 1, \'12\')')
+ 3 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 4 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 15:03:15 --> [Caused by] mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceno\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:03:15\', 1, \'12\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceno\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:03:15\', 1, \'12\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (\'ricardo\', \'briceno\', \'ricardo@gmail.com\', \'2025-08-13\', \'masculino\', \'venezuela\', \'2025-08-13 15:03:15\', 1, \'12\')')
+ 4 APPPATH\Models\UsuariosModel.php(45): CodeIgniter\Database\BaseConnection->query('INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', [...])
+ 5 APPPATH\Controllers\UsuariosController.php(40): App\Models\UsuariosModel->crear([...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:17:21 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:18:43 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:22:38 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:22:38 --> TypeError: Cannot access offset of type string on string
+[Method: POST, Route: crear]
+in APPPATH\Controllers\UsuariosController.php on line 34.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:23:28 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:24:25 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:24:25 --> ErrorException: Array to string conversion
+[Method: POST, Route: crear]
+in APPPATH\Models\UsuariosModel.php on line 53.
+ 1 APPPATH\Models\UsuariosModel.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Models\\UsuariosModel.php', 53)
+ 2 APPPATH\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear([...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:25:06 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:31:11 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:31:17 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:40:37 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:40:37 --> ErrorException: Array to string conversion
+[Method: POST, Route: crear]
+in APPPATH\Controllers\UsuariosController.php on line 37.
+ 1 APPPATH\Controllers\UsuariosController.php(37): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Controllers\\UsuariosController.php', 37)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:41:02 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:41:02 --> ErrorException: Undefined variable $usuarios
+[Method: POST, Route: crear]
+in APPPATH\Views\UsuariosView\usuarios.php on line 36.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usuarios', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 36)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(38): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:41:50 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:41:50 --> ErrorException: Undefined variable $usuarios
+[Method: POST, Route: crear]
+in APPPATH\Views\UsuariosView\usuarios.php on line 36.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usuarios', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 36)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(38): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:42:22 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:42:22 --> ErrorException: Undefined variable $usuarios
+[Method: POST, Route: crear]
+in APPPATH\Views\UsuariosView\usuarios.php on line 36.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usuarios', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 36)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(38): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:42:46 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:42:46 --> ErrorException: Undefined variable $usuarios
+[Method: POST, Route: crear]
+in APPPATH\Views\UsuariosView\usuarios.php on line 36.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usuarios', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 36)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(38): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:42:48 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:42:48 --> ErrorException: Undefined variable $usuarios
+[Method: POST, Route: crear]
+in APPPATH\Views\UsuariosView\usuarios.php on line 36.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $usuarios', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 36)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(38): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:43:16 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:44:21 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:47:37 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 15:47:37 --> ErrorException: Undefined array key "alertas"
+[Method: POST, Route: crear]
+in APPPATH\Controllers\UsuariosController.php on line 38.
+ 1 APPPATH\Controllers\UsuariosController.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "alertas"', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Controllers\\UsuariosController.php', 38)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 15:47:46 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:48:20 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:49:02 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:49:13 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:49:20 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:49:32 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:49:37 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:50:14 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:50:39 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:50:50 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 15:51:38 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:00:11 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:04:16 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:04:18 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:04:29 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:04:41 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:05:46 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:05:52 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:06:34 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:07:21 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:09:28 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:10:23 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(32): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:43:38 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(29): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:51:47 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(29): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:51:53 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(29): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 16:53:41 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: crear]
+in APPPATH\Views\template\cabezera.php on line 13.
+ 1 APPPATH\Views\template\cabezera.php(13): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php', 13)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('Template/cabezera', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(23): view('Template/cabezera')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 16:54:47 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:55:51 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:56:18 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:56:24 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:59:46 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 16:59:57 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:00:08 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:00:53 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:01:07 --> mysqli_sql_exception: Duplicate entry '' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:01:23 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:01:40 --> mysqli_sql_exception: Duplicate entry '' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:03:56 --> mysqli_sql_exception: Duplicate entry '' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:05:22 --> mysqli_sql_exception: Duplicate entry '' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:12:24 --> mysqli_sql_exception: Duplicate entry 'ricardo1@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:13:43 --> mysqli_sql_exception: Duplicate entry 'ricardobriceno1134@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(31): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 17:15:42 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "¿"
+[Method: GET, Route: %C2%BF]
+in SYSTEMPATH\Router\Router.php on line 741.
+ 1 SYSTEMPATH\Router\Router.php(207): CodeIgniter\Router\Router->checkDisallowedChars('¿')
+ 2 SYSTEMPATH\CodeIgniter.php(832): CodeIgniter\Router\Router->handle('¿')
+ 3 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 17:15:49 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: usuarios]
+in APPPATH\Views\template\cabezera.php on line 14.
+ 1 APPPATH\Views\template\cabezera.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php', 14)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('Template/cabezera', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(15): view('Template/cabezera')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 17:15:58 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: usuarios]
+in APPPATH\Views\template\cabezera.php on line 14.
+ 1 APPPATH\Views\template\cabezera.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php', 14)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\template\\cabezera.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('Template/cabezera', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(15): view('Template/cabezera')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 17:18:10 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "UsuariosView/crearUsuario.php"
+[Method: POST, Route: crear]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('UsuariosView/crearUsuario.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/crearUsuario', [], true)
+ 3 APPPATH\Controllers\UsuariosController.php(42): view('UsuariosView/crearUsuario', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2025-08-13 17:19:11 --> mysqli_sql_exception: Duplicate entry 'aad@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(33): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+ERROR - 2025-08-13 17:19:22 --> mysqli_sql_exception: Duplicate entry 'ricardo@gmail.com' for key 'email' in C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\EstoLlanos\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO usu...', 0)
+#1 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO usu...')
+#2 C:\xampp\htdocs\EstoLlanos\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO usu...')
+#3 C:\xampp\htdocs\EstoLlanos\app\Models\UsuariosModel.php(46): CodeIgniter\Database\BaseConnection->query('INSERT INTO usu...', Array)
+#4 C:\xampp\htdocs\EstoLlanos\app\Controllers\UsuariosController.php(33): App\Models\UsuariosModel->crear(Array)
+#5 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(933): App\Controllers\UsuariosController->crear()
+#6 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+#7 C:\xampp\htdocs\EstoLlanos\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\EstoLlanos\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\EstoLlanos\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\EstoLlanos\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2025-08-13 18:02:09 --> ErrorException: Array to string conversion
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 46.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 46)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 18:02:10 --> ErrorException: Array to string conversion
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 46.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 46)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 18:02:11 --> ErrorException: Array to string conversion
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 46.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 46)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 18:02:14 --> ErrorException: Array to string conversion
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 46.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(46): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 46)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 18:41:03 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: eliminar/41]
+in APPPATH\Models\UsuariosModel.php on line 71.
+ 1 APPPATH\Controllers\UsuariosController.php(57): App\Models\UsuariosModel->eliminar('41')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->eliminar('41')
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 19:11:57 --> ErrorException: Array to string conversion
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 43.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 43)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 19:13:27 --> ErrorException: Undefined variable $json_encode
+[Method: GET, Route: usuarios]
+in APPPATH\Views\UsuariosView\usuarios.php on line 43.
+ 1 APPPATH\Views\UsuariosView\usuarios.php(43): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $json_encode', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php', 43)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\EstoLlanos\\app\\Views\\UsuariosView\\usuarios.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('UsuariosView/usuarios', [], true)
+ 5 APPPATH\Controllers\UsuariosController.php(19): view('UsuariosView/usuarios', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-08-13 19:53:07 --> ErrorException: Undefined array key "activo"
+[Method: POST, Route: editar/70]
+in APPPATH\Models\UsuariosModel.php on line 97.
+ 1 APPPATH\Models\UsuariosModel.php(97): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "activo"', 'C:\\xampp\\htdocs\\EstoLlanos\\app\\Models\\UsuariosModel.php', 97)
+ 2 APPPATH\Controllers\UsuariosController.php(78): App\Models\UsuariosModel->editar('70', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsuariosController->editar('70')
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsuariosController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
