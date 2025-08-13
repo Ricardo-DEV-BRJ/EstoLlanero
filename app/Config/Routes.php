@@ -8,3 +8,4 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/landing', 'LandingPage::index');
 $routes->get('usuarios', 'UsuariosController::index');
+$routes->get('crear', 'UsuariosController::crear');

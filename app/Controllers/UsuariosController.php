@@ -13,4 +13,11 @@ class UsuariosController extends Controller{
         $datos['pieDePagina'] = view('Template/pieDePagina');
         return view('UsuariosView/usuarios', $datos);
     }
+
+    public function crear()
+    {   
+        $datos['cabezera'] = view('Template/cabezera');
+        $datos['pieDePagina'] = view('Template/pieDePagina');
+        return view('UsuariosView/crearUsuarios', $datos);
+    }
 }
