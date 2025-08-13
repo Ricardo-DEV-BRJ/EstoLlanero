@@ -1,5 +1,15 @@
 <?= $cabezera ?>
-<main class="flex justify-center items-center w-12/12">
+  <header class="flex justify-between items-center w-12/12 p-4" >
+    <div>
+      <img src="../public/Media/Logo.png" alt="" width="100">
+    </div>
+    <ul>
+      <li>
+        <a href="<?= base_url('crear') ?>" class="btn bg-blue-500 text-white">Crear Usuario</a>
+      </li>
+    </ul>
+
+  </header>
   <div class="card shadow-sm md:w-10/12 w-12/12">
     <div class="card-body">
       <div class="card-title flex items-center gap-2">
@@ -44,5 +54,5 @@
         </tbody>
       </table>
     </div>
-</main>
+
 <?= $pieDePagina ?>

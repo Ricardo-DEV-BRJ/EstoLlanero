@@ -14,3 +14,4 @@
 </head>
 
 <body>
+  <main class="flex flex-col justify-center items-center w-12/12">

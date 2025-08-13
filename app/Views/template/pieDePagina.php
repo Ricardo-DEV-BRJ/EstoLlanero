@@ -2,7 +2,7 @@
 <script>
     lucide.createIcons();
 </script>
-
+</main>
 </body>
 
 </html>
