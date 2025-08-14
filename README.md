@@ -1,3 +1,26 @@
+# 📋 Instrucciones para ejecutar el proyecto
+
+## 📌 Requisitos del Servidor (Para CodeIgniter 4)
+
+## CodeIgniter 4 requiere:
+
+- Composer https://getcomposer.org/download/
+
+- PHP 7.4 o superior (recomendado PHP 8.0+ para mejor rendimiento).
+
+- intl (para internacionalización).
+
+- XAMPP para la base de datos y sevidor APACHE
+
+## ✅ Ubicacion del proyecto
+
+Debes instanciar proyecto en la ruta de tu instalacion del XAMPP ejemplo "C:\xampp\htdocs\EstoLlanos"
+
+Ojo deben crear la carpeta Llamada especificamente "EstoLlanos" respetando el orden las mayusculas
+
+# Por ultimo 
+Debes crear una carpeta dentro de la carpeta Public del proyecto llamada image alli se guardaran todas las imagenes que se agreguen 
+
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?
