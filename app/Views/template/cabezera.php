@@ -28,6 +28,9 @@
           <a href="<?= base_url('crear') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="user-round-plus"></i> Crear Usuario</a>
         </li>
           <li>
+          <a href="<?= base_url('noticias') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="newspaper"></i> Noticias</a>
+        </li>
+          <li>
           <a href="<?= base_url('/') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="home"></i> Inicio</a>
         </li>
       </ul>

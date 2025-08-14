@@ -3,7 +3,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-white flex items-center">
-                        <i data-lucide="trophy" class="w-6 h-6 mr-2 text-accent"></i>
+                        <i data-lucide="trophy" class="w-6 h-6 mr-2 text-white"></i>
                         TRIUNFOBET
                     </h3>
                     <p class="text-gray-300">Tu destino principal para todas las actualizaciones deportivas y noticias de última hora de todo el mundo.</p>
@@ -68,3 +68,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+</script>

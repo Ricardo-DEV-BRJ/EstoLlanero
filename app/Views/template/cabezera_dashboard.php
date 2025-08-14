@@ -1,15 +1,17 @@
 <?php
-// app/Views/Template/cabezera_dashboard.php
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head>  
+   
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TRIUNFOBET - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -22,7 +24,8 @@
                 }
             }
         }
-    </script>
+        </script>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
@@ -82,6 +85,7 @@
             transform: translateY(-5px);
         }
     </style>
+ 
 </head>
 <body class="bg-gray-50">
     <!-- Barra de navegación -->
@@ -90,7 +94,7 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
                     <span class="text-2xl font-bold text-white flex items-center">
-                        <i data-lucide="trophy" class="w-6 h-6 mr-2 text-accent"></i>
+                        <i data-lucide="trophy" class="w-6 h-6 mr-2 text-white"></i>
                         TRIUNFOBET
                     </span>
                 </div>

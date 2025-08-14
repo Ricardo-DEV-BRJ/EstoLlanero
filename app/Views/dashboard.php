@@ -1,5 +1,5 @@
 <?= view('Template/cabezera_dashboard') ?>
-
+    
     <!-- Carrusel de noticias destacadas -->
     <div class="relative overflow-hidden h-[500px] bg-gradient-to-r from-secondary to-primary">
         <div class="carousel-item active absolute inset-0 flex items-center">
@@ -11,7 +11,7 @@
                     <h1 class="text-4xl md:text-5xl font-bold mb-4">EL EQUIPO DE FÚTBOL GANA EL CAMPEONATO</h1>
                     <p class="text-lg mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <button class="bg-accent hover:bg-[#2a1a61] text-white font-bold py-3 px-6 rounded-lg btn-hover flex items-center">
-                        Leer más <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                        Leer más <i data-lucide="arrow-right-from-line" class="ml-2 w-4 h-4"></i>
                     </button>
                 </div>
             </div>
@@ -70,8 +70,7 @@
                         <div class="absolute top-4 left-4">
                             <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">BALONCESTO</span>
                         </div>
-                        <i data-lucide="basketball" class="w-16 h-16 text-white opacity-20 absolute bottom-4 right-4"></i>
-                    </div>
+                        </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-primary mb-2">EL EQUIPO DE BALONCESTO AVANZA A LAS FINALES</h3>
                         <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
@@ -87,7 +86,6 @@
                         <div class="absolute top-4 left-4">
                             <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">FÚTBOL</span>
                         </div>
-                        <i data-lucide="football" class="w-16 h-16 text-white opacity-20 absolute bottom-4 right-4"></i>
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-primary mb-2">LESIONADO JUGADOR CLAVE EN PARTIDO DECISIVO</h3>
@@ -102,12 +100,11 @@
                 <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
                     <div class="h-48 bg-gradient-to-r from-yellow-500 to-amber-700 relative">
                         <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">TENIS</span>
+                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">BEISBOL</span>
                         </div>
-                        <i data-lucide="tennis" class="w-16 h-16 text-white opacity-20 absolute bottom-4 right-4"></i>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">ESTRELLA DEL TENIS GANA TORNEO IMPORTANTE</h3>
+                        <h3 class="text-xl font-bold text-primary mb-2">ESTRELLA DEL BEISBOL GANA TORNEO IMPORTANTE</h3>
                         <p class="text-gray-600 mb-4">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
                         <a href="#" class="text-accent font-semibold hover:underline inline-flex items-center">
                             Leer más <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
@@ -135,15 +132,14 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
                     <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="football" class="w-8 h-8 text-white"></i>
-                    </div>
+                        <i class="fa-solid fa-futbol fa-xl" style="color: #ffffff;"></i>                    </div>
                     <h3 class="text-xl font-bold text-primary mb-2">FÚTBOL</h3>
                     <p class="text-gray-600 text-sm">Últimas noticias y actualizaciones del mundo del fútbol</p>
                 </div>
                 
                 <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
                     <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="basketball" class="w-8 h-8 text-white"></i>
+                        <i class="fa-solid fa-basketball fa-2xl" style="color: #ffffff;"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">BALONCESTO</h3>
                     <p class="text-gray-600 text-sm">NBA, EuroLeague y todas las ligas de baloncesto</p>
@@ -151,7 +147,7 @@
                 
                 <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
                     <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="american-football" class="w-8 h-8 text-white"></i>
+                       <i class="fa-solid fa-football fa-2xl" style="color: #ffffff;"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">FÚTBOL AMERICANO</h3>
                     <p class="text-gray-600 text-sm">Actualizaciones de la NFL, análisis y noticias de jugadores</p>
@@ -159,13 +155,12 @@
                 
                 <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
                     <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="tennis" class="w-8 h-8 text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-2">TENIS</h3>
-                    <p class="text-gray-600 text-sm">Grand Slams, torneos ATP y WTA</p>
+                        <i class="fa-solid fa-baseball fa-2xl" style="color: #ffffff;"></i>                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-2">BEISBOL</h3>
+                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos autem</p>
                 </div>
             </div>
         </div>
     </section>
-
+    
 <?= view('Template/piedepagina_dashboard') ?>

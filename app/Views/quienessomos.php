@@ -71,29 +71,25 @@
                     <!-- Miembro 1 -->
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <div class="bg-gray-200 border-2 border-dashed rounded-full w-24 h-24 mx-auto mb-4"></div>
-                        <h3 class="text-lg font-bold text-primary">Carlos Martínez</h3>
-                        <p class="text-gray-600 text-sm">Director General</p>
+                        <h3 class="text-lg font-bold text-primary">Ricardo Briceño</h3>                   
                     </div>
                     
                     <!-- Miembro 2 -->
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <div class="bg-gray-200 border-2 border-dashed rounded-full w-24 h-24 mx-auto mb-4"></div>
-                        <h3 class="text-lg font-bold text-primary">Laura Fernández</h3>
-                        <p class="text-gray-600 text-sm">Editora Jefa</p>
+                        <h3 class="text-lg font-bold text-primary">Rhonny Jaimes</h3>
                     </div>
                     
                     <!-- Miembro 3 -->
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <div class="bg-gray-200 border-2 border-dashed rounded-full w-24 h-24 mx-auto mb-4"></div>
-                        <h3 class="text-lg font-bold text-primary">Miguel Ángel Ruiz</h3>
-                        <p class="text-gray-600 text-sm">Jefe de Tecnología</p>
+                        <h3 class="text-lg font-bold text-primary">Sofia Rivera</h3>
                     </div>
                     
                     <!-- Miembro 4 -->
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <div class="bg-gray-200 border-2 border-dashed rounded-full w-24 h-24 mx-auto mb-4"></div>
-                        <h3 class="text-lg font-bold text-primary">Ana Sánchez</h3>
-                        <p class="text-gray-600 text-sm">Directora de Marketing</p>
+                        <h3 class="text-lg font-bold text-primary">Jesus Salazar</h3>
                     </div>
                 </div>
             </div>
