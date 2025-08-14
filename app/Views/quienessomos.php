@@ -77,7 +77,7 @@
                     <!-- Miembro 2 -->
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <div class="bg-gray-200 border-2 border-dashed rounded-full w-24 h-24 mx-auto mb-4"></div>
-                        <h3 class="text-lg font-bold text-primary">Rhonny Jaimes</h3>
+                        <h3 class="text-lg font-bold text-primary">Rhoonny Jaimes</h3>
                     </div>
                     
                     <!-- Miembro 3 -->
