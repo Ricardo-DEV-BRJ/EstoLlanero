@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-08-2025 a las 05:02:30
+-- Tiempo de generación: 14-08-2025 a las 22:14:35
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,12 +33,28 @@ CREATE TABLE `personas` (
   `ruta_imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `personas`
+-- Estructura de tabla para la tabla `users`
 --
 
-INSERT INTO `personas` (`id`, `nombre`, `ruta_imagen`) VALUES
-(5, 'ricardito', '1755140441_4ccf1b0c53b66529e865.png');
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`) VALUES
+(1, 'Jesus', 'jesus@gmail.com', '1234', '2025-08-14 18:20:08'),
+(2, '1', '1', '123', '2025-08-14 18:29:57'),
+(3, 'Ricardo', 'ricardo@gmail.com', '$2y$10$eW5ExyyJNpmEc91AMuywA.CZGB.fpL2Q/71qvM3nuhSqlyBrlF5QO', '2025-08-14 19:20:49');
 
 -- --------------------------------------------------------
 
@@ -86,6 +102,12 @@ ALTER TABLE `personas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -101,6 +123,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `personas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
