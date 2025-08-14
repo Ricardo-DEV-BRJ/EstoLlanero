@@ -10,8 +10,22 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>Usuarios</title>
+  <link rel="stylesheet" href="../public/css/main.css">
+  <title><?= $titulo ?></title>
 </head>
 
 <body>
-  <main class="flex flex-col justify-center items-center w-12/12">
+  <main class="flex flex-col justify-center items-center w-12/12 fondo">
+    <header class="flex justify-between items-center w-12/12 p-4">
+      <div>
+        <img src="../public/Media/Logo.png" alt="" width="100">
+      </div>
+      <ul class="flex gap-2">
+        <li>
+          <a href="<?= base_url('usuarios') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"> <i data-lucide="users"></i> Usuario</a>
+        </li>
+        <li>
+          <a href="<?= base_url('crear') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="user-round-plus"></i> Crear Usuario</a>
+        </li>
+      </ul>
+    </header>
