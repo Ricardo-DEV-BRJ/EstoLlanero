@@ -18,3 +18,4 @@ $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
 $routes->get('noticias', 'NoticiasController::index');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
+// $routes->post('crearNoticias', 'NoticiasController::crear');
