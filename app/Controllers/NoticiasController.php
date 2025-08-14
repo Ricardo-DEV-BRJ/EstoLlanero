@@ -16,7 +16,8 @@ class NoticiasController extends Controller
         $noticias = new NoticiasModel();
         $datos['noticias'] = $noticias->noticias();
         $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'Noticias'
+            'titulo' => 'Noticias',
+            'header' => true
         ]);
         $datos['pieDePagina'] = view('template/pieDePagina');
         return view('NoticiasView/Noticias', $datos);
@@ -25,7 +26,8 @@ class NoticiasController extends Controller
     public function crearNoticias()
     {
         $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'Noticias'
+            'titulo' => 'Noticias',
+            'header' => true
         ]);
         $datos['pieDePagina'] = view('template/pieDePagina');
         return view('NoticiasView/NoticiasCrear', $datos);

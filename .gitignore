@@ -2,5 +2,5 @@ writable/logs/
 writable/session/
 # Ignorar todo dentro de /public/media, excepto la carpeta misma
 /public/image/*
-!/public/image/
-!/public/image/.gitkeep
+#!/public/image/
+#!/public/image/.gitkeep

@@ -17,3 +17,8 @@ $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
 $routes->get('noticias', 'NoticiasController::index');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
+$routes->get('login', 'AuthController::index');
+$routes->post('login', 'AuthController::login');
+$routes->get('sign', 'AuthController::signView');
+$routes->post('sign', 'AuthController::sign');
+$routes->get('logout', 'AuthController::logout');

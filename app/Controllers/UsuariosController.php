@@ -13,7 +13,8 @@ class UsuariosController extends Controller
         $usuarios = new UsuariosModel();
         $datos['usuarios'] = $usuarios->todos();
         $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'Usuarios'
+            'titulo' => 'EstoLlanos - Usuarios',
+            'header' => true
         ]);
         $datos['pieDePagina'] = view('Template/pieDePagina');
         return view('UsuariosView/usuarios', $datos);
@@ -23,7 +24,8 @@ class UsuariosController extends Controller
     {
         $usuarios = new UsuariosModel();
         $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'Usuarios'
+            'titulo' => 'EstoLlanos - Usuarios',
+            'header' => true
         ]);
         $datos['pieDePagina'] = view('Template/pieDePagina');
 
@@ -47,7 +49,6 @@ class UsuariosController extends Controller
                 return view('UsuariosView/crearUsuarios', $datos);
             }
 
-            print_r($datos['res']);
         }
     }
 
