@@ -16,3 +16,5 @@ $routes->get('eliminar/(:num)', 'UsuariosController::eliminar/$1');
 $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
 // $routes->post('guardarUsuario', 'UsuariosController::GuardarUsuario');
 $routes->get('noticias', 'NoticiasController::index');
+$routes->get('crearNoticias', 'NoticiasController::crearNoticias');
+$routes->post('crearNoticias', 'NoticiasController::crear');
