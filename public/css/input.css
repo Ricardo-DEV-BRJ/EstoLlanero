@@ -1,87 +1,98 @@
 @import "tailwindcss";
-@source "./public/*.{html,js}";
-
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake, mytheme;
+  themes: light, dark, lightTema --default, darkTema;
 }
 
-.bg-carta {
-  background-color: var(--color-carta); 
-}
-
-.bg-carta-content {
-  background-color: var(--color-carta-content); 
-}
-
-.bg-primaryR {
-  background-color: var(--color-primaryR); 
-}
-.bg-secondaryR {
-  background-color: var(--color-secondaryR); 
-}
-.bg-primary:hover {
-  background-color: var(--color-primary-hover); 
-}
-
+/* Tema personalizado */
 @plugin "daisyui/theme" {
-  name: "mytheme";
-  default: true;
-  /* set as default */
-  prefersdark: false;
-  /* set as default dark mode (prefers-color-scheme:dark) */
+  name: lightTema;
   color-scheme: light;
-  /* color of browser-provided UI */
+    /* Primary (Azul corporativo) */
+  --color-primary: oklch(62.4% 0.22 263.5);      /* #4b6bfb */
+  --color-primary-content: oklch(100% 0 0);       /* Blanco */
+  --color-primary-focus: oklch(53.6% 0.22 263.5); /* #3a56d8 */
 
-  --color-carta: oklch(22.97% 0.092 289.46);
-  --color-carta-content: oklch(20% 0.05 240);
+  /* Secondary (Gris azulado) */
+  --color-secondary: oklch(68.3% 0.05 248.8);     /* #7b92b2 */
+  --color-secondary-content: oklch(100% 0 0);      /* Blanco */
+  --color-secondary-focus: oklch(60% 0.05 248.8); /* #64748b */
 
-  --color-primaryR: oklch(45.03% 0.070 258.54);
-  --color-secondaryR: oklch(33.19% 0.089 292.38);
+  /* Accent (Verde esmeralda) */
+  --color-accent: oklch(72.1% 0.19 160.5);        /* #50cd89 */
+  --color-accent-content: oklch(100% 0 0);        /* Blanco */
+  --color-accent-focus: oklch(64.5% 0.19 160.5);  /* #3ca876 */
 
-  --color-primary: oklch(65.82% 0.169 248.81);
-  --color-primary-hover: oklab(53.943% 0.02009 -0.25293);
+  /* Neutral (Grises corporativos) */
+  --color-neutral: oklch(56.5% 0.01 260.7);       /* #6b7280 */
+  --color-neutral-content: oklch(100% 0 0);       /* Blanco */
+  --color-neutral-focus: oklch(48.5% 0.01 260.7); /* #4b5563 */
 
-  --color-primary-content: oklch(98% 0.01 240);
+  /* Base (Fondos) */
+  --color-base-100: oklch(100% 0 0);              /* Blanco puro */
+  --color-base-200: oklch(95% 0.01 260.7);        /* Gris muy claro */
+  --color-base-300: oklch(90% 0.01 260.7);        /* Gris claro */
+  --color-base-content: oklch(25% 0.03 260.7);    /* Texto oscuro (~#1f2937) */
 
-  --color-hover: oklch(98% 0.02 240);
-  --color-base-100: oklch(98% 0.02 240);
-  --color-base-200: oklch(95% 0.03 240);
-  --color-base-300: oklch(92% 0.04 240);
-  --color-base-content: oklch(20% 0.05 240);
-  
-  --color-secondary: oklch(70% 0.25 200);
-  --color-secondary-content: oklch(98% 0.01 200);
-  --color-accent: oklch(65% 0.25 160);
-  --color-accent-content: oklch(98% 0.01 160);
-  --color-neutral: oklch(50% 0.05 240);
-  --color-neutral-content: oklch(98% 0.01 240);
-  --color-info: oklch(70% 0.2 220);
-  --color-info-content: oklch(98% 0.01 220);
-  --color-success: oklch(65% 0.25 140);
-  --color-success-content: oklch(98% 0.01 140);
-  --color-warning: oklch(80% 0.25 80);
-  --color-warning-content: oklch(20% 0.05 80);
-  --color-error: oklch(65% 0.3 30);
-  --color-error-content: oklch(98% 0.01 30);
+  /* Estados */
+  --color-info: oklch(76% 0.12 230.5);            /* Azul info (~#3b82f6) */
+  --color-success: oklch(72.1% 0.19 160.5);       /* Verde éxito (~#50cd89) */
+  --color-warning: oklch(80% 0.16 70.5);          /* Amarillo (~#f59e0b) */
+  --color-error: oklch(68% 0.22 25.5);            /* Rojo error (~#ef4444) */
 
-
-  /* border radius */
   --radius-selector: 1rem;
   --radius-field: 0.25rem;
   --radius-box: 0.5rem;
-
-  /* base sizes */
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
-
-  /* border size */
   --border: 1px;
-
-  /* effects */
   --depth: 1;
   --noise: 0;
 }
 
-.color {
-  background-color: oklab(87.178% -0.18387 0.10926);
+@plugin "daisyui/theme" {
+  name: darkTema;
+  color-scheme: dark;
+    --color-base-100: oklch(15% 0.01 260);       /* Fondo principal (casi negro) */
+  --color-base-200: oklch(20% 0.01 260);       /* Contenedores */
+  --color-base-300: oklch(25% 0.01 260);       /* Bordes/separadores */
+  --color-base-content: oklch(90% 0 0);        /* Texto principal (blanco suave) */
+
+  /* Primario (Azul corporativo oscuro) */
+  --color-primary: oklch(50% 0.18 263);        /* Azul profesional */
+  --color-primary-content: oklch(95% 0 0);     /* Texto sobre primary */
+  --color-primary-focus: oklch(45% 0.18 263);  /* Hover/active */
+
+  /* Secundario (Gris tecnológico) */
+  --color-secondary: oklch(35% 0.03 250);      /* Gris azulado */
+  --color-secondary-content: oklch(85% 0 0);    /* Texto sobre secondary */
+  --color-secondary-focus: oklch(30% 0.03 250);
+
+  /* Acento (Esmeralda profesional) */
+  --color-accent: oklch(60% 0.16 160);         /* Verde corporativo */
+  --color-accent-content: oklch(15% 0 0);      /* Texto oscuro sobre accent */
+  --color-accent-focus: oklch(55% 0.16 160);
+
+  /* Neutrales (Escala de grises) */
+  --color-neutral: oklch(30% 0.01 260);        /* Gris medio */
+  --color-neutral-content: oklch(80% 0 0);     /* Texto sobre neutral */
+  --color-neutral-focus: oklch(25% 0.01 260);
+
+  /* Estados */
+  --color-info: oklch(55% 0.12 230);           /* Azul información */
+  --color-success: oklch(60% 0.14 160);        /* Verde éxito */
+  --color-warning: oklch(65% 0.15 70);         /* Ámbar advertencia */
+  --color-error: oklch(55% 0.18 25);           /* Rojo error */
+
+  /* Extras */
+  --color-surface: oklch(18% 0.02 260);        /* Superficies elevadas (cards) */
+  --color-overlay: oklch(10% 0 0 / 0.8);       /* Overlays oscuros */
+
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
