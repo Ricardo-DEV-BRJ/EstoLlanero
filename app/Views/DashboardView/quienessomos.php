@@ -10,18 +10,21 @@
             <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
                 <div class="flex flex-col md:flex-row items-center gap-8">
                     <div class="md:w-1/3">
-                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
-                            <i data-lucide="users" class="w-24 h-24 text-gray-400"></i>
-                        </div>
+                       <div class="w-full h-64 flex items-center justify-center bg-white rounded-xl">
+                              <img 
+                                src="../public/media/logoCompleto.jpg" 
+                                 alt="logo"
+                                class="max-w-full max-h-full object-contain" >
+                         </div>
                     </div>
                     <div class="md:w-2/3">
                         <h2 class="text-2xl font-bold text-primary mb-4">Nuestra Historia</h2>
-                        <p class="text-gray-700 mb-4">
-                            TRIUNFOBET nació en 2020 con la visión de convertirse en la plataforma líder de noticias deportivas en español. 
+                        <p class="text-gray-700 mb-4 text-justify">
+                            ESTOLLANOS nació en 2020 con la visión de convertirse en la plataforma líder de noticias deportivas en español. 
                             Fundada por apasionados del deporte y la tecnología, nuestra misión es brindar cobertura de calidad 
                             sobre todos los eventos deportivos relevantes a nivel mundial.
                         </p>
-                        <p class="text-gray-700">
+                        <p class="text-gray-700 text-justify">
                             Hoy contamos con un equipo de más de 50 periodistas deportivos distribuidos en 15 países, 
                             cubriendo más de 30 disciplinas deportivas diferentes.
                         </p>
@@ -35,7 +38,7 @@
                         <i data-lucide="target" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Misión</h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 text-justify">
                         Informar con veracidad, rapidez y profundidad sobre todos los eventos deportivos relevantes, 
                         brindando a nuestros lectores la mejor experiencia informativa.
                     </p>
@@ -46,7 +49,7 @@
                         <i data-lucide="eye" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Visión</h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 text-justify">
                         Convertirnos en el medio de referencia para los amantes del deporte en habla hispana, 
                         innovando constantemente en nuestra forma de contar las historias deportivas.
                     </p>
@@ -57,7 +60,7 @@
                         <i data-lucide="heart" class="w-8 h-8 text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-primary mb-2">Valores</h3>
-                    <p class="text-gray-600">
+                    <p class="text-gray-600 text-justify">
                         Pasión por el deporte, integridad periodística, innovación constante, 
                         respeto por la diversidad y compromiso con nuestra comunidad.
                     </p>

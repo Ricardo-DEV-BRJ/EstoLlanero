@@ -56,66 +56,100 @@
     </section>
 
     <!-- Sección de últimas noticias -->
-    <section class="py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary">ÚLTIMAS NOTICIAS</h2>
-                <div class="w-20 h-1 bg-accent mx-auto mt-2"></div>
-            </div>
-            
+<!-- Sección de últimas noticias -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-primary">ÚLTIMAS NOTICIAS</h2>
+            <div class="w-20 h-1 bg-accent mx-auto mt-2"></div>
+        </div>
+        
+        <?php 
+        // Ordenar noticias por ID descendente (las más recientes primero)
+        usort($noticias, function($a, $b) {
+            return $b['id'] <=> $a['id'];
+        });
+        
+        // Tomar solo las 3 primeras (más recientes)
+        $ultimasNoticias = array_slice($noticias, 0, 3);
+        ?>
+        
+        <?php if (!empty($ultimasNoticias)): ?>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Noticia 1 -->
+                <?php 
+                $categorias = ['FÚTBOL', 'BALONCESTO', 'BÉISBOL', 'TENIS', 'NATACIÓN', 'ATLETISMO'];
+                
+                foreach ($ultimasNoticias as $index => $noticia): 
+                    $categoria = $categorias[$index % count($categorias)];
+                    $imagenPath = $noticia['ruta_imagen'] ?? '';
+                ?>
                 <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
-                    <div class="h-48 bg-gradient-to-r from-blue-500 to-indigo-700 relative">
+                    <div class="h-48 relative overflow-hidden">
+                        <?php if (!empty($imagenPath)): ?>
+                            <!-- Mostrar imagen desde la ruta especificada -->
+                            <figure class="h-full w-full">
+                                <img 
+                                    src="../public/image/<?= $imagenPath ?>" 
+                                    alt="Imagen de noticia"
+                                    class="w-full h-full object-cover"
+                                />
+                            </figure>
+                        <?php else: ?>
+                            <!-- Fallback con gradiente -->
+                            <div class="h-full w-full bg-gradient-to-r 
+                                <?= $index % 6 == 0 ? 'from-blue-500 to-indigo-700' : '' ?>
+                                <?= $index % 6 == 1 ? 'from-green-500 to-emerald-700' : '' ?>
+                                <?= $index % 6 == 2 ? 'from-yellow-500 to-amber-700' : '' ?>
+                                <?= $index % 6 == 3 ? 'from-red-500 to-pink-700' : '' ?>
+                                <?= $index % 6 == 4 ? 'from-purple-500 to-violet-700' : '' ?>
+                                <?= $index % 6 == 5 ? 'from-cyan-500 to-blue-700' : '' ?>">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-white text-5xl font-bold opacity-50">
+                                        <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
+                                    </span>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        
                         <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">BALONCESTO</span>
+                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">
+                                <?= $categoria ?>
+                            </span>
                         </div>
-                        </div>
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">EL EQUIPO DE BALONCESTO AVANZA A LAS FINALES</h3>
-                        <p class="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                        <h3 class="text-xl font-bold text-primary mb-2">
+                            <?= esc($noticia['nombre'] ?? 'Sin nombre') ?> 
+                            <?= esc($noticia['apellido'] ?? '') ?>
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            <?= esc($noticia['email'] ?? 'Sin información de contacto') ?>
+                        </p>
                         <a href="#" class="text-accent font-semibold hover:underline inline-flex items-center">
-                            Leer más <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
+                            Ver detalles <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
                         </a>
                     </div>
                 </div>
-                
-                <!-- Noticia 2 -->
-                <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
-                    <div class="h-48 bg-gradient-to-r from-green-500 to-emerald-700 relative">
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">FÚTBOL</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">LESIONADO JUGADOR CLAVE EN PARTIDO DECISIVO</h3>
-                        <p class="text-gray-600 mb-4">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline inline-flex items-center">
-                            Leer más <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Noticia 3 -->
-                <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
-                    <div class="h-48 bg-gradient-to-r from-yellow-500 to-amber-700 relative">
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">BEISBOL</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">ESTRELLA DEL BEISBOL GANA TORNEO IMPORTANTE</h3>
-                        <p class="text-gray-600 mb-4">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline inline-flex items-center">
-                            Leer más <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
-                        </a>
-                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="text-center py-12">
+                <div class="inline-block p-6 bg-white rounded-xl shadow">
+                    <i data-lucide="newspaper" class="w-16 h-16 text-gray-400 mx-auto"></i>
+                    <h3 class="text-xl font-semibold text-gray-700 mt-4">
+                        No hay noticias disponibles
+                    </h3>
+                    <p class="text-gray-500 mt-2">
+                        Pronto publicaremos nuevas noticias deportivas
+                    </p>
                 </div>
             </div>
-            
+        <?php endif; ?>
+    </div>
+
             <div class="text-center mt-10">
                 <button class="bg-primary text-white px-6 py-3 rounded-lg btn-hover flex items-center mx-auto">
-                    <i data-lucide="newspaper" class="w-4 h-4 mr-2"></i> VER TODAS LAS NOTICIAS
+                    <a href="noticiaspublic" data-lucide="newspaper" class="w-4 h-4 mr-2"></a> VER TODAS LAS NOTICIAS
                 </button>
             </div>
         </div>

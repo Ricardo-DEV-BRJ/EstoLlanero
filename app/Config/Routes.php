@@ -7,6 +7,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'DashboardController::index');
 $routes->get('/quienessomos', 'DashboardController::quienessomos');
+$routes->get('/noticiaspublic', 'DashboardController::noticias');
+
+
 
 $routes->get('/landing', 'LandingPage::index');
 $routes->get('usuarios', 'UsuariosController::index');

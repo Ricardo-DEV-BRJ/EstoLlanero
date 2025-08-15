@@ -12,6 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="css/styledashboard.css" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -19,7 +20,7 @@
           colors: {
             primary: '#3d567c',
             secondary: '#000000',
-            accent: '#1c0f41',
+            accent: '#1c0f41ff',
             white: "#ffffff",
           }
         }
@@ -27,78 +28,8 @@
     }
   </script>
 
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .news-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .news-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-
-    .carousel-item {
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-
-    .carousel-item.active {
-      opacity: 1;
-    }
-
-    .category-card {
-      transition: all 0.3s ease;
-    }
-
-    .category-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-
-    .nav-link {
-      position: relative;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #fff;
-      transition: width 0.3s ease;
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .btn-hover {
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-hover:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .stats-card {
-      transition: all 0.3s ease;
-    }
-
-    .stats-card:hover {
-      transform: translateY(-5px);
-    }
-  </style>
-
+  
 </head>
 
 <body class="bg-gray-50">
@@ -115,7 +46,7 @@
 
         <div class="hidden md:flex space-x-8">
           <a href="<?= base_url('/') ?>" class="nav-link font-bold text-white">INICIO</a>
-          <a href="noticias" class="nav-link hover:text-white transition-colors">NOTICIAS</a>
+          <a href="noticiaspublic" class="nav-link hover:text-white transition-colors">NOTICIAS</a>
           <a href="quienessomos" class="nav-link hover:text-white transition-colors">QUIENES SOMOS</a>
         </div>
 
