@@ -33,6 +33,12 @@
             <a href="<?= base_url('crear') ?>" class="btn rounded-full bg-primary text-white"><i class="w-4 h-4" data-lucide="user-round-plus"></i> Crear Usuario</a>
           </li>
           <li>
+            <a href="<?= base_url('categorias') ?>" class="btn rounded-full bg-primary text-white"><i class="w-4 h-4" data-lucide="tags"></i> Categorías</a>
+          </li>
+          <li>
+            <a href="<?= base_url('crearCategoria') ?>" class="btn rounded-full bg-primary text-white"><i class="w-4 h-4" data-lucide="plus"></i> Crear Categoría</a>
+          </li>
+          <li>
             <a href="<?= base_url('noticias') ?>" class="btn rounded-full bg-primary text-white"><i class="w-4 h-4" data-lucide="newspaper"></i> Noticias</a>
           </li>
           <li>
@@ -52,8 +58,6 @@
               <a href="<?= base_url('/logout') ?>" class="btn rounded-full hover:bg-blue-400 bg-red-500 text-white"><i class="w-4 h-4" data-lucide="door-open"></i>Cerrar sesión</a>
             </li>
           <?php endif; ?>
-
-
         </ul>
       </header>
     <?php endif; ?>
