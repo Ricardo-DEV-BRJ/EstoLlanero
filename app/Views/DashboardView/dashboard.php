@@ -147,11 +147,12 @@
         <?php endif; ?>
     </div>
 
-            <div class="text-center mt-10">
-                <button class="bg-primary text-white px-6 py-3 rounded-lg btn-hover flex items-center mx-auto">
-                    <a href="noticiaspublic" data-lucide="newspaper" class="w-4 h-4 mr-2"></a> VER TODAS LAS NOTICIAS
-                </button>
-            </div>
+    <div class="text-center mt-10">
+                <a href="noticiaspublic" class="bg-primary text-white px-6 py-3 rounded-lg btn-hover flex items-center justify-center mx-auto w-max">
+                    <i data-lucide="newspaper" class="w-4 h-4 mr-2"></i>
+                    VER TODAS LAS NOTICIAS
+                </a>
+        </div>
         </div>
     </section>
 
