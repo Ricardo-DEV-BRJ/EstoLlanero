@@ -21,6 +21,9 @@ Ojo deben crear la carpeta Llamada especificamente "EstoLlanos" respetando el or
 # Por ultimo 
 Debes crear una carpeta dentro de la carpeta Public del proyecto llamada image alli se guardaran todas las imagenes que se agreguen 
 
+# Module Node.js
+Una vez ya clonado el repositorio ejecutar la sentencia de comando npm i 
+
 # CodeIgniter 4 Framework
 
 ## What is CodeIgniter?
