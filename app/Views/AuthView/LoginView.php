@@ -7,11 +7,11 @@
   <i class="fas fa-arrow-left"></i> Volver
 </button>
 
-<div class="w-12/12 flex justify-center items-center" style="min-height: 100dvh; background-color:#F2F2F2;">
+<div class="w-12/12 flex justify-center items-center" style="min-height: 100dvh;">
 
-  <div class="pa-4 bg-white w-8/12 flex rounded-xl">
+  <div class="p-4 w-8/12 flex rounded-xl">
     <figure class="p-4 w-6/12">
-      <img src="../public/media/logoCompleto.jpg" alt="logo">
+      <img src="../public/media/LogoC.jpg" class="w-12/12" alt="logo">
     </figure>
     <div class="card w-6/12 p-4 backdrop-filter-blur-md">
       <div class="card-title flex justify-center">

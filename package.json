@@ -7,6 +7,6 @@
     "daisyui": "^5.0.50"
   },
   "scripts": {
-    "build:css": "npx @tailwindcss/cli -i public/css/app.css -o public/css/output.css"
+    "build:css": "npx @tailwindcss/cli -i public/css/input.css -o public/css/output.css"
   }
 }
