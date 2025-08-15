@@ -1,4 +1,4 @@
-<?= view('Template/cabezera_dashboard') ?>
+<?= $cabezera ?>
 
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4 max-w-4xl">
@@ -96,4 +96,4 @@
         </div>
     </section>
 
-<?= view('Template/piedepagina_dashboard') ?>
+<?= $pieDePagina ?>

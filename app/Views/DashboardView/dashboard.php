@@ -1,4 +1,4 @@
-<?= view('Template/cabezera_dashboard') ?>
+<?= $cabezera ?>
     
     <!-- Carrusel de noticias destacadas -->
     <div class="relative overflow-hidden h-[500px] bg-gradient-to-r from-secondary to-primary">
@@ -163,4 +163,4 @@
         </div>
     </section>
     
-<?= view('Template/piedepagina_dashboard') ?>
+<?= $pieDePagina ?>
