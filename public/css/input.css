@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@source "./public/*.{html,js}";
+
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark, cupcake, mytheme;
+}
+
+.bg-carta {
+  background-color: var(--color-carta); 
+}
+
+.bg-carta-content {
+  background-color: var(--color-carta-content); 
+}
+
+.bg-primaryR {
+  background-color: var(--color-primaryR); 
+}
+.bg-secondaryR {
+  background-color: var(--color-secondaryR); 
+}
+.bg-primary:hover {
+  background-color: var(--color-primary-hover); 
+}
+
+@plugin "daisyui/theme" {
+  name: "mytheme";
+  default: true;
+  /* set as default */
+  prefersdark: false;
+  /* set as default dark mode (prefers-color-scheme:dark) */
+  color-scheme: light;
+  /* color of browser-provided UI */
+
+  --color-carta: oklch(22.97% 0.092 289.46);
+  --color-carta-content: oklch(20% 0.05 240);
+
+  --color-primaryR: oklch(45.03% 0.070 258.54);
+  --color-secondaryR: oklch(33.19% 0.089 292.38);
+
+  --color-primary: oklch(65.82% 0.169 248.81);
+  --color-primary-hover: oklab(53.943% 0.02009 -0.25293);
+
+  --color-primary-content: oklch(98% 0.01 240);
+
+  --color-hover: oklch(98% 0.02 240);
+  --color-base-100: oklch(98% 0.02 240);
+  --color-base-200: oklch(95% 0.03 240);
+  --color-base-300: oklch(92% 0.04 240);
+  --color-base-content: oklch(20% 0.05 240);
+  
+  --color-secondary: oklch(70% 0.25 200);
+  --color-secondary-content: oklch(98% 0.01 200);
+  --color-accent: oklch(65% 0.25 160);
+  --color-accent-content: oklch(98% 0.01 160);
+  --color-neutral: oklch(50% 0.05 240);
+  --color-neutral-content: oklch(98% 0.01 240);
+  --color-info: oklch(70% 0.2 220);
+  --color-info-content: oklch(98% 0.01 220);
+  --color-success: oklch(65% 0.25 140);
+  --color-success-content: oklch(98% 0.01 140);
+  --color-warning: oklch(80% 0.25 80);
+  --color-warning-content: oklch(20% 0.05 80);
+  --color-error: oklch(65% 0.3 30);
+  --color-error-content: oklch(98% 0.01 30);
+
+
+  /* border radius */
+  --radius-selector: 1rem;
+  --radius-field: 0.25rem;
+  --radius-box: 0.5rem;
+
+  /* base sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* border size */
+  --border: 1px;
+
+  /* effects */
+  --depth: 1;
+  --noise: 0;
+}
+
+.color {
+  background-color: oklab(87.178% -0.18387 0.10926);
+}
