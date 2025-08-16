@@ -1,0 +1,75 @@
+li:hover {
+    background-color: rgb(var(--bs-secondary-color-rgb), 0.5);
+    transition: all .3s ease;
+}
+
+.activo {
+    width: 20%;
+    animation-name: entrada;
+    animation-duration: .3s;
+}
+
+.inActivo {
+    animation-name: salida;
+    animation-duration: .3s;
+}
+
+.menuResAct {
+    position: fixed;
+    width: 75%;
+    z-index: 9999;
+    height: 100dvh;
+    animation-name: entradaRes;
+    animation-duration: .3s;
+}
+
+.menuResIn {
+    position: fixed;
+    width: 75%;
+    z-index: 9999;
+    height: 100dvh;
+    animation-name: salidaRes;
+    animation-duration: .3s;
+}
+
+
+@keyframes entrada {
+    0% {
+        width: 3%;
+    }
+
+    100% {
+        width: 20%;
+    }
+}
+
+
+@keyframes salida {
+    0% {
+        width: 20%;
+    }
+
+    100% {
+        width: 3%;
+    }
+}
+
+@keyframes entradaRes {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 75%;
+    }
+}
+
+@keyframes salidaRes {
+    0% {
+        width: 75%;
+    }
+
+    100% {
+        width: 0%;
+    }
+}
