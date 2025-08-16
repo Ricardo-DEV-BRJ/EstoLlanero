@@ -5,7 +5,7 @@
 
 
 <div class="w-12/12 flex bg-red-500 justify-center items-center" style="min-height: 100dvh;">
-  <div class="card justify-center items-center bg-carta w-4/12">
+  <div class="card bg-primary justify-center items-center sm:w-full md:sm:w-10/12">
     <div class="card bg-accent w-10/12 pt-6">
       <h4 class="card-subtitle">¡Bienvenido!</h4>
       <h3 class="card-title">Registra tu nueva cuenta</h3>
