@@ -23,7 +23,7 @@ $routes->post('crearNoticias', 'NoticiasController::crear');
 $routes->get('categorias', 'CategoriasController::index');
 $routes->get('crearCategoria', 'CategoriasController::crear');
 $routes->post('crearCategoria', 'CategoriasController::crear');
-$routes->get('eliminarCategoria/(:num)', 'CategoriasController::eliminar/$1');
+$routes->post('eliminarCategoria/(:num)', 'CategoriasController::eliminar/$1');
 $routes->post('editarCategoria/(:num)', 'CategoriasController::editar/$1');
 $routes->get('login', 'AuthController::index');
 $routes->post('login', 'AuthController::login');
