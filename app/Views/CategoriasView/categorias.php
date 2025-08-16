@@ -3,46 +3,52 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<div class="card shadow-sm mx-auto md:w-10/12 w-full">
+<div class="card shadow mx-auto my-4" style="max-width: 1200px;">
   <div class="card-body">
-    <div class="flex items-center gap-2 mb-6">
-      <i data-lucide="tag"></i>
-      <h2 class="text-2xl font-bold">Lista de categorías</h2>
+    <div class="d-flex align-items-center mb-4">
+      <i data-lucide="tag" class="me-2" style="width: 24px; height: 24px;"></i>
+      <h2 class="mb-0">Lista de categorías</h2>
     </div>
 
     <?php if (empty($categorias)): ?>
-      <div class="text-center py-8">
-        <i data-lucide="folder-x" class="w-12 h-12 mx-auto text-gray-400"></i>
-        <h3 class="text-xl font-medium mt-4">No hay categorías registradas</h3>
-        <p class="text-gray-500 mt-2">Comienza agregando una nueva categoría</p>
-        <a href="<?= base_url('crearCategoria') ?>" class="btn btn-primary mt-4">
-          <i data-lucide="plus" class="mr-2"></i> Añadir categoría
+      <div class="text-center py-5">
+        <i data-lucide="folder-x" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
+        <h3 class="h4">No hay categorías registradas</h3>
+        <p class="text-muted mb-3">Comienza agregando una nueva categoría</p>
+        <a href="<?= base_url('crearCategoria') ?>" class="btn btn-primary">
+          <i data-lucide="plus" class="me-1"></i> Añadir categoría
         </a>
       </div>
     <?php else: ?>
-      <div class="overflow-x-auto">
-        <table class="table w-full border border-gray-200">
-          <thead class="bg-blue-500 text-white">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary">
             <tr>
-              <th class="py-3 px-4 text-left w-1/12">ID</th>
-              <th class="py-3 px-4 text-left w-3/12">Nombre</th>
-              <th class="py-3 px-4 text-left w-6/12">Descripción</th>
-              <th class="py-3 px-4 text-center w-2/12">Acción</th>
+              <th style="width: 5%">ID</th>
+              <th style="width: 25%">Nombre</th>
+              <th>Descripción</th>
+              <th style="width: 15%" class="text-center">Acción</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($categorias as $categoria): ?>
-              <tr class="hover:bg-gray-50 border-b border-gray-200">
-                <td class="py-3 px-4"><?= $categoria['id'] ?></td>
-                <td class="py-3 px-4 font-medium"><?= $categoria['nombre'] ?></td>
-                <td class="py-3 px-4 text-gray-600"><?= $categoria['descripcion'] ?></td>
-                <td class="py-3 px-4 flex justify-center gap-2">
-                  <button class="btn btn-sm bg-blue-500 text-white" onclick="editar(<?= htmlspecialchars(json_encode($categoria), ENT_QUOTES, 'UTF-8') ?>)">
-                    <i data-lucide="pencil" class="hover:rotate-20 ease-out duration-300"></i>
-                  </button>
-                  <button class="btn btn-sm bg-red-500 text-white" onclick="confirmarEliminar('<?= base_url('eliminarCategoria/' . $categoria['id']) ?>')">
-                    <i data-lucide="trash" class="hover:rotate-20 ease-out duration-300"></i>
-                  </button>
+              <tr>
+                <td><?= $categoria['id'] ?></td>
+                <td class="fw-bold"><?= $categoria['nombre'] ?></td>
+                <td class="text-muted"><?= $categoria['descripcion'] ?></td>
+                <td class="text-center">
+                  <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-sm btn-primary px-2 py-2" data-bs-toggle="modal" data-bs-target="#modalEditar"
+                            data-id="<?= $categoria['id'] ?>"
+                            data-nombre="<?= htmlspecialchars($categoria['nombre']) ?>"
+                            data-descripcion="<?= htmlspecialchars($categoria['descripcion']) ?>">
+                      <i data-lucide="pencil" style="width: 16px; height: 16px;"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                            data-id="<?= $categoria['id'] ?>">
+                      <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             <?php endforeach; ?>
@@ -53,75 +59,79 @@
   </div>
 </div>
 
-<dialog id="modalEliminar" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">¿Eliminar categoría?</h3>
-    <p class="py-4">¿Estás seguro que deseas eliminar esta categoría?</p>
-    <div class="modal-action">
-      <button class="btn" onclick="cerrarModalEliminar()">Cancelar</button>
-      <a id="btnConfirmarEliminar" class="btn bg-red-500 text-white">Eliminar</a>
+<div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿Eliminar categoría?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro que deseas eliminar esta categoría? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+        <form id="formEliminar" method="post" action="">
+          <?= csrf_field() ?>
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+      </div>
     </div>
   </div>
-</dialog>
+</div>
 
-<dialog id="modalEditar" class="modal">
-  <div class="modal-box max-w-2xl">
-    <div class="flex justify-between items-center mb-4">
-      <h3 class="text-lg font-bold">Editar categoría</h3>
-      <button class="btn btn-sm btn-circle" onclick="cerrarModalEditar()">
-        <i data-lucide="x"></i>
-      </button>
-    </div>
-    <div class="card bg-base-100 shadow">
-      <div class="card-body p-6">
-        <form id="formEditar" action="<?= base_url('editarCategoria') ?>" method="post" class="space-y-4">
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditar" method="post" action="">
           <input type="hidden" name="id" id="id_categoria">
-          <div class="form-control">
-            <label class="label" for="nombre">
-              <span class="label-text font-bold">Nombre</span>
-            </label>
-            <input type="text" name="nombre" id="nombre" class="input input-bordered w-full" required>
+          <?= csrf_field() ?>
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-bold">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre_editar" required>
           </div>
-
-          <div class="form-control">
-            <label class="label" for="descripcion">
-              <span class="label-text font-bold">Descripción</span>
-            </label>
-            <textarea name="descripcion" id="descripcion" class="textarea textarea-bordered h-24" required></textarea>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion_editar" rows="4" required></textarea>
           </div>
-
-          <div class="pt-4">
-            <button type="submit" class="btn btn-primary w-full">
-              <i data-lucide="send" class="mr-2"></i> Guardar cambios
+          <div class="pt-2">
+            <button type="submit" class="btn btn-primary w-100">
+              <i data-lucide="send" class="me-2"></i> Guardar cambios
             </button>
           </div>
         </form>
       </div>
     </div>
   </div>
-</dialog>
+</div>
 
 <script>
-  function editar(datos) {
-    document.getElementById('modalEditar').showModal();
-    document.getElementById('id_categoria').value = datos.id;
-    document.getElementById('nombre').value = datos.nombre;
-    document.getElementById('descripcion').value = datos.descripcion;
-    document.getElementById('formEditar').action = "<?= base_url('editarCategoria') ?>/" + datos.id;
-  }
+if (typeof lucide !== 'undefined') {
+  lucide.createIcons();
+}
 
-  function cerrarModalEditar() {
-    document.getElementById('modalEditar').close();
-  }
+document.getElementById('modalEditar').addEventListener('show.bs.modal', function(event) {
+  const button = event.relatedTarget;
+  const id = button.getAttribute('data-id');
+  const nombre = button.getAttribute('data-nombre');
+  const descripcion = button.getAttribute('data-descripcion');
+  
+  document.getElementById('id_categoria').value = id;
+  document.getElementById('nombre_editar').value = nombre;
+  document.getElementById('descripcion_editar').value = descripcion;
+  document.getElementById('formEditar').action = "<?= base_url('editarCategoria') ?>/" + id;
+});
 
-  function confirmarEliminar(url) {
-    document.getElementById('btnConfirmarEliminar').href = url;
-    document.getElementById('modalEliminar').showModal();
-  }
-
-  function cerrarModalEliminar() {
-    document.getElementById('modalEliminar').close();
-  }
+document.getElementById('modalEliminar').addEventListener('show.bs.modal', function(event) {
+  const button = event.relatedTarget;
+  const id = button.getAttribute('data-id');
+  document.getElementById('formEliminar').action = "<?= base_url('eliminarCategoria') ?>/" + id;
+});
 </script>
 
 <?= $pieDePagina ?>
