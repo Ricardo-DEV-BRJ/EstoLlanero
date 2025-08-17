@@ -9,15 +9,16 @@
       <i data-lucide="tag" class="me-2" style="width: 24px; height: 24px;"></i>
       <h2 class="mb-0">Lista de categorías</h2>
     </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearCategoria">
+        <i data-lucide="plus"></i> Agregar Categoría
+      </button>
+    </div>
 
     <?php if (empty($categorias)): ?>
       <div class="text-center py-5">
         <i data-lucide="folder-x" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
         <h3 class="h4">No hay categorías registradas</h3>
         <p class="text-muted mb-3">Comienza agregando una nueva categoría</p>
-        <a href="<?= base_url('crearCategoria') ?>" class="btn btn-primary">
-          <i data-lucide="plus" class="me-1"></i> Añadir categoría
-        </a>
       </div>
     <?php else: ?>
       <div class="">
@@ -30,30 +31,59 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($categorias as $categoria): ?>
-              <tr>
-                <td data-columna="Nombre" class="fw-bold"><?= $categoria['nombre'] ?></td>
-                <td data-columna="Descripción" class="text-muted"><?= $categoria['descripcion'] ?></td>
-                <td data-columna="Acciones" class="text-center">
-                  <div class="d-flex justify-content-center gap-2">
-                    <button type="button" class="btn btn-sm btn-primary px-2 py-2" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                            data-id="<?= $categoria['id'] ?>"
-                            data-nombre="<?= htmlspecialchars($categoria['nombre']) ?>"
-                            data-descripcion="<?= htmlspecialchars($categoria['descripcion']) ?>">
-                      <i data-lucide="pencil" style="width: 16px; height: 16px;"></i>
-                    </button>
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
-                            data-id="<?= $categoria['id'] ?>">
-                      <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            <?php endforeach; ?>
-          </tbody>
+           <?php foreach ($categorias as $categoria): ?>
+            <tr class="border-bottom">
+            <td data-columna="Nombre" class="fw-bold"><?= $categoria['nombre'] ?></td>
+            <td data-columna="Descripción" class="text-muted"><?= $categoria['descripcion'] ?></td>
+            <td data-columna="Acciones" class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEditar"
+              data-id="<?= $categoria['id'] ?>"
+              data-nombre="<?= htmlspecialchars($categoria['nombre']) ?>"
+              data-descripcion="<?= htmlspecialchars($categoria['descripcion']) ?>">
+            <i data-lucide="pencil" style="width: 16px; height: 16px;"></i>
+          </button>
+          <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                  data-id="<?= $categoria['id'] ?>">
+            <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  <?php endforeach; ?>
+</tbody>
+
         </table>
       </div>
     <?php endif; ?>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCrearCategoria" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Crear Nueva Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('crearCategoria') ?>" method="post">
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-bold">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="off" required>
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label fw-bold">Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
+          </div>
+          <div class="pt-2">
+            <button type="submit" class="btn btn-primary w-100">
+              <i data-lucide="send" class="me-2"></i> Crear categoría
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 

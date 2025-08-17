@@ -3,7 +3,6 @@
 $links = array(
   array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
   array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
-  array('link' => 'crearCategoria', 'icon' => 'plus', 'nombre' => 'Crear Categoría'),
   array('link' => 'noticias', 'icon' => 'newspaper', 'nombre' => 'Noticias'),
   array('link' => 'crearNoticias', 'icon' => 'message-square-diff', 'nombre' => 'Crear noticias'),
   array('link' => '/', 'icon' => 'home', 'nombre' => 'Inicio'),

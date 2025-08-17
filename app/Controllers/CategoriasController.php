@@ -22,35 +22,33 @@ class CategoriasController extends Controller
     }
 
     public function crear()
-    {
-        $categorias = new CategoriasModel();
-        $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'EstoLlanos - Categorías',
-            'header' => true
-        ]);
-        $datos['pieDePagina'] = view('Template/pieDePagina');
+{
+    $categorias = new CategoriasModel();
+    $datos['cabezera'] = view('Template/cabezera', [
+        'titulo' => 'EstoLlanos - Categorías',
+        'header' => true
+    ]);
+    $datos['pieDePagina'] = view('Template/pieDePagina');
 
-        if ($this->request->getMethod() === 'GET') {
-            return view('CategoriasView/crearCategorias', $datos);
+    if ($this->request->getMethod() === 'POST') {
+        $datos['res'] = $categorias->crear($this->request->getPost());
+        if ($datos['res']['success'] != false) {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Éxito',
+                'descripcion' => 'Categoría creada correctamente.',
+            ]);
+            return redirect()->to(base_url('categorias'));
         } else {
-            $datos['res'] = $categorias->crear($this->request->getPost());
-            if ($datos['res']['success'] != false) {
-                session()->setFlashdata('alerta', [
-                    'modal' => true,
-                    'titulo' => 'Éxito',
-                    'descripcion' => 'Categoría creada correctamente.',
-                ]);
-                return redirect()->to(base_url('categorias'));
-            } else {
-                $datos['alerta'] = view('Template/Alertas', [
-                    'modal' => true,
-                    'titulo' => 'Algo salio mal..',
-                    'descripcion' => $datos['res']['message'],
-                ]);
-                return view('CategoriasView/crearCategorias', $datos);
-            }
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Error',
+                'descripcion' => $datos['res']['message'],
+            ]);
+            return redirect()->to(base_url('categorias'));
         }
     }
+}
 
     public function eliminar($id = null)
     {
