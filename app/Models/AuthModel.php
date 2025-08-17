@@ -6,15 +6,15 @@ use CodeIgniter\Model;
 
 class AuthModel extends Model
 {
-  protected $table      = 'users';
+  protected $table      = 'usuarios';
   // Uncomment below if you want add primary key
   // protected $primaryKey = 'id';
 
   public function login($datos)
   {
-    $sql = 'SELECT * FROM users WHERE username = ?';
+    $sql = 'SELECT * FROM usuarios WHERE usuario = ?';
     $params = [
-      $datos['username'],
+      $datos['usuario'],
     ];
 
     try {
@@ -25,8 +25,16 @@ class AuthModel extends Model
           'message' => 'Usuario no existe'
         ];
       }
-      if (password_verify($datos['pass'], $query[0]['password'])) {
-        return ['success' => true, 'message' => 'Acceso concedido', 'user' => $query[0]['username'], 'email' => $query[0]['email']];
+      if (password_verify($datos['contrasena'], $query[0]['contrasena'])) {
+        return [
+          'success' => true,
+          'message' => 'Acceso concedido',
+          'id' => $query[0]['id'],
+          'usuario' => $query[0]['usuario'],
+          'nombre' => $query[0]['nombre'],
+          'apellido' => $query[0]['apellido'],
+          'rol' => $query[0]['rol'],
+        ];
       } else {
         return ['success' => false, 'message' => 'Contraseña incorrecta'];
       }
@@ -78,5 +86,4 @@ class AuthModel extends Model
       ];
     };
   }
-
 }

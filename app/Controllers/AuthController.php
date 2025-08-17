@@ -32,8 +32,11 @@ class AuthController extends Controller
     if ($res['success']) {
       session()->set([
         'isLoggedIn' => 'true',
-        'user' => $res['user'],
-        'email' => $res['email']
+        'id'=> $res['id'],
+        'usuario' => $res['usuario'],
+        'nombre' => $res['nombre'],
+        'apellido' => $res['apellido'],
+        'rol' => $res['rol'],
       ]);
       return redirect()->to(base_url('usuarios'));
     } else {

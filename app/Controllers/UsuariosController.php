@@ -29,26 +29,22 @@ class UsuariosController extends Controller
         ]);
         $datos['pieDePagina'] = view('Template/pieDePagina');
 
-        if ($this->request->getMethod() === 'GET') {
-            return view('UsuariosView/crearUsuarios', $datos);
-        } else {
-            $datos['res'] = $usuarios->crear($this->request->getPost());
-            if ($datos['res']['success'] != false) {
-                session()->setFlashdata('alerta', [
-                    'modal' => true,
-                    'titulo' => 'Éxito',
-                    'descripcion' => 'Usuario creado correctamente.',
-                ]);
-                return redirect()->to(base_url('usuarios'));
-            } else {
-                $datos['alerta'] = view('Template/Alertas', [
-                    'modal' => true,
-                    'titulo' => 'Algo salio mal..',
-                    'descripcion' => $datos['res']['message'],
-                ]);
-                return view('UsuariosView/crearUsuarios', $datos);
-            }
 
+        $datos['res'] = $usuarios->crear($this->request->getPost());
+        if ($datos['res']['success'] != false) {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Éxito',
+                'descripcion' => 'Usuario creado correctamente.',
+            ]);
+            return redirect()->to(base_url('usuarios'));
+        } else {
+            $datos['alerta'] = view('Template/Alertas', [
+                'modal' => true,
+                'titulo' => 'Algo salio mal..',
+                'descripcion' => $datos['res']['message'],
+            ]);
+            return view('UsuariosView/usuarios', $datos);
         }
     }
 
@@ -67,7 +63,7 @@ class UsuariosController extends Controller
             session()->setFlashdata('alerta', [
                 'modal' => true,
                 'titulo' => 'Error al eliminar',
-                'descripcion' => $datos['res']['message'],
+                'descripcion' => $datos['res']['message'] . " "  . $datos['res']['error'],
             ]);
             return redirect()->to(base_url('usuarios'));
         }

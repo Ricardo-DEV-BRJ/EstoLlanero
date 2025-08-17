@@ -28,9 +28,11 @@ class CategoriasModel extends Model
 
     public function eliminar($id)
     {
+        $sql = 'CALL eliminar_categoria(?)';
         try {
-            $this->delete($id);
-            return ['success' => true, 'message' => 'Categoría eliminada correctamente'];
+            $result = $this->db->query($sql, $id);
+            $mensaje = $result->getResultArray();
+            return ['success' => true, 'message' => $mensaje[0]['resultado']];
         } catch (\Exception $e) {
             return ['success' => false, 'message' => $e->getMessage()];
         }

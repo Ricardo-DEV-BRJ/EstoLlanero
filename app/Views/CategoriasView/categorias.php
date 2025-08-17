@@ -20,23 +20,21 @@
         </a>
       </div>
     <?php else: ?>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
+      <div class="">
+        <table class="table table-bordered table-hover table-breakpoint-sm">
           <thead class="table-primary">
             <tr>
-              <th style="width: 5%">ID</th>
-              <th style="width: 25%">Nombre</th>
+              <th>Nombre</th>
               <th>Descripción</th>
-              <th style="width: 15%" class="text-center">Acción</th>
+              <th class="text-center">Acción</th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($categorias as $categoria): ?>
               <tr>
-                <td><?= $categoria['id'] ?></td>
-                <td class="fw-bold"><?= $categoria['nombre'] ?></td>
-                <td class="text-muted"><?= $categoria['descripcion'] ?></td>
-                <td class="text-center">
+                <td data-columna="Nombre" class="fw-bold"><?= $categoria['nombre'] ?></td>
+                <td data-columna="Descripción" class="text-muted"><?= $categoria['descripcion'] ?></td>
+                <td data-columna="Acciones" class="text-center">
                   <div class="d-flex justify-content-center gap-2">
                     <button type="button" class="btn btn-sm btn-primary px-2 py-2" data-bs-toggle="modal" data-bs-target="#modalEditar"
                             data-id="<?= $categoria['id'] ?>"

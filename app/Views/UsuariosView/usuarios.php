@@ -3,190 +3,208 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<div class="card shadow-sm md:w-10/12 w-12/12">
-  <div class="card-body">
-    <div class="card-title flex items-center gap-2">
-      <i data-lucide="user"></i>
-      <h2 class="card-title text-2xl">Lista de usuarios</h2>
-    </div>
-    <table class="table border-1 border-stone-300 w-12/12">
-      <thead class="bg-blue-500 text-white text-bold text-center">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Correo</th>
-          <th>Nacimiento</th>
-          <th>Genero</th>
-          <th>País</th>
-          <th>Fecha registro</th>
-          <th>Activo</th>
-          <th>Saldo</th>
-          <th>Acción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($usuarios as $usuario): ?>
-          <tr class="hover:bg-gray-200 ease-out duration-200">
-            <td> <?= $usuario['id'] ?></td>
-            <td> <?= $usuario['nombre'] ?></td>
-            <td> <?= $usuario['apellido'] ?></td>
-            <td> <?= $usuario['email'] ?></td>
-            <td> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_nacimiento']))) ?></td>
-            <td> <?= $usuario['genero'] ?></td>
-            <td> <?= $usuario['pais'] ?></td>
-            <td> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_registro']))) ?></td>
-            <td> <?= $usuario['activo'] == 1 ? 'Activo' : 'Inactivo' ?></td>
-            <td> <?= $usuario['saldo'] ?></td>
-            <td>
+<section class="d-flex justify-content-center w-100">
 
-              <button class="btn bg-blue-500 text-white" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
-                <i data-lucide="pencil" class="hover:rotate-20 ease-out duration-300"></i>
-              </button>
-
-              <button class="btn bg-red-500 text-white" onclick="confirmarEliminar('<?= base_url('eliminar/' . $usuario['id']) ?>')">
-                <i data-lucide="trash" class="hover:rotate-20 ease-out duration-300"></i>
-              </button>
-
-            </td>
+  <div class="card w-lg-90 w-md-100 w-100">
+    <div class="card-body w-100">
+      <div class="card-header d-flex justify-content-between align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <i data-lucide="user"></i>
+          <h2 class="card-title">Lista de usuarios</h2>
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregar">
+            <i data-lucide="plus"></i>
+            Agregar usuario
+          </button>
+        </div>
+      </div>
+      <br>
+      <table class="table-breakpoint-sm w-100">
+        <thead class="text-center">
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Fecha registro</th>
+            <th>Activo</th>
+            <th>Acciones</th>
           </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <?php foreach ($usuarios as $usuario): ?>
+            <tr class="border-bottom">
+              <td data-columna="Nombre" class="text-center justify-content-between"> <?= $usuario['nombre'] ?></td>
+              <td data-columna="Apellido" class="text-center justify-content-between"> <?= $usuario['apellido'] ?></td>
+              <td data-columna="Usuario" class="text-center justify-content-between"> <?= $usuario['usuario'] ?></td>
+              <td data-columna="Rol" class="text-center justify-content-between"> <?= $usuario['rol'] ?></td>
+              <td data-columna="Fecha registro" class="text-center justify-content-between"> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_registro']))) ?></td>
+              <td data-columna="Activo" class="text-center justify-content-between"> <?= $usuario['activo'] == 1 ? 'Activo' : 'Inactivo' ?></td>
+              <td data-columna="Acciones" class="text-center justify-content-between gap-2">
+                <div>
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEditar" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
+                    <i data-lucide="pencil"></i>
+                  </button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#miModal" onclick="confirmarEliminar('<?= base_url('eliminar/' . $usuario['id']) ?>')">
+                    <i data-lucide="trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+</section>
+
+<div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Eliminar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="card-text text-center ">¿Estás seguro que deseas eliminar este usuario?</p>
+        <h6 class="card-subtitle text-center text-body-secondary">Esta acción es irreversible</h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <a id="btnConfirmarEliminar" class="btn btn-danger text-white"> <i data-lucide="trash"></i> Eliminar</a>
+      </div>
+    </div>
   </div>
+</div>
 
-  <dialog id="modalEliminar" class="modal">
-    <div class="modal-box">
-      <h3 class="text-lg font-bold">¿Eliminar usuario?</h3>
-      <p class="py-4">¿Estás seguro que deseas eliminar este usuario?</p>
-      <div class="modal-action">
-        <button class="btn" onclick="cerrarModalEliminar()">Cancelar</button>
-        <a id="btnConfirmarEliminar" class="btn bg-red-500 text-white">Eliminar</a>
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Editar usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditar" action="<?= base_url('editar') ?>" method="post" class="d-flex flex-column gap-4">
+          <div class="form-group">
+            <label for="nombre">
+              <strong>
+                Nombre
+              </strong>
+            </label>
+            <input type="text" name="nombre" id="nombre" class="form-control input" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="apellido">
+              <strong>
+                Apellido
+              </strong>
+            </label>
+            <input type="text" name="apellido" id="apellido" class="form-control input" placeholder="apellido">
+          </div>
+          <div class="form-group">
+            <label for="rol"><strong>Rol del usuario</strong></label>
+            <select class="form-select input" name="rol" id="rol">
+              <option selected>Seleccione un rol</option>
+              <option value="superadmin">Super Admin</option>
+              <option value="admin">Encargado</option>
+              <option value="lector">Lector</option>
+            </select>
+          </div>
+          <div class="d-flex w-100 justify-content-center">
+            <button type="submit" class="btn btn-primary w-75 text-light fw-bold"><i data-lucide="pencil"></i> Editar</button>
+          </div>
+        </form>
       </div>
     </div>
-  </dialog>
+  </div>
+</div>
 
-  <dialog id="modalEditar" class="modal w-12/12">
-    <div class="modal-box">
-      <div class="flex justify-between item-center">
-        <h3 class="text-lg font-bold">Editar usuario</h3>
-        <button class="tooltip" data-tip="Cerrar" onclick="cerrarModalEditar()">
-          <i data-lucide="x"></i>
-        </button>
+<div class="modal fade" id="modalAgregar" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Agregar una nueva cuenta</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="card shadow-xl w-12/12 p-4">
-        <div class="card-title">
-          <h2>Crear Usuario</h2>
-        </div>
-        <div class="card-body">
-          <form id="formEditar" action="<?= base_url('editar') ?>" method="post" class="flex flex-col gap-2">
-
-            <div class="w-12/12 flex gap-4">
-              <div class="form-group flex flex-col gap-2 w-6/12">
-                <label for="nombre">
-                  <strong>Nombre</strong>
-                </label>
-                <input autocomplete="off" autocapitalize="on" type="text" name="nombre" id="nombre" class="form-control w-12/12 input" aria-describedby="helpId">
-              </div>
-              <div class="form-group flex flex-col gap-2 w-6/12">
-                <label for="apellido">
-                  <strong>Apellido</strong>
-                </label>
-                <input autocomplete="off" autocapitalize="on" type="text" name="apellido" id="apellido" class="form-control w-12/12 input" aria-describedby="helpId">
-              </div>
+      <div class="modal-body">
+        <form action="<?= base_url('crear') ?> " method="post" class="d-flex flex-column gap-4">
+          <div class="form-group">
+            <label for="nombre">
+              <strong>
+                Nombre
+              </strong>
+            </label>
+            <input required type="text" name="nombre" id="nombre" class="form-control input" placeholder="Nombre">
+          </div>
+          <div class="form-group">
+            <label for="apellido">
+              <strong>
+                Apellido
+              </strong>
+            </label>
+            <input required type="text" name="apellido" id="apellido" class="form-control input" placeholder="apellido">
+          </div>
+          <div class="form-group">
+            <label for="usuario">
+              <strong>
+                Usuario
+              </strong>
+            </label>
+            <input required type="usuario" name="usuario" id="usuario" class="form-control input" placeholder="Usuario">
+          </div>
+          <div class="form-group">
+            <label for="" class="form-label">
+              <strong>Contraseña</strong>
+            </label>
+            <div class="d-flex gap-2">
+              <input required
+                type="password"
+                class="form-control input"
+                name="contrasena"
+                id="contrasena"
+                placeholder="Contraseña" />
+              <button type="button" class="btn rounded-pill p-2 btn-outline-link" onmousedown="showPass()" onmouseup="hiddenPass()"><i data-lucide="eye" id="eye"></i></button>
             </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="mail">
-                <strong>Correo</strong>
-              </label>
-              <input autocomplete="off" autocapitalize="on" type="email" name="email" id="email" class="form-control w-12/12 input" aria-describedby="helpId">
-            </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="fecha_nacimiento">
-                <strong>Nacimiento</strong>
-              </label>
-              <input autocomplete="off" autocapitalize="on" type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control w-12/12 input" aria-describedby="helpId">
-            </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="genero">
-                <strong>Genero</strong>
-              </label>
-              <select name="genero" id="genero" class="form-control select w-12/12 input" aria-describedby="helpId">
-                <option disabled selected>Seleccione un genero</option>
-                <option value="Masculino">Masculino</option>
-                <option value="Femenino">Femenino</option>
-                <option value="Otro..">Otro..</option>
-              </select>
-            </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="text">
-                <strong>País</strong>
-              </label>
-              <input autocomplete="off" autocapitalize="on" type="text" name="pais" id="pais" class="form-control w-12/12 input" aria-describedby="helpId">
-            </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="saldo	">
-                <strong>Saldo</strong>
-              </label>
-              <input autocomplete="off" step="0.01" type="number" name="saldo" id="saldo" class="form-control w-12/12 validator input" aria-describedby="helpId">
-            </div>
-
-            <div class="form-group flex flex-col gap-2">
-              <label for="activo	">
-                <strong>Activo</strong>
-              </label>
-              <select name="activo" id="activo" class="form-control select w-12/12 input" aria-describedby="helpId">
-                <option value=true>Activo</option>
-                <option value=false>Inactivo</option>
-              </select>
-            </div>
-
-            <div class="p-4">
-              <button type="subtmit" class="w-12/12 btn btn-primary hover:bg-indigo-900 rounded-3xl" data-toggle="button" aria-pressed="false" autocomplete="off"> <i data-lucide="send"></i> Editar datos</button>
-            </div>
-          </form>
-
-        </div>
-
+          </div>
+          <div class="form-group">
+            <label for="rol"><strong>Rol del usuario</strong></label>
+            <select class="form-select input" name="rol" id="rol">
+              <option value=null selected>Seleccione un rol</option>
+              <option value="superadmin">Super Admin</option>
+              <option value="admin">Encargado</option>
+              <option value="lector">Lector</option>
+            </select>
+          </div>
+          <div class="d-flex w-100 justify-content-center">
+            <button type="submit" class="btn btn-primary w-75 text-light fw-bold">Registrar</button>
+          </div>
+        </form>
       </div>
     </div>
-  </dialog>
+  </div>
+</div>
 
-  <script>
-    function editar(datos) {
-      if (typeof datos === 'string') {
-        datos = JSON.parse(datos);
-      }
-      console.log(datos);
-      document.getElementById('modalEditar').showModal();
-      document.getElementById('nombre').value = datos.nombre
-      document.getElementById('apellido').value = datos.apellido
-      document.getElementById('email').value = datos.email
-      document.getElementById('fecha_nacimiento').value = datos.fecha_nacimiento
-      document.getElementById('genero').value = datos.genero
-      document.getElementById('pais').value = datos.pais
-      document.getElementById('saldo').value = datos.saldo
-      document.getElementById('activo').value = datos.activo == 1 ? true : false
-      document.getElementById('formEditar').action = "<?= base_url('editar') ?>/" + datos.id;
+
+
+
+
+<script>
+  function editar(datos) {
+    if (typeof datos === 'string') {
+      datos = JSON.parse(datos);
     }
+    console.log(datos);
+    document.getElementById('nombre').value = datos.nombre
+    document.getElementById('apellido').value = datos.apellido
+    document.getElementById('rol').value = datos.rol
+    document.getElementById('formEditar').action = "<?= base_url('editar') ?>/" + datos.id;
+  }
 
-    function cerrarModalEditar() {
-      document.getElementById('modalEditar').close();
-    }
 
-    function confirmarEliminar(url) {
-      document.getElementById('btnConfirmarEliminar').href = url;
-      document.getElementById('modalEliminar').showModal();
-    }
+  function confirmarEliminar(url) {
+    document.getElementById('btnConfirmarEliminar').href = url;
+  }
+</script>
 
-    function cerrarModalEliminar() {
-      document.getElementById('modalEliminar').close();
-    }
-  </script>
-
-  <?= $pieDePagina ?>
+<?= $pieDePagina ?>

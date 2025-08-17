@@ -2,10 +2,10 @@
 
 $links = array(
   array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
-  array('link' => 'crear', 'icon' => 'user-round-plus', 'nombre' => 'Crear usuario'),
   array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
   array('link' => 'crearCategoria', 'icon' => 'plus', 'nombre' => 'Crear Categoría'),
   array('link' => 'noticias', 'icon' => 'newspaper', 'nombre' => 'Noticias'),
+  array('link' => 'crearNoticias', 'icon' => 'message-square-diff', 'nombre' => 'Crear noticias'),
   array('link' => '/', 'icon' => 'home', 'nombre' => 'Inicio'),
   array('link' => 'login', 'icon' => 'key-round', 'nombre' => 'Iniciar Sesión'),
   array('link' => 'sign', 'icon' => 'lock-keyhole-open', 'nombre' => 'Registrarse'),
@@ -24,6 +24,7 @@ $links = array(
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/custom.css">
   <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/tablesResponsive.css">
   <title><?= $titulo ?></title>
 </head>
 
@@ -75,7 +76,7 @@ $links = array(
 
         </ul>
       </header>
-      <header class="w-100 border-bottom d-md-none sticky-top">
+      <header class="w-100 border-bottom d-md-none sticky-top bg-body">
         <div class="p-2 d-flex justify-content-between">
           <button type="button" class="btn btn-primary" onclick="togleMenu()">
             <i data-lucide="menu"></i>
@@ -131,12 +132,11 @@ $links = array(
 
 
       </header>
-      <section class="w-100 p-4">
-        <div class="w-100 p-2 d-flex justify-content-end d-none d-md-flex">
-          <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
-            <i data-lucide="moon" id="icon"></i>
-          </button>
+    <?php endif; ?>
+    <section class="w-100 p-4">
+      <div class="w-100 p-2 d-flex justify-content-end d-none d-md-flex">
+        <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
+          <i data-lucide="moon" id="icon"></i>
+        </button>
 
-        </div>
-
-      <?php endif; ?>
+      </div>

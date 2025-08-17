@@ -60,7 +60,7 @@ class CategoriasController extends Controller
             session()->setFlashdata('alerta', [
                 'modal' => true,
                 'titulo' => 'Éxito',
-                'descripcion' => 'Categoría eliminada correctamente.',
+                'descripcion' => $datos['res']['message'],
             ]);
             return redirect()->to(base_url('categorias'));
         } else {

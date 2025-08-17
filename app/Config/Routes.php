@@ -8,25 +8,27 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'DashboardController::index');
 $routes->get('/quienessomos', 'DashboardController::quienessomos');
 $routes->get('/noticiaspublic', 'DashboardController::noticias');
+
 $routes->get('favoritos', 'FavoritosController::index');
 $routes->get('favoritos/ver/(:num)', 'FavoritosController::ver/$1');
 $routes->post('favoritos/agregar', 'FavoritosController::agregar');
 $routes->post('favoritos/eliminar/(:num)', 'FavoritosController::eliminar/$1');
 
-$routes->get('/landing', 'LandingPage::index');
 $routes->get('usuarios', 'UsuariosController::index');
-$routes->get('crear', 'UsuariosController::crear');
 $routes->post('crear', 'UsuariosController::crear');
 $routes->get('eliminar/(:num)', 'UsuariosController::eliminar/$1');
 $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
+
 $routes->get('noticias', 'NoticiasController::index');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
+
 $routes->get('categorias', 'CategoriasController::index');
 $routes->get('crearCategoria', 'CategoriasController::crear');
 $routes->post('crearCategoria', 'CategoriasController::crear');
 $routes->post('eliminarCategoria/(:num)', 'CategoriasController::eliminar/$1');
 $routes->post('editarCategoria/(:num)', 'CategoriasController::editar/$1');
+
 $routes->get('login', 'AuthController::index');
 $routes->post('login', 'AuthController::login');
 $routes->get('sign', 'AuthController::signView');

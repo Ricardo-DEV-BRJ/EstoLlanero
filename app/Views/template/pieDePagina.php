@@ -94,6 +94,16 @@
       menuAct = false
     }
   }
+
+  const showPass = () => {
+    const contraseña = document.getElementById('contrasena')
+    contraseña.setAttribute('type', 'text')
+  }
+  
+  const hiddenPass = () => {
+    const contraseña = document.getElementById('contrasena')
+    contraseña.setAttribute('type', 'password')
+  }
 </script>
 </section>
 

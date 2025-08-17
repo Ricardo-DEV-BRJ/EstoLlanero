@@ -73,3 +73,188 @@ li:hover {
         width: 0%;
     }
 }
+
+/* `sm` applies to x-small devices (portrait phones, less than 576px) */
+@media (max-width: 576px) {
+    .w-xs-25 {
+        width: 25% !important;
+    }
+
+    .w-xs-50 {
+        width: 50% !important;
+    }
+
+    .w-xs-70 {
+        width: 70% !important;
+    }
+
+    .w-xs-75 {
+        width: 75% !important;
+    }
+
+    .w-xs-80 {
+        width: 80% !important;
+    }
+
+    .w-xs-90 {
+        width: 90% !important;
+    }
+
+    .w-xs-100 {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .w-sm-25 {
+        width: 25% !important;
+    }
+
+    .w-sm-50 {
+        width: 50% !important;
+    }
+
+    .w-sm-70 {
+        width: 70% !important;
+    }
+
+    .w-sm-75 {
+        width: 75% !important;
+    }
+
+    .w-sm-80 {
+        width: 80% !important;
+    }
+
+    .w-sm-90 {
+        width: 90% !important;
+    }
+
+    .w-sm-100 {
+        width: 100% !important;
+    }
+}
+
+/* // `md` applies to small devices (landscape phones, less than 768px) */
+@media (min-width: 768px) {
+    .w-md-25 {
+        width: 25% !important;
+    }
+
+    .w-md-50 {
+        width: 50% !important;
+    }
+
+    .w-md-70 {
+        width: 70% !important;
+    }
+
+    .w-md-75 {
+        width: 75% !important;
+    }
+
+    .w-md-80 {
+        width: 80% !important;
+    }
+
+    .w-md-90 {
+        width: 90% !important;
+    }
+
+    .w-md-100 {
+        width: 100% !important;
+    }
+}
+
+/* `lg` applies to medium devices (tablets, less than 992px) */
+@media (min-width: 992px) {
+    .w-lg-25 {
+        width: 25% !important;
+    }
+
+    .w-lg-50 {
+        width: 50% !important;
+    }
+
+    .w-lg-70 {
+        width: 70% !important;
+    }
+
+    .w-lg-75 {
+        width: 75% !important;
+    }
+
+    .w-lg-80 {
+        width: 80% !important;
+    }
+
+    .w-lg-90 {
+        width: 90% !important;
+    }
+
+    .w-lg-100 {
+        width: 100% !important;
+    }
+}
+
+/* `xl` applies to large devices (desktops, less than 1200px) */
+@media (min-width: 1200px) {
+    .w-xl-25 {
+        width: 25% !important;
+    }
+
+    .w-xl-50 {
+        width: 50% !important;
+    }
+
+    .w-xl-70 {
+        width: 70% !important;
+    }
+
+    .w-xl-75 {
+        width: 75% !important;
+    }
+
+    .w-xl-80 {
+        width: 80% !important;
+    }
+
+    .w-xl-90 {
+        width: 90% !important;
+    }
+
+    .w-xl-100 {
+        width: 100% !important;
+    }
+}
+
+/* `xxl` applies to x-large devices (large desktops, less than 1400px) */
+@media (min-width: 1400px) {
+    .w-xxl-25 {
+        width: 25% !important;
+    }
+
+    .w-xxl-50 {
+        width: 50% !important;
+    }
+
+    .w-xxl-70 {
+        width: 70% !important;
+    }
+
+    .w-xxl-75 {
+        width: 75% !important;
+    }
+
+    .w-xxl-80 {
+        width: 80% !important;
+    }
+
+    .w-xxl-90 {
+        width: 90% !important;
+    }
+
+    .w-xxl-100 {
+        width: 100% !important;
+    }
+}

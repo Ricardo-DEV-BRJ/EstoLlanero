@@ -15,6 +15,7 @@ class NoticiasController extends Controller
     {
         $noticias = new NoticiasModel();
         $datos['noticias'] = $noticias->noticias();
+        $datos['categorias'] = $noticias->categorias();
         $datos['cabezera'] = view('Template/cabezera', [
             'titulo' => 'Noticias',
             'header' => true
@@ -25,11 +26,13 @@ class NoticiasController extends Controller
 
     public function crearNoticias()
     {
+        $noticias = new NoticiasModel();
         $datos['cabezera'] = view('Template/cabezera', [
             'titulo' => 'Noticias',
             'header' => true
         ]);
         $datos['pieDePagina'] = view('template/pieDePagina');
+        $datos['categorias'] = $noticias->categorias();
         return view('NoticiasView/NoticiasCrear', $datos);
     }
 
@@ -39,27 +42,21 @@ class NoticiasController extends Controller
 
         $image = $this->request->getFile('image');
         if ($image) {
-            $nombreImage = $image->getRandomName();
-            $image->move(FCPATH . 'image/', $nombreImage);
-            $params = [
-                'nombre' => $this->request->getVar('nombre'),
-                'imagen' => $nombreImage
-            ];
-            $datos['res'] = $noticias->crear($params);
+            $datos['res'] = $noticias->crear($this->request->getPost(), $image);
             if ($datos['res']['success'] != false) {
                 session()->setFlashdata('alerta', [
                     'modal' => true,
                     'titulo' => 'Éxito',
                     'descripcion' => 'Noticia creada correctamente.',
                 ]);
-                return redirect()->to(base_url('crearNoticias'));
+                return redirect()->to(base_url('noticias'));
             } else {
                 session()->setFlashdata('alerta', [
                     'modal' => true,
                     'titulo' => 'Error al crear',
                     'descripcion' => $datos['res']['message'],
                 ]);
-                return redirect()->to(base_url('crearNoticias'));
+                return redirect()->to(base_url('noticias'));
             }
         } else {
             session()->setFlashdata('alerta', [
@@ -67,7 +64,7 @@ class NoticiasController extends Controller
                 'titulo' => 'Faltan algo..',
                 'descripcion' => "Debes agregar un imagen",
             ]);
-            return redirect()->to(base_url('crearNoticias'));
+            return redirect()->to(base_url('noticias'));
         }
     }
 }
