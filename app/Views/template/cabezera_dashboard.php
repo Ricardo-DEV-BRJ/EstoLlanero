@@ -47,6 +47,10 @@
           <a href="usuarios" class="nav-btn">
             <i data-lucide="user" class="w-4 h-4"></i> Admin Panel
           </a>
+          <!-- Icono de estrella para favoritos -->
+          <a href="<?= base_url('favoritos') ?>" class="nav-link" title="Favoritos">
+            <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i>
+          </a>
         </div>
         
         <button class="hamburger" id="hamburger">
@@ -63,6 +67,10 @@
     <a href="<?= base_url('/') ?>" class="nav-link font-bold">INICIO</a>
     <a href="noticiaspublic" class="nav-link">NOTICIAS</a>
     <a href="quienessomos" class="nav-link">QUIENES SOMOS</a>
+    <!-- Icono de estrella para favoritos (versión móvil) -->
+    <a href="FavoritosView.php" class="nav-link flex items-center gap-2">
+      <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i> Favoritos
+    </a>
     <a href="usuarios" class="nav-btn">
       <i data-lucide="user" class="w-4 h-4"></i> Admin Panel
     </a>

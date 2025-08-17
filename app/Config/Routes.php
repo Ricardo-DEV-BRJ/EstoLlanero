@@ -8,8 +8,10 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'DashboardController::index');
 $routes->get('/quienessomos', 'DashboardController::quienessomos');
 $routes->get('/noticiaspublic', 'DashboardController::noticias');
-
-
+$routes->get('favoritos', 'FavoritosController::index');
+$routes->get('favoritos/ver/(:num)', 'FavoritosController::ver/$1');
+$routes->post('favoritos/agregar', 'FavoritosController::agregar');
+$routes->post('favoritos/eliminar/(:num)', 'FavoritosController::eliminar/$1');
 
 $routes->get('/landing', 'LandingPage::index');
 $routes->get('usuarios', 'UsuariosController::index');
