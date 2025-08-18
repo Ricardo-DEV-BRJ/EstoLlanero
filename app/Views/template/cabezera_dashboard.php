@@ -44,7 +44,7 @@
           <a href="<?= base_url('/') ?>" class="nav-link font-bold">INICIO</a>
           <a href="noticiaspublic" class="nav-link">NOTICIAS</a>
           <a href="quienessomos" class="nav-link">QUIENES SOMOS</a>
-          <a href="usuarios" class="nav-btn">
+          <a href="login" class="nav-btn">
             <i data-lucide="user" class="w-4 h-4"></i> Admin Panel
           </a>
           <!-- Icono de estrella para favoritos -->

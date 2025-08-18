@@ -28,8 +28,6 @@ class UsuariosController extends Controller
             'header' => true
         ]);
         $datos['pieDePagina'] = view('Template/pieDePagina');
-
-
         $datos['res'] = $usuarios->crear($this->request->getPost());
         if ($datos['res']['success'] != false) {
             session()->setFlashdata('alerta', [

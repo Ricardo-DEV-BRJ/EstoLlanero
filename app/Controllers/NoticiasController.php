@@ -67,4 +67,47 @@ class NoticiasController extends Controller
             return redirect()->to(base_url('noticias'));
         }
     }
+
+    public function edit($id = null, $imagen)
+    {
+        $noticias = new NoticiasModel();
+        $foto = $this->request->getFile('image');
+        $datos['res'] = $noticias->editar($id, $this->request->getPost(), $foto, $imagen);
+        if ($datos['res']['success'] == true) {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Exito',
+                'descripcion' => "Se edito con exito la noticia",
+            ]);
+            return redirect()->to(base_url('noticias'));
+        } else {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Algo salio mal...',
+                'descripcion' => $datos['res']['message'],
+            ]);
+            return redirect()->to(base_url('noticias'));
+        }
+    }
+
+    public function eliminar($id = null)
+    {
+        $noticias = new NoticiasModel();
+         $datos['res'] = $noticias->eliminar($id);
+        if ($datos['res']['success'] != false) {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Éxito',
+                'descripcion' => $datos['res']['message'],
+            ]);
+            return redirect()->to(base_url('noticias'));
+        } else {
+            session()->setFlashdata('alerta', [
+                'modal' => true,
+                'titulo' => 'Error al eliminar',
+                'descripcion' => $datos['res']['message'],
+            ]);
+            return redirect()->to(base_url('noticias'));
+        }
+    }
 }

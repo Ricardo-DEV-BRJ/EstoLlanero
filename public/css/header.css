@@ -16,7 +16,7 @@ li:hover {
 
 .menuResAct {
     position: fixed;
-    width: 75%;
+    width: 100%;
     z-index: 9999;
     height: 100dvh;
     animation-name: entradaRes;
@@ -30,6 +30,13 @@ li:hover {
     height: 100dvh;
     animation-name: salidaRes;
     animation-duration: .3s;
+}
+
+.seccion-con-scroll {
+    height: 130px;
+    /* Altura fija */
+    overflow-y: auto;
+    /* Scroll vertical si es necesario */
 }
 
 
@@ -74,10 +81,105 @@ li:hover {
     }
 }
 
+@media (min-width:300px) {
+    .menuResAct {
+        width: 75%;
+    }
+
+}
+
+@media (min-width:425px) {
+    .menuResAct {
+        width: 60%;
+    }
+
+    @keyframes entradaRes {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 60%;
+        }
+    }
+
+    @keyframes salidaRes {
+        0% {
+            width: 60%;
+        }
+
+        100% {
+            width: 0%;
+        }
+    }
+}
+
+@media (min-width:480px) {
+    .menuResAct {
+        width: 50%;
+    }
+
+    @keyframes entradaRes {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 50%;
+        }
+    }
+
+    @keyframes salidaRes {
+        0% {
+            width: 50%;
+        }
+
+        100% {
+            width: 0%;
+        }
+    }
+}
+
+@media (min-width:588px) {
+    .menuResAct {
+        width: 40%;
+    }
+
+    @keyframes entradaRes {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 40%;
+        }
+    }
+
+    @keyframes salidaRes {
+        0% {
+            width: 40%;
+        }
+
+        100% {
+            width: 0%;
+        }
+    }
+}
+
+.w-33 {
+    width: calc(33.333% - 20px) !important;
+}
+
+
+
 /* `sm` applies to x-small devices (portrait phones, less than 576px) */
 @media (max-width: 576px) {
     .w-xs-25 {
         width: 25% !important;
+    }
+
+    .w-xs-33 {
+        width: calc(33.333% - 20px) !important;
     }
 
     .w-xs-50 {
@@ -108,6 +210,10 @@ li:hover {
 @media (min-width: 576px) {
     .w-sm-25 {
         width: 25% !important;
+    }
+
+    .w-sm-33 {
+        width: calc(33.333% - 20px) !important;
     }
 
     .w-sm-50 {
@@ -141,6 +247,10 @@ li:hover {
         width: 25% !important;
     }
 
+    .w-md-33 {
+        width: calc(33.333% - 20px) !important;
+    }
+
     .w-md-50 {
         width: 50% !important;
     }
@@ -164,12 +274,21 @@ li:hover {
     .w-md-100 {
         width: 100% !important;
     }
+
+    .card-md-50 {
+        width: calc(50% - 20px) !important;
+    }
+
 }
 
 /* `lg` applies to medium devices (tablets, less than 992px) */
 @media (min-width: 992px) {
     .w-lg-25 {
         width: 25% !important;
+    }
+
+    .w-lg-33 {
+        width: calc(33.333% - 20px) !important;
     }
 
     .w-lg-50 {
@@ -203,6 +322,10 @@ li:hover {
         width: 25% !important;
     }
 
+    .w-xl-33 {
+        width: calc(33.333% - 20px) !important;
+    }
+
     .w-xl-50 {
         width: 50% !important;
     }
@@ -232,6 +355,10 @@ li:hover {
 @media (min-width: 1400px) {
     .w-xxl-25 {
         width: 25% !important;
+    }
+
+    .w-xxl-33 {
+        width: calc(33.333% - 20px) !important;
     }
 
     .w-xxl-50 {

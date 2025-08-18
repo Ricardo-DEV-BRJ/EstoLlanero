@@ -22,6 +22,8 @@ $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
 $routes->get('noticias', 'NoticiasController::index');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
+$routes->post('editNoticias/(:num)/(:segment)', 'NoticiasController::edit/$1/$2');
+$routes->get('eliminarNoticia/(:num)', 'NoticiasController::eliminar/$1');
 
 $routes->get('categorias', 'CategoriasController::index');
 $routes->get('crearCategoria', 'CategoriasController::crear');
