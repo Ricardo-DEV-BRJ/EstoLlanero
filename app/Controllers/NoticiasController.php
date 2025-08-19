@@ -13,15 +13,23 @@ class NoticiasController extends Controller
 
     public function index()
     {
-        $noticias = new NoticiasModel();
-        $datos['noticias'] = $noticias->noticias();
-        $datos['categorias'] = $noticias->categorias();
-        $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'Noticias',
-            'header' => true
-        ]);
-        $datos['pieDePagina'] = view('template/pieDePagina');
-        return view('NoticiasView/Noticias', $datos);
+        $usuario = [
+            'isLoggedIn' => session()->get('isLoggedIn'),
+            'rol' => session()->get('rol')
+        ];
+        if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
+            $noticias = new NoticiasModel();
+            $datos['noticias'] = $noticias->noticias();
+            $datos['categorias'] = $noticias->categorias();
+            $datos['cabezera'] = view('Template/cabezera', [
+                'titulo' => 'Noticias',
+                'header' => true
+            ]);
+            $datos['pieDePagina'] = view('template/pieDePagina');
+            return view('NoticiasView/Noticias', $datos);
+        } else {
+            return redirect()->to(base_url('errorAuth'));
+        }
     }
 
     public function crear()

@@ -10,14 +10,22 @@ class UsuariosController extends Controller
     protected $usuarioModel;
     public function index()
     {
-        $usuarios = new UsuariosModel();
-        $datos['usuarios'] = $usuarios->todos();
-        $datos['cabezera'] = view('Template/cabezera', [
-            'titulo' => 'EstoLlanos - Usuarios',
-            'header' => true
-        ]);
-        $datos['pieDePagina'] = view('Template/pieDePagina');
-        return view('UsuariosView/usuarios', $datos);
+        $usuario = [
+            'isLoggedIn' => session()->get('isLoggedIn'),
+            'rol' => session()->get('rol')
+        ];
+        if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
+            $usuarios = new UsuariosModel();
+            $datos['usuarios'] = $usuarios->todos();
+            $datos['cabezera'] = view('Template/cabezera', [
+                'titulo' => 'EstoLlanos - Usuarios',
+                'header' => true
+            ]);
+            $datos['pieDePagina'] = view('Template/pieDePagina');
+            return view('UsuariosView/usuarios', $datos);
+        } else {
+            return redirect()->to(base_url('errorAuth'));
+        }
     }
 
     public function crear()

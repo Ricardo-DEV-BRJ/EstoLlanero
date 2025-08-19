@@ -10,7 +10,6 @@ $routes->get('/quienessomos', 'DashboardController::quienessomos');
 $routes->get('/noticiaspublic', 'DashboardController::noticias');
 $routes->get('/noticiaspublic/(:num)', 'DashboardController::detalle/$1');
 
-
 $routes->get('favoritos', 'FavoritosController::index');
 $routes->get('favoritos/ver/(:num)', 'FavoritosController::ver/$1');
 $routes->post('favoritos/agregar', 'FavoritosController::agregar');
@@ -44,3 +43,5 @@ $routes->post('login', 'AuthController::login');
 $routes->get('sign', 'AuthController::signView');
 $routes->post('sign', 'AuthController::sign');
 $routes->get('logout', 'AuthController::logout');
+
+$routes->get('errorAuth', 'ErrorAuthController::index');

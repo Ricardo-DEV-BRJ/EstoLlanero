@@ -1,5 +1,12 @@
 <?php
 
+$usuario = [
+  'access' => session()->get('isLoggedIn'),
+  'usuario' => session()->get('usuario'),
+  'nombre' => session()->get('nombre'),
+  'apellido' => session()->get('apellido'),
+];
+
 $links = array(
   array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
   array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
@@ -32,7 +39,6 @@ $links = array(
     <?php if ($header == true): ?>
       <header class="d-flex flex-column gap-4 border-end d-none d-md-block " id="menuNav">
         <div class="sticky-top">
-
           <div class="" style="min-height: 25dvh;">
             <div class="d-flex align-items-center p-4 gap-2 d-none contenido">
               <img src="../public/Media/LogoCircular.png" alt="" width="100">
@@ -41,6 +47,14 @@ $links = array(
                 <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
               </div>
             </div>
+            <?php if ($usuario['access']): ?>
+              <div class="card-body ps-4 d-none contenido">
+                <h5><strong> Bienvenido </strong> <?= $usuario['usuario'] ?></h5>
+
+              </div>
+            <?php endif; ?>
+
+
           </div>
           <ul class="d-flex flex-column list-unstyled ps-2 pe-2">
             <?php foreach ($links as $link): ?>
