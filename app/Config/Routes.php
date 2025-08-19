@@ -14,7 +14,13 @@ $routes->get('/noticiaspublic/(:num)', 'DashboardController::detalle/$1');
 $routes->get('favoritos', 'FavoritosController::index');
 $routes->get('favoritos/ver/(:num)', 'FavoritosController::ver/$1');
 $routes->post('favoritos/agregar', 'FavoritosController::agregar');
+$routes->get('favoritos/verificar/(:num)', 'FavoritosController::verificar/$1'); // Nueva ruta
 $routes->post('favoritos/eliminar/(:num)', 'FavoritosController::eliminar/$1');
+
+// Rutas para comentarios
+$routes->get('comentarios/ver/(:num)', 'ComentariosController::ver/$1');
+$routes->post('comentarios/agregar', 'ComentariosController::agregar');
+
 
 $routes->get('usuarios', 'UsuariosController::index');
 $routes->post('crear', 'UsuariosController::crear');
