@@ -9,6 +9,9 @@
   });
   lucide.createIcons();
 
+  const url = (window.location.pathname).split('/')[3]
+  console.log(url)
+
   function toggleTheme() {
     const html = document.documentElement;
     const currentTheme = html.getAttribute("data-bs-theme");
@@ -28,47 +31,49 @@
     }
   }
 
-  // Inicializar ícono según el tema al cargar la página
-  document.addEventListener("DOMContentLoaded", () => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    document.documentElement.setAttribute("data-bs-theme", savedTheme);
+  if (url != 'login' && url !='sign') {
+    // Inicializar ícono según el tema al cargar la página
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      document.documentElement.setAttribute("data-bs-theme", savedTheme);
 
-    const icon = document.getElementById("icon");
-    icon.setAttribute("data-lucide", savedTheme === "light" ? "moon" : "sun");
+      const icon = document.getElementById("icon");
+      icon.setAttribute("data-lucide", savedTheme === "light" ? "moon" : "sun");
 
-    // Asegurar que Lucide esté cargado
-    if (window.lucide) {
-      lucide.createIcons();
-    }
+      // Asegurar que Lucide esté cargado
+      if (window.lucide) {
+        lucide.createIcons();
+      }
 
-    const elemento = document.getElementById("menuNav");
+      const elemento = document.getElementById("menuNav");
 
-    // Cuando el mouse entra en el elemento
-    elemento.addEventListener("mouseenter", () => {
-      const navegacion = document.querySelectorAll('.contenido');
-      elemento.classList.add('activo')
-      elemento.classList.remove('inActivo')
-      setTimeout(() => {
-        navegacion.forEach(item => {
-          item.classList.remove('d-none')
-        })
-      }, 100)
+      // Cuando el mouse entra en el elemento
+      elemento.addEventListener("mouseenter", () => {
+        const navegacion = document.querySelectorAll('.contenido');
+        elemento.classList.add('activo')
+        elemento.classList.remove('inActivo')
+        setTimeout(() => {
+          navegacion.forEach(item => {
+            item.classList.remove('d-none')
+          })
+        }, 100)
+
+      });
+
+      elemento.addEventListener("mouseleave", () => {
+        const navegacion = document.querySelectorAll('.contenido');
+        elemento.classList.remove('activo')
+        elemento.classList.add('inActivo')
+        setTimeout(() => {
+          navegacion.forEach(item => {
+            item.classList.add('d-none')
+          })
+        }, 100)
+
+      })
 
     });
-
-    elemento.addEventListener("mouseleave", () => {
-      const navegacion = document.querySelectorAll('.contenido');
-      elemento.classList.remove('activo')
-      elemento.classList.add('inActivo')
-      setTimeout(() => {
-        navegacion.forEach(item => {
-          item.classList.add('d-none')
-        })
-      }, 100)
-
-    })
-
-  });
+  }
 
   let menuAct = false
 

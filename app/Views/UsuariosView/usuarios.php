@@ -6,10 +6,10 @@
 
 <div class="card w-lg-90 w-md-100 w-100">
   <div class="card-body w-100">
-    <div class="card-header d-flex justify-content-between align-items-center gap-2">
+    <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
       <div class="d-flex align-items-center gap-2">
         <i data-lucide="user"></i>
-        <h2 class="card-title">Lista de usuarios</h2>
+        <h3 class="card-title">Lista de usuarios</h3>
       </div>
       <div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="add()">
@@ -45,10 +45,10 @@
               <td data-columna="Acciones" class="text-center justify-content-between gap-2">
                 <div>
                   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
-                    <i data-lucide="pencil"></i>
+                    <i data-lucide="pencil" style="width: 18px; height:18px;"></i>
                   </button>
                   <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#miModal" onclick="confirmarEliminar('<?= base_url('eliminar/' . $usuario['id']) ?>')">
-                    <i data-lucide="trash"></i>
+                    <i data-lucide="trash" style="width: 18px; height:18px;"></i>
                   </button>
                 </div>
               </td>

@@ -32,7 +32,7 @@ class AuthController extends Controller
     if ($res['success']) {
       session()->set([
         'isLoggedIn' => 'true',
-        'id'=> $res['id'],
+        'id' => $res['id'],
         'usuario' => $res['usuario'],
         'nombre' => $res['nombre'],
         'apellido' => $res['apellido'],
@@ -45,7 +45,7 @@ class AuthController extends Controller
         'titulo' => 'Error de acceso',
         'descripcion' => $res['message'],
       ]);
-      return redirect()->to(base_url('login'));
+      return redirect()->back()->withInput();
     }
   }
 
@@ -58,29 +58,38 @@ class AuthController extends Controller
     $datos['pie'] = view('template/pieDePagina');
     return view('AuthView/CrearUsuarioView', $datos);
   }
+
   public function sign()
   {
     $users = new AuthModel();
     $datos['cabezera'] = view('template/cabezera', [
-      'titulo' => 'EstoLlanos - Ingresar',
-      'header' => false
+      'titulo' => 'EstoLlanos - home',
+      'header' => true
     ]);
     $datos['pie'] = view('template/pieDePagina');
-    $datos['res'] = $users->sign($this->request->getPost());
-    if ($datos['res']['success'] != false) {
+    $res = $users->sign($this->request->getPost());
+    if ($res['success']) {
+      session()->set([
+        'isLoggedIn' => 'true',
+        'id' => $res['id'],
+        'usuario' => $res['usuario'],
+        'nombre' => $res['nombre'],
+        'apellido' => $res['apellido'],
+        'rol' => $res['rol'],
+      ]);
       session()->setFlashdata('alerta', [
         'modal' => true,
         'titulo' => 'Éxito',
         'descripcion' => 'Usuario creado correctamente.',
       ]);
-      return redirect()->to(base_url('sign'));
+      return redirect()->to(base_url('/'));
     } else {
       session()->setFlashdata('alerta', [
         'modal' => true,
         'titulo' => 'Error al editar',
-        'descripcion' => $datos['res']['message'],
+        'descripcion' => $res['message'],
       ]);
-      return redirect()->to(base_url('sign'));
+      return redirect()->back()->withInput();
     }
   }
 

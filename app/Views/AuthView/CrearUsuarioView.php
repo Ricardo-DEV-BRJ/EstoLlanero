@@ -3,6 +3,13 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
+<section class="w-100 d-flex flex-column flex-justify-center mx-0 align-items-center">
+  <div class="w-100 p-2 d-flex justify-content-end d-md-none d-flex">
+    <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
+      <i data-lucide="moon" id="icon"></i>
+    </button>
+  </div>
+</section>
 <section class="w-100 d-flex justify-content-center align-items-center" style="height: 80dvh;">
 
   <div class="card w-sm-90 w-md-75 w-lg-50 w-xs-90 bg-gray-200 d-flex align-items-center justify-content-center" style="min-height: 70dvh;">
@@ -17,7 +24,7 @@
               Nombre
             </strong>
           </label>
-          <input type="text" name="nombre" id="nombre" class="form-control input" placeholder="Nombre">
+          <input type="text" value="<?= old('usuario') ?>" name="nombre" id="nombre" class="form-control input" placeholder="Nombre">
         </div>
         <div class="form-group">
           <label for="apellido">
@@ -25,7 +32,7 @@
               Apellido
             </strong>
           </label>
-          <input type="text" name="apellido" id="apellido" class="form-control input" placeholder="apellido">
+          <input type="text" value="<?= old('usuario') ?>" name="apellido" id="apellido" class="form-control input" placeholder="apellido">
         </div>
         <div class="form-group">
           <label for="usuario">
@@ -33,7 +40,7 @@
               Usuario
             </strong>
           </label>
-          <input type="usuario" name="usuario" id="usuario" class="form-control input" placeholder="Usuario">
+          <input type="usuario" value="<?= old('usuario') ?>" name="usuario" id="usuario" class="form-control input" placeholder="Usuario">
         </div>
         <div class="form-group">
           <label for="" class="form-label">
@@ -41,6 +48,7 @@
           </label>
           <input
             type="password"
+            value="<?= old('usuario') ?>"
             class="form-control input"
             name="contrasena"
             id="contrasena"

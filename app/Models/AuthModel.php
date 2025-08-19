@@ -46,16 +46,29 @@ class AuthModel extends Model
 
   public function sign($datos)
   {
-    $sql = 'INSERT INTO users (username, email, `password`) VALUES (?,?,?)';
+    $sql = "INSERT INTO usuarios (nombre, apellido, usuario, contrasena, rol, fecha_registro, activo) VALUES (?, ?, ?, ?, ?,?,?)";
     $params = [
-      $datos['username'],
-      $datos['email'],
-      password_hash($datos['pass'], PASSWORD_DEFAULT)
+      $datos['nombre'],
+      $datos['apellido'],
+      $datos['usuario'],
+      password_hash($datos['contrasena'], PASSWORD_DEFAULT),
+      'lector',
+      date('Y-m-d H:i:s'),
+      true,
     ];
 
     try {
       $this->db->query($sql, $params);
-      return ['success' => true, 'id' => $this->db->insertID()];
+      
+      return [
+        'success' => true,
+        'message' => 'Acceso concedido',
+        'id' => $this->db->insertID(),
+        'usuario' => $datos['usuario'],
+        'nombre' => $datos['nombre'],
+        'apellido' => $datos['apellido'],
+        'rol' => 'lector'
+      ];
     } catch (\Exception $e) {
       $message = '';
       $errorCode = $this->db->error()['code'] ?? $e->getCode();
@@ -79,11 +92,6 @@ class AuthModel extends Model
           'message' => "Faltan campos"
         ];
       };
-      return [
-        'success' => false,
-        'error' => 'unknown',
-        'message' => $result ?? $e->getMessage()
-      ];
     };
   }
 }

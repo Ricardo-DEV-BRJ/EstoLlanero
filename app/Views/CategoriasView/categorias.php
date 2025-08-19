@@ -4,66 +4,70 @@
 <?php endif; ?>
 
 
-  <div class="card shadow w-100 w-lg-70">
-    <div class="card-body">
-      <div class="d-flex align-items-center mb-4">
-        <i data-lucide="tag" class="me-2" style="width: 24px; height: 24px;"></i>
-        <h2 class="mb-0">Lista de categorías</h2>
-      </div>
+<div class="card shadow w-100 w-lg-70">
+  <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+    <div class="d-flex align-items-center mb-4">
+      <i data-lucide="tag" class="me-2" style="width: 24px; height: 24px;"></i>
+      <h3 class="mb-0">Lista de categorías</h3>
+    </div>
+    <div class="text-center" data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Agregar categoría">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearCategoria">
         <i data-lucide="plus"></i> Agregar Categoría
       </button>
     </div>
+  </div>
 
-    <?php if (empty($categorias)): ?>
-      <div class="text-center py-5">
-        <i data-lucide="folder-x" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
-        <h3 class="h4">No hay categorías registradas</h3>
-        <p class="text-muted mb-3">Comienza agregando una nueva categoría</p>
-      </div>
-    <?php else: ?>
-      <div class="p-4">
-        <div class="card">
-          <table class="table table-hover table-breakpoint-sm">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Creada por</th>
-                <th class="text-center">Acción</th>
+  <?php if (empty($categorias)): ?>
+    <div class="text-center py-5">
+      <i data-lucide="folder-x" class="text-muted mb-3" style="width: 48px; height: 48px;"></i>
+      <h3 class="h4">No hay categorías registradas</h3>
+      <p class="text-muted mb-3">Comienza agregando una nueva categoría</p>
+    </div>
+  <?php else: ?>
+    <div class="p-4">
+      <div class="card">
+        <table class="table table-hover table-breakpoint-sm">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Creada por</th>
+              <th class="text-center">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($categorias as $categoria): ?>
+              <tr class="border-bottom">
+                <td data-columna="Nombre" class="fw-bold"><?= $categoria['nombre'] ?></td>
+                <td data-columna="Descripción" class="text-muted"><?= $categoria['descripcion'] ?></td>
+                <td data-columna="Creada por" class="text-muted"><?= $categoria['autor'] ?></td>
+                <td data-columna="Acciones" class="text-center">
+                  <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEditar"
+                      data-id="<?= $categoria['id'] ?>"
+                      data-nombre="<?= htmlspecialchars($categoria['nombre']) ?>"
+                      data-descripcion="<?= htmlspecialchars($categoria['descripcion']) ?>">
+                      <i data-lucide="pencil" style="width: 16px; height: 16px;"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
+                      data-id="<?= $categoria['id'] ?>">
+                      <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
+                    </button>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($categorias as $categoria): ?>
-                <tr class="border-bottom">
-                  <td data-columna="Nombre" class="fw-bold"><?= $categoria['nombre'] ?></td>
-                  <td data-columna="Descripción" class="text-muted"><?= $categoria['descripcion'] ?></td>
-                  <td data-columna="Creada por" class="text-muted"><?= $categoria['autor'] ?></td>
-                  <td data-columna="Acciones" class="text-center">
-                    <div class="d-flex justify-content-center gap-2">
-                      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                        data-id="<?= $categoria['id'] ?>"
-                        data-nombre="<?= htmlspecialchars($categoria['nombre']) ?>"
-                        data-descripcion="<?= htmlspecialchars($categoria['descripcion']) ?>">
-                        <i data-lucide="pencil" style="width: 16px; height: 16px;"></i>
-                      </button>
-                      <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar"
-                        data-id="<?= $categoria['id'] ?>">
-                        <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
-            </tbody>
+            <?php endforeach; ?>
+          </tbody>
 
-          </table>
-        </div>
+        </table>
       </div>
+    </div>
 
-    <?php endif; ?>
-  </div>
-  </div>
+  <?php endif; ?>
+</div>
+</div>
 
 
 <div class="modal fade" id="modalCrearCategoria" tabindex="-1" aria-hidden="true">
