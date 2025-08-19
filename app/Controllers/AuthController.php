@@ -10,12 +10,17 @@ class AuthController extends Controller
 
   public function index()
   {
-    $datos['cabezera'] = view('template/cabezera', [
-      'titulo' => 'EstoLlanos - Ingresar',
-      'header' => false
-    ]);
-    $datos['pie'] = view('template/pieDePagina');
-    return view('AuthView/LoginView', $datos);
+    $usuario = session()->get('isLoggedIn');
+    if (!$usuario) {
+      $datos['cabezera'] = view('template/cabezera', [
+        'titulo' => 'EstoLlanos - Ingresar',
+        'header' => false
+      ]);
+      $datos['pie'] = view('template/pieDePagina');
+      return view('AuthView/LoginView', $datos);
+    } else {
+      return redirect()->to(base_url('/'));
+    }
   }
 
   public function login()
@@ -38,7 +43,7 @@ class AuthController extends Controller
         'apellido' => $res['apellido'],
         'rol' => $res['rol'],
       ]);
-      return redirect()->to(base_url('usuarios'));
+      return redirect()->to(base_url('/'));
     } else {
       session()->setFlashdata('alerta', [
         'modal' => true,
@@ -51,12 +56,17 @@ class AuthController extends Controller
 
   public function signView()
   {
-    $datos['cabezera'] = view('template/cabezera', [
-      'titulo' => 'EstoLlanos - Ingresar',
-      'header' => false
-    ]);
-    $datos['pie'] = view('template/pieDePagina');
-    return view('AuthView/CrearUsuarioView', $datos);
+    $usuario = session()->get('isLoggedIn');
+    if (!$usuario) {
+      $datos['cabezera'] = view('template/cabezera', [
+        'titulo' => 'EstoLlanos - Ingresar',
+        'header' => false
+      ]);
+      $datos['pie'] = view('template/pieDePagina');
+      return view('AuthView/CrearUsuarioView', $datos);
+    } else {
+      return redirect()->to(base_url('/'));
+    }
   }
 
   public function sign()

@@ -11,12 +11,14 @@
         <i data-lucide="user"></i>
         <h3 class="card-title">Lista de usuarios</h3>
       </div>
-      <div>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="add()">
-          <i data-lucide="plus"></i>
-          Agregar usuario
-        </button>
-      </div>
+      <?php if (session()->get('rol') == 'superadmin'): ?>
+        <div>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="add()">
+            <i data-lucide="plus"></i>
+            Agregar usuario
+          </button>
+        </div>
+      <?php endif; ?>
     </div>
     <br>
     <div class="card">
@@ -36,13 +38,13 @@
         <tbody>
           <?php foreach ($usuarios as $usuario): ?>
             <tr class="border-bottom">
-              <td data-columna="Nombre" class="text-center justify-content-between"> <?= ucfirst($usuario['nombre']) ?></td>
-              <td data-columna="Apellido" class="text-center justify-content-between"> <?= ucfirst($usuario['apellido']) ?></td>
-              <td data-columna="Usuario" class="text-center justify-content-between"> <?= ucfirst($usuario['usuario']) ?></td>
-              <td data-columna="Rol" class="text-center justify-content-between"> <?= ucfirst($usuario['rol']) ?></td>
-              <td data-columna="Fecha registro" class="text-center justify-content-between"> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_registro']))) ?></td>
-              <td data-columna="Activo" class="text-center justify-content-between"> <?= $usuario['activo'] == 1 ? 'Activo' : 'Inactivo' ?></td>
-              <td data-columna="Acciones" class="text-center justify-content-between gap-2">
+              <td data-columna="Nombre" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= ucfirst($usuario['nombre']) ?></td>
+              <td data-columna="Apellido" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= ucfirst($usuario['apellido']) ?></td>
+              <td data-columna="Usuario" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= ucfirst($usuario['usuario']) ?></td>
+              <td data-columna="Rol" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= ucfirst($usuario['rol']) ?></td>
+              <td data-columna="Fecha registro" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_registro']))) ?></td>
+              <td data-columna="Activo" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= $usuario['activo'] == 1 ? 'Activo' : 'Inactivo' ?></td>
+              <td data-columna="Acciones" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between gap-2">
                 <div>
                   <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
                     <i data-lucide="pencil" style="width: 18px; height:18px;"></i>
@@ -58,7 +60,6 @@
       </table>
     </div>
   </div>
-
 
   <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -154,9 +155,9 @@
       document.getElementById('nombre').value = null
       document.getElementById('apellido').value = null
       document.getElementById('passCont').classList.remove('d-none')
-      document.getElementById('contrasena').setAttribute('required','')
+      document.getElementById('contrasena').setAttribute('required', '')
       document.getElementById('usuarioCont').classList.remove('d-none')
-      document.getElementById('usuario').setAttribute('required','')
+      document.getElementById('usuario').setAttribute('required', '')
       document.getElementById('rol').value = null
       document.getElementById('formUsuarios').action = "<?= base_url('crear') ?>";
     }

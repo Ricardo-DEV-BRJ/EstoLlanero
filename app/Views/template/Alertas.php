@@ -39,7 +39,7 @@
 </style>
 
 <div class="w-100 h-100 fixed-top d-flex justify-content-center fondo align-items-center <?= isset($modal) ? '' : 'd-none' ?>" id="modalAlertaView">
-  <div class="card w-25 p-3 entrada" id="modalCartaView">
+  <div class="card w-100 w-md-50 w-lg-40 w-xl-25 p-3 entrada" id="modalCartaView">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><?= $titulo ?? 'Alerta' ?></h5>

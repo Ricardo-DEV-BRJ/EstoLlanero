@@ -158,7 +158,7 @@
                 </p>
 
                 <div class="mt-auto">
-                  <a href="<?= base_url('noticias/'.$noticia['id']) ?>" class="text-accent fw-semibold text-decoration-none">
+                  <a href="<?= base_url('noticiaspublic/'.$noticia['id']) ?>" class="text-accent fw-semibold text-decoration-none">
                     Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
                   </a>
                 </div>

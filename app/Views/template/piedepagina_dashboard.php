@@ -54,22 +54,22 @@
         <h4 class="h6 fw-bold mb-3">Nuestro Equipo</h4>
         <ul class="list-unstyled mb-0">
           <li class="mb-2">
-            <a href="#" class="footer-link d-flex align-items-center">
+            <a href="https://github.com/Ricardo-DEV-BRJ" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Ricardo Briceño
             </a>
           </li>
           <li class="mb-2">
-            <a href="#" class="footer-link d-flex align-items-center">
+            <a href="https://github.com/rhonnyjaimes" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Rhonny Jaimes
             </a>
           </li>
           <li class="mb-2">
-            <a href="#" class="footer-link d-flex align-items-center">
+            <a href="https://github.com/sofiarvalero" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Sofia Rivera
             </a>
           </li>
           <li class="mb-2">
-            <a href="#" class="footer-link d-flex align-items-center">
+            <a href="https://github.com/Izoru14" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Jesus Salazar
             </a>
           </li>

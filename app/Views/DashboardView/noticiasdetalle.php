@@ -12,7 +12,7 @@
 
         <div class="text-muted mb-4">
           Por <strong><?= esc($noticia['autor_nombre'] . ' ' . $noticia['autor_apellido']) ?></strong>
-          · <?= date('d \d\e F, Y', strtotime($noticia['fecha'])) ?>
+          · <?= date('d/m/Y', strtotime($noticia['fecha'])) ?>
         </div>
 
         <?php if (!empty($noticia['imagen'])): ?>
