@@ -4,148 +4,93 @@
 <html lang="es">
 
 <head>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EstoLLanos - Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- 1) Tu CSS que contiene Bootstrap / plantillas (custom.css) -->
+  <!-- Asegúrate que css/custom.css existe y contiene bootstrap + plantillas -->
+  <link rel="stylesheet" href="css/custom.css" />
+
+  <!-- 2) CSS específico del dashboard (sobrescribe variables y estilos) -->
+  <link rel="stylesheet" href="css/styledashboard.css" />
+
+  <!-- 3) Google Fonts (Poppins) - opcional, útil para tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 4) Font Awesome (CDN para iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="css/styledashboard.css" rel="stylesheet">
+
+  <!-- 5) Lucide icons (CDN) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+  <!-- 6) Bootstrap JS: preferimos local (js/bootstrap.bundle.min.js) con fallback a CDN -->
+  <script src="js/bootstrap.bundle.min.js" defer></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#3d567c',
-            secondary: '#000000',
-            accent: '#1c0f41ff',
-            white: "#ffffff",
-          }
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!window.bootstrap) {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js';
+        s.defer = true;
+        document.head.appendChild(s);
       }
-    }
+    });
+  </script>
+
+  <!-- 7) Init Lucide icons cuando esté disponible -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
+    });
   </script>
 </head>
 
-<body class="bg-gray-50">
-  <!-- Navbar responsivo -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="nav-content">
-        <a href="#" class="brand">
-          <div class="brand-icon">
-            <i data-lucide="trophy" class="w-6 h-6 text-white"></i>
-          </div>
-          <span>EstoLlanos</span>
+<body>
+  <!-- NAVBAR (Bootstrap) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <i data-lucide="trophy" class="me-1"></i>
+      <span>EstoLlanos</span>
+    </a>
+
+    <!-- Botón responsive -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Mostrar menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <!-- Links principales -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link fw-bold" href="<?= base_url('/') ?>">INICIO</a></li>
+        <li class="nav-item"><a class="nav-link" href="noticiaspublic">NOTICIAS</a></li>
+        <li class="nav-item"><a class="nav-link" href="quienessomos">QUIENES SOMOS</a></li>
+        <!-- Favoritos ahora también visible en móvil -->
+        <li class="nav-item d-lg-none">
+          <a class="nav-link text-warning" href="<?= base_url('favoritos') ?>">
+            <i data-lucide="star" class="me-1"></i> Favoritos
+          </a>
+        </li>
+      </ul>
+
+      <!-- Lado derecho -->
+      <div class="d-flex align-items-center gap-2">
+        <!-- Favoritos (solo escritorio) -->
+        <a class="nav-link text-warning d-none d-lg-inline-flex align-items-center" href="<?= base_url('favoritos') ?>" title="Favoritos">
+          <i data-lucide="star" class="me-1"></i> Favoritos
         </a>
-        
-        <div class="nav-links">
-          <a href="<?= base_url('/') ?>" class="nav-link font-bold">INICIO</a>
-          <a href="noticiaspublic" class="nav-link">NOTICIAS</a>
-          <a href="quienessomos" class="nav-link">QUIENES SOMOS</a>
-          <a href="login" class="nav-btn">
-            <i data-lucide="user" class="w-4 h-4"></i> Admin Panel
-          </a>
-          <!-- Icono de estrella para favoritos -->
-          <a href="<?= base_url('favoritos') ?>" class="nav-link" title="Favoritos">
-            <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i>
-          </a>
-        </div>
-        
-        <button class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+
+        <!-- Botón Admin -->
+        <a class="btn nav-btn d-inline-flex align-items-center" href="login">
+          <i data-lucide="user" class="me-1"></i>
+          Admin Panel
+        </a>
       </div>
     </div>
-  </nav>
-  
-  <!-- Menú móvil -->
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="<?= base_url('/') ?>" class="nav-link font-bold">INICIO</a>
-    <a href="noticiaspublic" class="nav-link">NOTICIAS</a>
-    <a href="quienessomos" class="nav-link">QUIENES SOMOS</a>
-    <!-- Icono de estrella para favoritos (versión móvil) -->
-    <a href="FavoritosView.php" class="nav-link flex items-center gap-2">
-      <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i> Favoritos
-    </a>
-    <a href="usuarios" class="nav-btn">
-      <i data-lucide="user" class="w-4 h-4"></i> Admin Panel
-    </a>
   </div>
+</nav>
 
-  <script>
-    // Inicializar Lucide Icons
-    lucide.createIcons();
-    
-    // Toggle menu móvil
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-      
-      // Animación del botón hamburguesa
-      const spans = hamburger.querySelectorAll('span');
-      if (mobileMenu.classList.contains('active')) {
-        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-        spans[1].style.opacity = '0';
-        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-      } else {
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-      }
-    });
-    
-    // Cerrar menú al hacer clic en un enlace
-    const navLinks = document.querySelectorAll('.mobile-menu .nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('active');
-        const spans = hamburger.querySelectorAll('span');
-        spans[0].style.transform = 'none';
-        spans[1].style.opacity = '1';
-        spans[2].style.transform = 'none';
-      });
-    });
-    
-    // Simulación de carrusel
-    document.addEventListener('DOMContentLoaded', function() {
-      const indicators = document.querySelectorAll('.carousel-indicator');
-      const items = document.querySelectorAll('.carousel-item');
-      
-      // Inicializar primer indicador
-      if (indicators.length > 0) indicators[0].classList.remove('bg-opacity-50');
-      
-      indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-          // Remover clases activas
-          document.querySelector('.carousel-item.active')?.classList.remove('active');
-          document.querySelector('.carousel-indicator:not(.bg-opacity-50)')?.classList.add('bg-opacity-50');
-          
-          // Añadir clases activas
-          items[index].classList.add('active');
-          indicator.classList.remove('bg-opacity-50');
-        });
-      });
-      
-      // Auto carrusel cada 5 segundos
-      if (items.length > 1) {
-        setInterval(() => {
-          const activeIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
-          const nextIndex = (activeIndex + 1) % items.length;
-          
-          items[activeIndex].classList.remove('active');
-          items[nextIndex].classList.add('active');
-          
-          indicators[activeIndex].classList.add('bg-opacity-50');
-          indicators[nextIndex].classList.remove('bg-opacity-50');
-        }, 5000);
-      }
-    });
-  </script>
+  
 </body>
 </html>

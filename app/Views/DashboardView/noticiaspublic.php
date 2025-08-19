@@ -1,66 +1,74 @@
 <?= $cabezera ?>
-<section class="py-12 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-primary">TODAS LAS NOTICIAS</h2>
-            <div class="w-20 h-1 bg-accent mx-auto mt-2"></div>
-        </div>
-        
-        <?php if (!empty($noticias)): ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php foreach ($noticias as $noticia): ?>
-                <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
-                    <div class="h-48 relative overflow-hidden">
-                        <?php if (!empty($noticia['ruta_imagen'])): ?>
-                            <img 
-                                src="../public/image/<?= $noticia['ruta_imagen'] ?>" 
-                                alt="<?= $noticia['nombre'] ?>"
-                                class="w-full h-full object-cover"
-                            />
-                        <?php else: ?>
-                            <div class="h-full w-full bg-gradient-to-r from-blue-500 to-indigo-700">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <span class="text-white text-5xl font-bold opacity-50">
-                                        <?= substr($noticia['nombre'], 0, 1) ?>
-                                    </span>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">
-                                <?= $noticia['nombre'] ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">
-                            <?= $noticia['nombre'] ?>
-                        </h3>
-                        <p class="text-gray-600 mb-4">
-                            <?= substr($noticia['nombre'], 0, 100) ?>...
-                        </p>
-                        <a href="NoticiaDetalle.php?id=<?= $noticia['id'] ?>" 
-                           class="text-accent font-semibold hover:underline inline-flex items-center">
-                            Ver detalles <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-             <div class="text-center py-12">
-                <div class="inline-block p-6 bg-white rounded-xl shadow">
-                    <i data-lucide="newspaper" class="w-16 h-16 text-gray-400 mx-auto"></i>
-                    <h3 class="text-xl font-semibold text-gray-700 mt-4">
-                        No hay noticias disponibles
-                    </h3>
-                    <p class="text-gray-500 mt-2">
-                        Pronto publicaremos nuevas noticias deportivas
-                    </p>
-                </div>
-            </div>        <?php endif; ?>
+
+<section class="py-5" aria-label="Todas las noticias">
+  <div class="container">
+    <!-- Encabezado de sección (mismo estilo que dashboard) -->
+    <div class="text-center mb-5">
+      <h2 class="h2 fw-bold text-primary">TODAS LAS NOTICIAS</h2>
+      <div class="mx-auto mt-2" style="width:80px;height:4px;background:var(--brand-accent);border-radius:2px;"></div>
     </div>
+    
+    <?php if (!empty($noticias)): ?>
+      <div class="row g-4">
+        <?php foreach ($noticias as $noticia): ?>
+          <div class="col-12 col-md-6 col-lg-4">
+            <!-- Tarjeta de noticia (estilo consistente con dashboard) -->
+            <div class="card h-100 shadow-sm card-hover">
+              <!-- Imagen o placeholder -->
+              <?php if (!empty($noticia['imagen'])): ?>
+                <img 
+                  src="../public/image/<?= $noticia['imagen'] ?>" 
+                  class="card-img-top" 
+                  alt="<?= esc($noticia['titulo']) ?>"
+                  style="height:220px; object-fit:cover;"
+                />
+              <?php else: ?>
+                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
+                  <span class="text-white fs-1 opacity-50">
+                    <?= substr($noticia['nombre'] ?? 'N', 0, 1) ?>
+                  </span>
+                </div>
+              <?php endif; ?>
+
+              <div class="card-body d-flex flex-column">
+                <!-- Badge de categoría -->
+                <div class="mb-2">
+                  <span class="badge bg-accent text-white"><?= esc($noticia['categoria'] ?? 'General') ?></span>
+                </div>
+
+                <!-- Título -->
+                <h5 class="card-title text-primary"><?= esc($noticia['titulo']) ?></h5>
+
+                <!-- Contenido truncado -->
+                <p class="card-text text-secondary mb-3" style="-webkit-line-clamp:3; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;">
+                  <?= esc($noticia['descripcion'] ?? substr($noticia['contenido'], 0, 100)) ?>...
+                </p>
+
+                <!-- Enlace (mismo estilo que dashboard) -->
+                <div class="mt-auto">
+                  <a href="NoticiaDetalle.php?id=<?= $noticia['id'] ?>" 
+                     class="text-accent fw-semibold text-decoration-none">
+                    Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php else: ?>
+      <!-- Mensaje sin noticias (mismo estilo que dashboard) -->
+      <div class="text-center py-5">
+        <div class="card mx-auto" style="max-width:420px;">
+          <div class="card-body text-center">
+            <i data-lucide="newspaper" class="mb-3" style="width:48px;height:48px;color:var(--bs-gray-400);"></i>
+            <h5 class="fw-semibold">No hay noticias disponibles</h5>
+            <p class="text-muted">Pronto publicaremos nuevas noticias deportivas</p>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+  </div>
 </section>
 
 <?= $pieDePagina ?>

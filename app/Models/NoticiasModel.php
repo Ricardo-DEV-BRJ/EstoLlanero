@@ -6,11 +6,11 @@ use CodeIgniter\Model;
 
 class NoticiasModel extends Model
 {
-    protected $table      = 'personas';
+    protected $table      = 'noticias';
 
     public function noticias()
     {
-        $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, c.nombre as categoria, c.id as categoria_id, u.nombre, u.apellido FROM noticias n INNER JOIN categorias c ON n.categoria_id = c.id INNER JOIN usuarios u ON n.autor_id = u.id WHERE eliminada = 0';
+        $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, c.nombre as categoria, c.id as categoria_id, u.nombre, u.apellido FROM noticias n INNER JOIN categorias c ON n.categoria_id = c.id INNER JOIN usuarios u ON n.autor_id = u.id WHERE eliminada = 0   ORDER BY n.fecha DESC';
         $query = $this->db->query($sql); // 'México' reemplaza el ?
 
         return $query->getResultArray();

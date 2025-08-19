@@ -1,201 +1,254 @@
 <?= $cabezera ?>
-    
-    <!-- Carrusel de noticias destacadas -->
-    <div class="relative overflow-hidden h-[500px] bg-gradient-to-r from-secondary to-primary">
-        <div class="carousel-item active absolute inset-0 flex items-center">
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2071&auto=format&fit=crop')] bg-cover bg-center"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-black/80 to-black/50"></div>
-            <div class="container mx-auto px-4 z-10 text-white max-w-3xl">
-                <div class="p-8 rounded-lg">
-                    <span class="bg-accent text-white text-sm font-bold px-3 py-1 rounded mb-4 inline-block">NOTICIA DESTACADA</span>
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">EL EQUIPO DE FÚTBOL GANA EL CAMPEONATO</h1>
-                    <p class="text-lg mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <button class="bg-accent hover:bg-[#2a1a61] text-white font-bold py-3 px-6 rounded-lg btn-hover flex items-center">
-                        Leer más <i data-lucide="arrow-right-from-line" class="ml-2 w-4 h-4"></i>
-                    </button>
-                </div>
-            </div>
+
+<!-- CARRUSEL PRINCIPAL (3 diapositivas) -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Carrusel de noticias">
+  <!-- Indicadores -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+
+  <div class="carousel-inner">
+    <!-- Slide 1 -->
+    <div class="carousel-item active" style="height:500px;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);"></div>
+
+        <div class="container h-100 d-flex align-items-center">
+          <div class="text-white" style="max-width:720px; z-index:2;">
+            <span class="badge bg-accent text-white fw-bold mb-3">NOTICIA DESTACADA</span>
+            <h1 class="display-5 fw-bold text-white">EL EQUIPO DE FÚTBOL GANA EL CAMPEONATO</h1>
+            <p class="lead text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
+              Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
         </div>
-        
-        <div class="absolute bottom-4 left-0 right-0 flex justify-center space-x-2 z-10">
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 focus:outline-none"></button>
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 focus:outline-none"></button>
-            <button class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 focus:outline-none"></button>
-        </div>
+      </div>
     </div>
 
-    <!-- Estadísticas -->
-    <section class="py-12 bg-gradient-to-r from-accent to-[#2a1a61]">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <div class="stats-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white text-center shadow-xl border border-white/20">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="users" class="w-12 h-12 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">USUARIOS ACTIVOS</h3>
-                    <p class="text-4xl font-bold">15,342</p>
-                </div>
-                
-                <div class="stats-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white text-center shadow-xl border border-white/20">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="newspaper" class="w-12 h-12 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">NOTICIAS PUBLICADAS</h3>
-                    <p class="text-4xl font-bold">1,248</p>
-                </div>
-                
-                <div class="stats-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-white text-center shadow-xl border border-white/20">
-                    <div class="flex justify-center mb-4">
-                        <i data-lucide="award" class="w-12 h-12 text-white"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2">CAMPEONATOS CUBIERTOS</h3>
-                    <p class="text-4xl font-bold">87</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Slide 2 -->
+    <div class="carousel-item" style="height:500px;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1542736667-069246bdbc6d?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);"></div>
 
-    <!-- Sección de últimas noticias -->
-<!-- Sección de últimas noticias -->
-<section class="py-12 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-primary">ÚLTIMAS NOTICIAS</h2>
-            <div class="w-20 h-1 bg-accent mx-auto mt-2"></div>
+        <div class="container h-100 d-flex align-items-center">
+          <div class="text-white" style="max-width:720px; z-index:2;">
+            <span class="badge bg-accent text-white fw-bold mb-3">ENTREVISTA</span>
+            <h2 class="display-6 fw-bold text-white">ENTREVISTA AL ENTRENADOR CAMPEÓN</h2>
+            <p class="lead text-white mb-4">Una charla exclusiva con el entrenador que llevó al equipo a la victoria.</p>
+            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
+              Leer entrevista <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
         </div>
-        
-        <?php 
-        // Ordenar noticias por ID descendente (las más recientes primero)
-        usort($noticias, function($a, $b) {
-            return $b['id'] <=> $a['id'];
-        });
-        
-        // Tomar solo las 3 primeras (más recientes)
-        $ultimasNoticias = array_slice($noticias, 0, 3);
-        ?>
-        
-        <?php if (!empty($ultimasNoticias)): ?>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <?php 
-                $categorias = ['FÚTBOL', 'BALONCESTO', 'BÉISBOL', 'TENIS', 'NATACIÓN', 'ATLETISMO'];
-                
-                foreach ($ultimasNoticias as $index => $noticia): 
-                    $categoria = $categorias[$index % count($categorias)];
-                    $imagenPath = $noticia['ruta_imagen'] ?? '';
-                ?>
-                <div class="news-card bg-white rounded-xl shadow overflow-hidden border border-gray-200">
-                    <div class="h-48 relative overflow-hidden">
-                        <?php if (!empty($imagenPath)): ?>
-                            <!-- Mostrar imagen desde la ruta especificada -->
-                            <figure class="h-full w-full">
-                                <img 
-                                    src="../public/image/<?= $imagenPath ?>" 
-                                    alt="Imagen de noticia"
-                                    class="w-full h-full object-cover"
-                                />
-                            </figure>
-                        <?php else: ?>
-                            <!-- Fallback con gradiente -->
-                            <div class="h-full w-full bg-gradient-to-r 
-                                <?= $index % 6 == 0 ? 'from-blue-500 to-indigo-700' : '' ?>
-                                <?= $index % 6 == 1 ? 'from-green-500 to-emerald-700' : '' ?>
-                                <?= $index % 6 == 2 ? 'from-yellow-500 to-amber-700' : '' ?>
-                                <?= $index % 6 == 3 ? 'from-red-500 to-pink-700' : '' ?>
-                                <?= $index % 6 == 4 ? 'from-purple-500 to-violet-700' : '' ?>
-                                <?= $index % 6 == 5 ? 'from-cyan-500 to-blue-700' : '' ?>">
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <span class="text-white text-5xl font-bold opacity-50">
-                                        <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
-                                    </span>
-                                </div>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <div class="absolute top-4 left-4">
-                            <span class="bg-accent text-white text-xs font-bold px-2 py-1 rounded">
-                                <?= $categoria ?>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-primary mb-2">
-                            <?= esc($noticia['nombre'] ?? 'Sin nombre') ?> 
-                            <?= esc($noticia['apellido'] ?? '') ?>
-                        </h3>
-                        <p class="text-gray-600 mb-4">
-                            <?= esc($noticia['email'] ?? 'Sin información de contacto') ?>
-                        </p>
-                        <a href="#" class="text-accent font-semibold hover:underline inline-flex items-center">
-                            Ver detalles <i data-lucide="arrow-right" class="ml-1 w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <div class="text-center py-12">
-                <div class="inline-block p-6 bg-white rounded-xl shadow">
-                    <i data-lucide="newspaper" class="w-16 h-16 text-gray-400 mx-auto"></i>
-                    <h3 class="text-xl font-semibold text-gray-700 mt-4">
-                        No hay noticias disponibles
-                    </h3>
-                    <p class="text-gray-500 mt-2">
-                        Pronto publicaremos nuevas noticias deportivas
-                    </p>
-                </div>
-            </div>
-        <?php endif; ?>
+      </div>
     </div>
 
-    <div class="text-center mt-10">
-                <a href="noticiaspublic" class="bg-primary text-white px-6 py-3 rounded-lg btn-hover flex items-center justify-center mx-auto w-max">
-                    <i data-lucide="newspaper" class="w-4 h-4 mr-2"></i>
-                    VER TODAS LAS NOTICIAS
-                </a>
-        </div>
-        </div>
-    </section>
+    <!-- Slide 3 -->
+    <div class="carousel-item" style="height:500px;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 100%);"></div>
 
-    <!-- Sección de categorías -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-primary">CATEGORÍAS DEPORTIVAS</h2>
-                <div class="w-20 h-1 bg-accent mx-auto mt-2"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
-                    <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-futbol fa-xl" style="color: #ffffff;"></i>                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-2">FÚTBOL</h3>
-                    <p class="text-gray-600 text-sm">Últimas noticias y actualizaciones del mundo del fútbol</p>
-                </div>
-                
-                <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
-                    <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-basketball fa-2xl" style="color: #ffffff;"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-2">BALONCESTO</h3>
-                    <p class="text-gray-600 text-sm">NBA, EuroLeague y todas las ligas de baloncesto</p>
-                </div>
-                
-                <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
-                    <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                       <i class="fa-solid fa-football fa-2xl" style="color: #ffffff;"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-2">FÚTBOL AMERICANO</h3>
-                    <p class="text-gray-600 text-sm">Actualizaciones de la NFL, análisis y noticias de jugadores</p>
-                </div>
-                
-                <div class="category-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border border-gray-200 hover:border-accent/30">
-                    <div class="w-16 h-16 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-baseball fa-2xl" style="color: #ffffff;"></i>                    </div>
-                    <h3 class="text-xl font-bold text-primary mb-2">BEISBOL</h3>
-                    <p class="text-gray-600 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos autem</p>
-                </div>
-            </div>
+        <div class="container h-100 d-flex align-items-center">
+          <div class="text-white" style="max-width:720px; z-index:2;">
+            <span class="badge bg-accent text-white fw-bold mb-3">RESULTADOS</span>
+            <h2 class="display-6 fw-bold text-white">RESUMEN DE LA TEMPORADA</h2>
+            <p class="lead text-white mb-4">Los mejores momentos, estadísticas y análisis de la temporada completa.</p>
+            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
+              Ver resumen <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+            </a>
+          </div>
         </div>
-    </section>
-    
+      </div>
+    </div>
+  </div>
+
+  <!-- Controles -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
+
+<!-- ESTADÍSTICAS -->
+<section class="py-5" aria-label="Estadísticas">
+  <div class="container">
+    <div class="row g-4 justify-content-center">
+      <div class="col-12 col-md-4">
+        <div class="card bg-accent text-white card-hover h-100">
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <i data-lucide="users" style="width:48px;height:48px;"></i>
+            </div>
+            <h5 class="card-title fw-bold text-white">USUARIOS ACTIVOS</h5>
+            <p class="display-6 fw-bold mb-0 text-white">15,342</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card bg-accent text-white card-hover h-100">
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <i data-lucide="newspaper" style="width:48px;height:48px;"></i>
+            </div>
+            <h5 class="card-title fw-bold text-white">NOTICIAS PUBLICADAS</h5>
+            <p class="display-6 fw-bold mb-0 text-white">1,248</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="card bg-accent text-white card-hover h-100">
+          <div class="card-body text-center">
+            <div class="mb-3">
+              <i data-lucide="award" style="width:48px;height:48px;"></i>
+            </div>
+            <h5 class="card-title fw-bold text-white">CAMPEONATOS CUBIERTOS</h5>
+            <p class="display-6 fw-bold mb-0 text-white">87</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÚLTIMAS NOTICIAS -->
+<section class="py-5" aria-label="Últimas noticias">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="h2 fw-bold text-primary">ÚLTIMAS NOTICIAS</h2>
+      <div class="mx-auto mt-2" style="width:80px;height:4px;background:var(--brand-accent);border-radius:2px;"></div>
+    </div>
+
+    <?php
+      $ultimasNoticias = array_slice($noticias ?? [], 0, 3);
+    ?>
+
+    <?php if (!empty($ultimasNoticias)): ?>
+      <div class="row g-4">
+        <?php foreach ($ultimasNoticias as $noticia): ?>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm card-hover">
+              <?php if (!empty($noticia['imagen'])): ?>
+                <img src="<?= base_url('image/'.$noticia['imagen']) ?>" class="card-img-top" alt="<?= esc($noticia['titulo']) ?>" style="height:220px; object-fit:cover;">
+              <?php else: ?>
+                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
+                  <span class="text-white fs-1 opacity-50">
+                    <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
+                  </span>
+                </div>
+              <?php endif; ?>
+
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2">
+                  <span class="badge bg-accent text-white"><?= esc($noticia['categoria']) ?></span>
+                </div>
+
+                <h5 class="card-title text-primary"><?= esc($noticia['titulo']) ?></h5>
+
+                <p class="card-text text-secondary mb-3" style="-webkit-line-clamp:3; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;">
+                  <?= esc($noticia['contenido']) ?>
+                </p>
+
+                <div class="mt-auto">
+                  <a href="<?= base_url('noticias/'.$noticia['id']) ?>" class="text-accent fw-semibold text-decoration-none">
+                    Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php else: ?>
+      <div class="text-center py-5">
+        <div class="card mx-auto" style="max-width:420px;">
+          <div class="card-body text-center">
+            <i data-lucide="newspaper" class="mb-3" style="width:48px;height:48px;color:var(--bs-gray-400);"></i>
+            <h5 class="fw-semibold">No hay noticias disponibles</h5>
+            <p class="text-muted">Pronto publicaremos nuevas noticias deportivas</p>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <div class="text-center mt-4">
+      <a href="noticiaspublic" class="btn btn-brand d-inline-flex align-items-center">
+        <i data-lucide="newspaper" class="me-2" style="width:16px;height:16px;"></i> VER TODAS LAS NOTICIAS
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORÍAS -->
+<section class="py-5 bg-white" aria-label="Categorías">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2 class="h2 fw-bold text-primary">CATEGORÍAS DEPORTIVAS</h2>
+      <div class="mx-auto mt-2" style="width:80px;height:4px;background:var(--brand-accent);border-radius:2px;"></div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Fútbol -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card h-100 border card-hover">
+          <div class="card-body text-center">
+            <div class="mx-auto mb-3 rounded-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:var(--brand-accent);">
+              <i class="fa-solid fa-futbol" style="color:#fff;font-size:22px;"></i>
+            </div>
+            <h5 class="fw-bold text-primary">FÚTBOL</h5>
+            <p class="text-secondary small">Últimas noticias y actualizaciones del mundo del fútbol</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Baloncesto -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card h-100 border card-hover">
+          <div class="card-body text-center">
+            <div class="mx-auto mb-3 rounded-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:var(--brand-accent);">
+              <i class="fa-solid fa-basketball" style="color:#fff;font-size:22px;"></i>
+            </div>
+            <h5 class="fw-bold text-primary">BALONCESTO</h5>
+            <p class="text-secondary small">NBA, EuroLeague y todas las ligas de baloncesto</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fútbol Americano -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card h-100 border card-hover">
+          <div class="card-body text-center">
+            <div class="mx-auto mb-3 rounded-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:var(--brand-accent);">
+              <i class="fa-solid fa-football" style="color:#fff;font-size:22px;"></i>
+            </div>
+            <h5 class="fw-bold text-primary">FÚTBOL AMERICANO</h5>
+            <p class="text-secondary small">Actualizaciones de la NFL, análisis y noticias de jugadores</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beisbol -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="card h-100 border card-hover">
+          <div class="card-body text-center">
+            <div class="mx-auto mb-3 rounded-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:var(--brand-accent);">
+              <i class="fa-solid fa-baseball" style="color:#fff;font-size:22px;"></i>
+            </div>
+            <h5 class="fw-bold text-primary">BEISBOL</h5>
+            <p class="text-secondary small">Noticias, estadísticas y resultados de béisbol</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <?= $pieDePagina ?>

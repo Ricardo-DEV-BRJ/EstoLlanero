@@ -1,202 +1,240 @@
-/* style.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+:root {
+  --brand-primary: #3d567c;    /* color principal - navbar y títulos */
+  --brand-secondary: #000000;  /* texto secundario */
+  --brand-accent: #1c0f41;     /* botones destacados */
+  --brand-white: #ffffff;
+  --brand-warning: #ffc107;
+  --brand-success: #198754;
+
+  --bs-primary: var(--brand-primary);
+  --bs-secondary: var(--brand-secondary);
+  --bs-body-bg: #f8fafc; 
+  --bs-body-color: #212529;
+
+  --radius-base: 8px;
+  --shadow-sm: 0 4px 6px rgba(0,0,0,0.08);
+  --shadow-md: 0 10px 15px rgba(0,0,0,0.12);
+
+}
+
+/* 2) Tipografía global */
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  margin: 0;
 }
 
-/* Navbar styles */
-.navbar {
-  background: #3d567c;
-  color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+/* 3) Utilidades de color (aseguran que el texto use tu paleta) */
+.text-primary { color: var(--brand-primary) !important; }
+.text-accent  { color: var(--brand-accent) !important; }
+.text-white   { color: var(--brand-white) !important; }
+.text-secondary { color: var(--brand-secondary) !important; }
 
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
+/* 4) Background & border utilidades */
+.bg-brand { background-color: var(--brand-primary) !important; color: var(--brand-white) !important; }
+.bg-accent { background-color: var(--brand-accent) !important; color: var(--brand-white) !important; }
+.bg-warning { background-color: var(--brand-warning) !important; color: #000 !important; }
 
-.nav-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-}
+.border-brand { border-color: var(--brand-primary) !important; }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 1.5rem;
-  font-weight: bold;
+/* 5) Botón de marca (usa junto a clases Bootstrap si quieres) */
+.btn-brand {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border: none;
+  padding: .45rem .9rem;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
+.btn-brand:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-.brand-icon {
-  display: flex;
-  align-items: center;
+/* 6) Navbar overrides (solo estilos necesarios, Bootstrap maneja estructura y responsive) */
+.navbar.bg-primary {
+  background-color: var(--brand-primary) !important;
 }
+.navbar .navbar-brand { color: var(--brand-white); font-weight: 600; }
+.navbar .nav-link { color: rgba(255,255,255,.92); }
+.navbar .nav-link:hover { color: var(--brand-white); }
 
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.nav-link {
-  position: relative;
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
+/* Estilo del boton admin dentro del navbar (usa clase .nav-btn en HTML) */
+.nav-btn {
+  background-color: #fff;        /* Blanco */
+  color: var(--brand-accent);      /* Azul Bootstrap */
   font-weight: 500;
+  border: 2px solid var(--bs-primary);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/* Hover suave (no cambia bruscamente de color, solo sombra) */
+.nav-btn:hover {
+  background-color:var(--brand-accent);
+  color: var(--bs-primary);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+/* Animación de subrayado en el navbar */
+.navbar .nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, .92);
   transition: color 0.3s ease;
 }
 
-.nav-link:hover {
-  color: white;
-}
-
-.nav-link::after {
-  content: '';
+.navbar .nav-link::after {
+  content: "";
   position: absolute;
-  bottom: -5px;
   left: 0;
-  width: 0;
+  bottom: -4px;
+  width: 0%;
   height: 2px;
-  background: #fff;
+  background: var(--brand-white);
   transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
+.navbar .nav-link:hover {
+  color: var(--brand-white);
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link:focus::after,
+.navbar .nav-link:active::after {
   width: 100%;
 }
 
-.nav-btn {
-  background: #1c0f41;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+/* 7) Carousel captions: asegurar legibilidad y usar utilidades de color si quieres */
+.carousel-caption h1,
+.carousel-caption h5,
+.carousel-caption p {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-.nav-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+/* 8) Tarjetas y efectos hover */
+.card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+.card-hover:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+/* 9) Tablas - resaltar monto de deuda */
+.table .debt-amount {
+  font-weight: 700;
+  color: var(--brand-accent);
+  background: rgba(28,15,65,0.06);
+  padding: .25rem .5rem;
+  border-radius: 6px;
 }
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  padding: 0.5rem;
-}
-
-.hamburger span {
-  width: 28px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-}
-
-/* Mobile menu */
-.mobile-menu {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 70px);
-  background: #3d567c;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 2rem 1rem;
-  transform: translateX(-100%);
-  transition: transform 0.4s ease-in-out;
-  z-index: 999;
-}
-
-.mobile-menu.active {
-  transform: translateX(0);
-}
-
-.mobile-menu .nav-link {
-  font-size: 1.2rem;
-}
-
-.mobile-menu .nav-btn {
-  width: 100%;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-/* Responsive */
+/* 10) Ajustes responsive puntuales (limpios y necesarios) */
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
+  .navbar .nav-link.d-none.d-lg-inline-flex { display: none !important; }
 }
 
-/* Resto de tus estilos */
-.news-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* 11) Utilidades pequeñas */
+.gap-sm { gap: .5rem !important; }
+.p-xxs { padding: .35rem !important; }
+
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.news-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+/* Header del modal usa el color accent del dashboard */
+.modal-header {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border-bottom: none;
 }
 
-.carousel-item {
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
+/* Botón de cierre claro para header oscuro (Bootstrap 5 soporta btn-close-white) */
+.modal-header .btn-close {
+  filter: none;
 }
 
-.carousel-item.active {
-  opacity: 1;
+/* Body del modal */
+.modal-body {
+  color: var(--bs-body-color);
+  padding: 1.25rem 1.5rem;
 }
 
-.category-card {
-  transition: all 0.3s ease;
+/* Footer sin borde y centrado */
+.modal-footer {
+  border-top: none;
+  justify-content: center;
+  padding-bottom: 1.25rem;
 }
 
-.category-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+/* Icono grande de confirmación */
+.modal-success-icon {
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--brand-white);
+  color: var(--brand-accent);
+  margin-bottom: .6rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
-.btn-hover {
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Botón dentro del modal usa la variable btn-brand */
+.modal .btn-brand {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border: none;
 }
 
-.btn-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+/* Input inválido simple */
+.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .2rem rgba(220,53,69,.12) !important;
 }
 
-.stats-card {
-  transition: all 0.3s ease;
+/* Ajustes responsive (por si el footer-form stacked) */
+@media (max-width: 767.98px) {
+  .footer .footer-form { flex-direction: column; gap: .5rem; }
+  .footer .footer-form .footer-btn { width: 100%; }
 }
 
-.stats-card:hover {
-  transform: translateY(-5px);
+
+/* Footer */
+.footer {
+  background-color: var(--brand-primary);
+  color: var(--brand-white);
+}
+
+.footer h3,
+.footer h4,
+.footer p,
+.footer a,
+.footer .footer-bottom {
+  color: var(--brand-white) !important;
+}
+
+.footer a.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer .social-icon {
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
+
+.footer .social-icon:hover {
+  color: #f1f1f1; /* un blanco más claro al pasar el mouse */
+}
+
+.footer .footer-btn {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.footer .footer-btn:hover {
+  background-color: #e0e0e0;
 }
