@@ -46,7 +46,7 @@
 
                 <!-- Enlace (mismo estilo que dashboard) -->
                 <div class="mt-auto">
-                  <a href="NoticiaDetalle.php?id=<?= $noticia['id'] ?>" 
+                  <a href="noticiaspublic/<?= $noticia['id'] ?>" 
                      class="text-accent fw-semibold text-decoration-none">
                     Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
                   </a>

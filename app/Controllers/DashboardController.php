@@ -23,7 +23,7 @@ class DashboardController extends BaseController
         return view('DashboardView/dashboard', $datos);
     }
 
-      public function noticias()
+    public function noticias()
     {
         $noticiasModel = new NoticiasModel();
         $datos['noticias'] = $noticiasModel->noticias();
@@ -39,7 +39,35 @@ class DashboardController extends BaseController
         
         return view('DashboardView/noticiaspublic', $datos);
     }
-    
+
+    public function detalle($id = null)
+{
+    $noticiasModel = new NoticiasModel();
+    $noticia = $noticiasModel->obtenerPorId($id);
+
+        // Validación simple si no existe la noticia
+        if (empty($noticia)) {
+        // Puedes redirigir a la página de noticias con un mensaje de error
+        session()->setFlashdata('error', 'La noticia que buscas no existe o ha sido eliminada.');
+        return redirect()->to('noticiaspublic');
+        
+        // O mostrar una vista de error directamente:
+        // return view('errors/noticia_no_encontrada');
+    }   
+
+    // Si es acceso normal renderizamos la vista de detalle
+    $datos['noticia'] = $noticia;
+
+    // Reusar las cabecera/pie del dashboard (igual que en tus otros métodos)
+    $datos['cabezera'] = view('Template/cabezera_dashboard', [
+        'titulo' => 'EstoLlanos - ' . $noticia['titulo'], // Agregar título dinámico
+        'header' => true
+    ]);
+    $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
+
+    return view('DashboardView/noticiasDetalle', $datos);
+}
+
     public function quienessomos()
     {
         // Cabecera específica para dashboard

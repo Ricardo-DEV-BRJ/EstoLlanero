@@ -9,24 +9,15 @@
   <title>EstoLLanos - Dashboard</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-  <!-- 1) Tu CSS que contiene Bootstrap / plantillas (custom.css) -->
-  <!-- Asegúrate que css/custom.css existe y contiene bootstrap + plantillas -->
-  <link rel="stylesheet" href="css/custom.css" />
-
-  <!-- 2) CSS específico del dashboard (sobrescribe variables y estilos) -->
-  <link rel="stylesheet" href="css/styledashboard.css" />
-
-  <!-- 3) Google Fonts (Poppins) - opcional, útil para tipografía -->
+     <link href="<?= base_url('css/custom.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('css/styledashboard.css') ?>" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- 4) Font Awesome (CDN para iconos) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- 5) Lucide icons (CDN) -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
   <!-- 6) Bootstrap JS: preferimos local (js/bootstrap.bundle.min.js) con fallback a CDN -->
-  <script src="js/bootstrap.bundle.min.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       if (!window.bootstrap) {
@@ -64,8 +55,8 @@
       <!-- Links principales -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link fw-bold" href="<?= base_url('/') ?>">INICIO</a></li>
-        <li class="nav-item"><a class="nav-link" href="noticiaspublic">NOTICIAS</a></li>
-        <li class="nav-item"><a class="nav-link" href="quienessomos">QUIENES SOMOS</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('noticiaspublic') ?>">NOTICIAS</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?= base_url('quienessomos') ?>">QUIENES SOMOS</a></li>
         <!-- Favoritos ahora también visible en móvil -->
         <li class="nav-item d-lg-none">
           <a class="nav-link text-warning" href="<?= base_url('favoritos') ?>">

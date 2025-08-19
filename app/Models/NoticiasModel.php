@@ -16,6 +16,21 @@ class NoticiasModel extends Model
         return $query->getResultArray();
     }
 
+    public function obtenerPorId(int $id)
+    {
+    $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, 
+                   c.nombre as categoria, c.id as categoria_id, 
+                   u.nombre as autor_nombre, u.apellido as autor_apellido
+            FROM noticias n
+            INNER JOIN categorias c ON n.categoria_id = c.id
+            INNER JOIN usuarios u ON n.autor_id = u.id
+            WHERE n.id = ? AND n.eliminada = 0
+            LIMIT 1';
+    $query = $this->db->query($sql, [(int)$id]);
+    return $query->getRowArray(); // devuelve fila o null
+    }
+
+
     public function categorias()
     {
         $sql = 'SELECT * FROM categorias';

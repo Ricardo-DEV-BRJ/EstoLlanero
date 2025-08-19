@@ -37,12 +37,12 @@
             </a>
           </li>
           <li class="mb-2">
-            <a href="noticias" class="footer-link d-flex align-items-center">
+            <a href="<?= base_url('/noticiaspublic') ?>" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Noticias
             </a>
           </li>
           <li class="mb-2">
-            <a href="quienessomos" class="footer-link d-flex align-items-center">
+            <a href="<?= base_url('/quienessomos') ?>" class="footer-link d-flex align-items-center">
               <i data-lucide="chevron-right" class="chev-icon me-2" style="width:14px;height:14px;"></i> Quiénes Somos
             </a>
           </li>

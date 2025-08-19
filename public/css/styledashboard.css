@@ -238,3 +238,22 @@ body {
 .footer .footer-btn:hover {
   background-color: #e0e0e0;
 }
+
+  .text-justify {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+  
+
+  .article-content p {
+    margin-bottom: 1.2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
