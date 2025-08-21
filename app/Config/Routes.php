@@ -18,7 +18,8 @@ $routes->get('favoritos/verificar/(:num)', 'FavoritosController::verificar/$1');
 
 // Rutas para comentarios
 $routes->get('comentarios/ver/(:num)', 'ComentariosController::ver/$1');
-$routes->post('comentarios/agregar', 'ComentariosController::agregar');
+$routes->post('crearComentario/(:num)', 'ComentariosController::agregar/$1');
+$routes->post('comentarios/(:num)', 'ComentariosController::comentarios/$1');
 
 
 $routes->get('usuarios', 'UsuariosController::index');
@@ -27,6 +28,7 @@ $routes->get('eliminar/(:num)', 'UsuariosController::eliminar/$1');
 $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
 
 $routes->get('noticias', 'NoticiasController::index');
+$routes->get('noticiasPrueba', 'NoticiasController::noticiasPrueba');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
 $routes->post('editNoticias/(:num)/(:segment)', 'NoticiasController::edit/$1/$2');

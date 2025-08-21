@@ -285,3 +285,10 @@ body {
 .favorito-icon {
     font-size: 1.2rem;
 }
+
+.seccion-con-scroll {
+    height: 60vh;
+    /* Altura fija */
+    overflow-y: auto;
+    /* Scroll vertical si es necesario */
+}

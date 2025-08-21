@@ -31,6 +31,27 @@ class NoticiasController extends Controller
             return redirect()->to(base_url('errorAuth'));
         }
     }
+    public function noticiasPrueba()
+    {
+        $usuario = [
+            'isLoggedIn' => session()->get('isLoggedIn'),
+            'rol' => session()->get('rol')
+        ];
+        if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
+            $noticias = new NoticiasModel();
+            $datos['noticias'] = $noticias->noticias();
+            return $this->response->setJSON([
+            'success' => true,
+            'noticias' => $datos['noticias']
+        ]);
+        } else {
+            return $this->response->setJSON([
+            'success' => false,
+            'error' => 'No autorizado',
+            'message' => 'No tienes permisos para acceder a este recurso'
+        ])->setStatusCode(401);
+        }
+    }
 
     public function crear()
     {

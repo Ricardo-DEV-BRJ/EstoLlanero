@@ -81,9 +81,9 @@ class Database extends Config
     //    public array $default = [
     //        'DSN'        => '',
     //        'hostname'   => 'localhost',
-    //        'username'   => 'root',
-    //        'password'   => 'root',
-    //        'database'   => 'ci4',
+    //        'username'   => 'postgres',
+    //        'password'   => '123456',
+    //        'database'   => 'sistemas_noticias',
     //        'schema'     => 'public',
     //        'DBDriver'   => 'Postgre',
     //        'DBPrefix'   => '',
