@@ -13,7 +13,30 @@
         <?php foreach ($noticias as $noticia): ?>
           <div class="col-12 col-md-6 col-lg-4">
             <!-- Tarjeta de noticia (estilo consistente con dashboard) -->
-            <div class="card h-100 shadow-sm card-hover">
+            <div class="card h-100 shadow-sm card-hover position-relative">
+              <!-- Botón de favoritos (estrellita) - Nuevo elemento agregado -->
+              <div class="position-absolute top-0 end-0 m-2">
+                <?php
+                  // Verificar si la noticia ya está en favoritos
+                  $esFavorito = false;
+                  if (!empty($favoritos) && is_array($favoritos)) {
+                    foreach ($favoritos as $fav) {
+                      if ($fav['noticia_id'] == $noticia['id']) {
+                        $esFavorito = true;
+                        break;
+                      }
+                    }
+                  }
+                ?>
+                <button class="btn btn-sm p-1 bg-white rounded-circle shadow-sm favorito-btn" 
+                        data-noticia-id="<?= $noticia['id'] ?>"
+                        data-es-favorito="<?= $esFavorito ? 'true' : 'false' ?>"
+                        onclick="toggleFavorito(this, <?= $noticia['id'] ?>)"
+                        style="width: 32px; height: 32px;">
+                  <span class="favorito-icon"><?= $esFavorito ? '★' : '☆' ?></span>
+                </button>
+              </div>
+
               <!-- Imagen o placeholder -->
               <?php if (!empty($noticia['imagen'])): ?>
                 <img 
@@ -70,5 +93,78 @@
     <?php endif; ?>
   </div>
 </section>
+
+<script>
+// Función para alternar favoritos (la misma que en favoritos.php)
+function toggleFavorito(btn, noticiaId) {
+    const icon = btn.querySelector('.favorito-icon');
+    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
+    
+    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
+    if (esFavorito) {
+        icon.innerHTML = '☆'; // Estrella vacía
+        btn.setAttribute('data-es-favorito', 'false');
+    } else {
+        icon.innerHTML = '★'; // Estrella rellena
+        btn.setAttribute('data-es-favorito', 'true');
+    }
+    
+    // Hacer la petición al servidor
+    fetch('<?= base_url('favoritos/agregar') ?>', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Operación de favorito exitosa:', data.message);
+            // Si se eliminó el favorito y estamos en la página de favoritos, recargar
+            if (esFavorito && window.location.pathname.includes('favoritos')) {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        } else {
+            // Revertir cambios si falla
+            if (esFavorito) {
+                icon.innerHTML = '★';
+                btn.setAttribute('data-es-favorito', 'true');
+            } else {
+                icon.innerHTML = '☆';
+                btn.setAttribute('data-es-favorito', 'false');
+            }
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Revertir cambios si hay error
+        if (esFavorito) {
+            icon.innerHTML = '★';
+            btn.setAttribute('data-es-favorito', 'true');
+        } else {
+            icon.innerHTML = '☆';
+            btn.setAttribute('data-es-favorito', 'false');
+        }
+        alert('Error de conexión. Intenta nuevamente.');
+    });
+}
+
+// Inicializar iconos de Lucide
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    console.log('Vista de noticias públicas inicializada');
+});
+</script>
 
 <?= $pieDePagina ?>
