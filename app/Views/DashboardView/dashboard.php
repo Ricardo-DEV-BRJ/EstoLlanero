@@ -1,4 +1,7 @@
 <?= $cabezera ?>
+<?php if (session('alerta')): ?>
+  <?= view('Template/Alertas', session('alerta')) ?>
+<?php endif; ?>
 
 <!-- CARRUSEL PRINCIPAL (3 diapositivas) -->
 <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Carrusel de noticias">
@@ -131,53 +134,72 @@
       $ultimasNoticias = array_slice($noticias ?? [], 0, 3);
     ?>
 
-    <?php if (!empty($ultimasNoticias)): ?>
-      <div class="row g-4">
-        <?php foreach ($ultimasNoticias as $noticia): ?>
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm card-hover">
-              <?php if (!empty($noticia['imagen'])): ?>
-                <img src="<?= base_url('image/'.$noticia['imagen']) ?>" class="card-img-top" alt="<?= esc($noticia['titulo']) ?>" style="height:220px; object-fit:cover;">
-              <?php else: ?>
-                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
-                  <span class="text-white fs-1 opacity-50">
-                    <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
-                  </span>
-                </div>
-              <?php endif; ?>
+    <!-- En dashboard.php, modificar la sección de ÚLTIMAS NOTICIAS -->
+<?php if (!empty($ultimasNoticias)): ?>
+  <div class="row g-4">
+    <?php foreach ($ultimasNoticias as $noticia): ?>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm card-hover position-relative">
+          <!-- Botón de favoritos -->
+<div class="position-absolute top-0 end-0 m-2">
+    <?php 
+    $esFavorito = false;
+    if (!empty($favoritos_usuario)) {
+        foreach ($favoritos_usuario as $fav) {
+            if ($fav['noticia_id'] == $noticia['id']) {
+                $esFavorito = true;
+                break;
+            }
+        }
+    }
+    ?>
+    <button class="btn btn-sm p-1 bg-white rounded-circle shadow-sm favorito-btn" 
+            data-noticia-id="<?= $noticia['id'] ?>"
+            data-es-favorito="<?= $esFavorito ? 'true' : 'false' ?>"
+            onclick="toggleFavorito(this, <?= $noticia['id'] ?>)"
+            style="width: 32px; height: 32px;">
+        <span class="favorito-icon">
+            <?php if ($esFavorito): ?>
+                ★ <!-- Estrella rellena (favorito) -->
+            <?php else: ?>
+                ☆ <!-- Estrella vacía (no favorito) -->
+            <?php endif; ?>
+        </span>
+    </button>
+</div>
 
-              <div class="card-body d-flex flex-column">
-                <div class="mb-2">
-                  <span class="badge bg-accent text-white"><?= esc($noticia['categoria']) ?></span>
-                </div>
-
-                <h5 class="card-title text-primary"><?= esc($noticia['titulo']) ?></h5>
-
-                <p class="card-text text-secondary mb-3" style="-webkit-line-clamp:3; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;">
-                  <?= esc($noticia['contenido']) ?>
-                </p>
-
-                <div class="mt-auto">
-                  <a href="<?= base_url('noticiaspublic/'.$noticia['id']) ?>" class="text-accent fw-semibold text-decoration-none">
-                    Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
-                  </a>
-                </div>
-              </div>
+          <?php if (!empty($noticia['imagen'])): ?>
+            <img src="<?= base_url('image/'.$noticia['imagen']) ?>" class="card-img-top" alt="<?= esc($noticia['titulo']) ?>" style="height:220px; object-fit:cover;">
+          <?php else: ?>
+            <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
+              <span class="text-white fs-1 opacity-50">
+                <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
+              </span>
             </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-    <?php else: ?>
-      <div class="text-center py-5">
-        <div class="card mx-auto" style="max-width:420px;">
-          <div class="card-body text-center">
-            <i data-lucide="newspaper" class="mb-3" style="width:48px;height:48px;color:var(--bs-gray-400);"></i>
-            <h5 class="fw-semibold">No hay noticias disponibles</h5>
-            <p class="text-muted">Pronto publicaremos nuevas noticias deportivas</p>
+          <?php endif; ?>
+
+          <div class="card-body d-flex flex-column">
+            <div class="mb-2">
+              <span class="badge bg-accent text-white"><?= esc($noticia['categoria']) ?></span>
+            </div>
+
+            <h5 class="card-title text-primary"><?= esc($noticia['titulo']) ?></h5>
+
+            <p class="card-text text-secondary mb-3" style="-webkit-line-clamp:3; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;">
+              <?= esc($noticia['contenido']) ?>
+            </p>
+
+            <div class="mt-auto">
+              <a href="<?= base_url('noticiaspublic/'.$noticia['id']) ?>" class="text-accent fw-semibold text-decoration-none">
+                Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
 
     <div class="text-center mt-4">
       <a href="noticiaspublic" class="btn btn-brand d-inline-flex align-items-center">
@@ -250,5 +272,125 @@
     </div>
   </div>
 </section>
+
+<script>
+// Función para alternar favoritos (versión mejorada)
+function toggleFavorito(btn, noticiaId) {
+    const icon = btn.querySelector('.favorito-icon');
+    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
+    
+    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
+    if (esFavorito) {
+        icon.innerHTML = '☆'; // Estrella vacía
+        btn.setAttribute('data-es-favorito', 'false');
+    } else {
+        icon.innerHTML = '★'; // Estrella rellena
+        btn.setAttribute('data-es-favorito', 'true');
+    }
+    
+    // Hacer la petición al servidor
+    fetch('<?= base_url('favoritos/agregar') ?>', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Operación de favorito exitosa:', data.message);
+            
+            // Si hay un mensaje de alerta, mostrarlo
+            if (data.alerta) {
+                // Crear y mostrar alerta con el mismo estilo que login
+                mostrarAlerta(data.alerta);
+            }
+        } else {
+            // Revertir cambios si falla
+            if (esFavorito) {
+                icon.innerHTML = '★';
+                btn.setAttribute('data-es-favorito', 'true');
+            } else {
+                icon.innerHTML = '☆';
+                btn.setAttribute('data-es-favorito', 'false');
+            }
+            
+            // Mostrar alerta de error si viene en la respuesta
+            if (data.alerta) {
+                mostrarAlerta(data.alerta);
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Revertir cambios si hay error
+        if (esFavorito) {
+            icon.innerHTML = '★';
+            btn.setAttribute('data-es-favorito', 'true');
+        } else {
+            icon.innerHTML = '☆';
+            btn.setAttribute('data-es-favorito', 'false');
+        }
+        
+        // Mostrar alerta de error genérico
+        mostrarAlerta({
+            tipo: 'error',
+            mensaje: 'Error de conexión. Intenta nuevamente.'
+        });
+    });
+}
+
+// Función para mostrar alertas con el mismo estilo que login
+function mostrarAlerta(alerta) {
+    // Crear contenedor de alerta si no existe
+    let alertContainer = document.getElementById('alert-container');
+    if (!alertContainer) {
+        alertContainer = document.createElement('div');
+        alertContainer.id = 'alert-container';
+        alertContainer.className = 'fixed-top mt-5'; // Posicionamiento fijo en la parte superior
+        document.body.prepend(alertContainer);
+    }
+    
+    // Crear elemento de alerta
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${alerta.tipo === 'error' ? 'danger' : 'success'} alert-dismissible fade show m-3`;
+    alertElement.setAttribute('role', 'alert');
+    alertElement.innerHTML = `
+        ${alerta.mensaje}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    // Agregar alerta al contenedor
+    alertContainer.appendChild(alertElement);
+    
+    // Auto-eliminar después de 5 segundos
+    setTimeout(() => {
+        if (alertElement.parentNode) {
+            alertElement.remove();
+        }
+    }, 5000);
+}
+
+// Función para inicializar los botones de favoritos
+function inicializarBotonesFavoritos() {
+    const botonesFavoritos = document.querySelectorAll('.favorito-btn');
+    
+    botonesFavoritos.forEach(btn => {
+        console.log('Botón de favorito inicializado:', btn.getAttribute('data-noticia-id'));
+    });
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    inicializarBotonesFavoritos();
+    console.log('Sistema de favoritos inicializado');
+});
+</script>
 
 <?= $pieDePagina ?>

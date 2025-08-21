@@ -257,3 +257,31 @@ body {
       padding-right: 15px;
     }
   }
+
+.favorito-btn {
+    transition: all 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorito-btn:hover {
+    transform: scale(1.1);
+    background-color: #fff3cd !important;
+}
+
+.favorito-icon {
+    font-size: 18px;
+    line-height: 1;
+    color: #6c757d; /* Color gris por defecto */
+}
+
+[data-es-favorito="true"] .favorito-icon {
+    color: #ffc107; /* Color amarillo para favoritos */
+}
+
+/* Estilos para las estrellas */
+.favorito-icon {
+    font-size: 1.2rem;
+}

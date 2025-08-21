@@ -31,22 +31,42 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           <?php foreach ($favoritos as $noticia): ?>
             <div class="col">
-              <div class="card h-100 news-card">
-                <div class="card-img-container position-relative">
-                  <img src="../public/image/<?= $noticia['imagen'] ?>" class="card-img-top news-image" alt="<?= $noticia['titulo'] ?>" onclick="openNewsOverlay(<?= htmlspecialchars(json_encode($noticia), ENT_QUOTES, 'UTF-8') ?>)">
-                  <div class="category-badge position-absolute top-0 start-0 m-2">
-                    <span class="badge bg-primary"><?= $noticia['categoria'] ?></span>
-                  </div>
+              <div class="card h-100 shadow-sm card-hover position-relative">
+                <!-- Botón de favoritos (estrellita) -->
+                <div class="position-absolute top-0 end-0 m-2">
+                  <button class="btn btn-sm p-1 bg-white rounded-circle shadow-sm favorito-btn" 
+                          data-noticia-id="<?= $noticia['noticia_id'] ?>"
+                          data-es-favorito="true"
+                          onclick="toggleFavorito(this, <?= $noticia['noticia_id'] ?>)"
+                          style="width: 32px; height: 32px;">
+                    <span class="favorito-icon">★</span>
+                  </button>
                 </div>
-                <div class="card-body">
-                  <h5 class="card-title news-title" onclick="openNewsOverlay(<?= htmlspecialchars(json_encode($noticia), ENT_QUOTES, 'UTF-8') ?>)"><?= $noticia['titulo'] ?></h5>
-                  <p class="card-text news-preview"><?= strlen($noticia['contenido']) > 100 ? substr($noticia['contenido'], 0, 100) . '...' : $noticia['contenido'] ?></p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted"><?= date('d/m/Y', strtotime($noticia['fecha'])) ?></small>
-                    <a href="<?= base_url('favoritos/eliminar/'.$noticia['id']) ?>" 
-                       class="btn btn-sm btn-outline-danger"
-                       onclick="return confirm('¿Quitar de favoritos?')">
-                      <i data-lucide="star" class="favorited"></i> Quitar
+
+                <?php if (!empty($noticia['imagen'])): ?>
+                  <img src="<?= base_url('image/'.$noticia['imagen']) ?>" class="card-img-top" alt="<?= esc($noticia['titulo']) ?>" style="height:220px; object-fit:cover;">
+                <?php else: ?>
+                  <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
+                    <span class="text-white fs-1 opacity-50">
+                      <?= substr($noticia['autor_nombre'] ?? 'N', 0, 1) . substr($noticia['autor_apellido'] ?? 'A', 0, 1) ?>
+                    </span>
+                  </div>
+                <?php endif; ?>
+
+                <div class="card-body d-flex flex-column">
+                  <div class="mb-2">
+                    <span class="badge bg-accent text-white"><?= esc($noticia['categoria'] ?? 'General') ?></span>
+                  </div>
+
+                  <h5 class="card-title text-primary"><?= esc($noticia['titulo']) ?></h5>
+
+                  <p class="card-text text-secondary mb-3" style="-webkit-line-clamp:3; display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;">
+                    <?= esc($noticia['contenido']) ?>
+                  </p>
+
+                  <div class="mt-auto">
+                    <a href="<?= base_url('noticiaspublic/'.$noticia['noticia_id']) ?>" class="text-accent fw-semibold text-decoration-none">
+                      Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
                     </a>
                   </div>
                 </div>
@@ -74,70 +94,77 @@
   </div>
 </main>
 
-<!-- Overlay para visualizar noticia completa (mismo que en Noticias.php) -->
-<div class="news-overlay" id="newsOverlay">
-    <div class="news-overlay-content">
-        <button class="news-overlay-close" onclick="closeNewsOverlay()">
-            <i data-lucide="x"></i>
-        </button>
-        <div class="news-overlay-image-container">
-            <img id="overlayNewsImage" src="" alt="" class="news-overlay-image">
-        </div>
-        <div class="news-overlay-body">
-            <h2 id="overlayNewsTitle"></h2>
-            <div class="news-meta">
-                <span id="overlayNewsCategory" class="badge bg-primary"></span>
-                <span id="overlayNewsDate" class="text-muted"></span>
-                <span id="overlayNewsAuthor" class="text-muted"></span>
-            </div>
-            <div class="news-content" id="overlayNewsContent"></div>
-            <div class="news-actions mt-4">
-                <button class="btn btn-outline-primary" id="overlayFavoriteBtn" onclick="toggleFavoriteOverlay()">
-                    <i data-lucide="star" class="favorite-icon-overlay"></i> Añadir a favoritos
-                </button>
-                <button class="btn btn-outline-secondary" onclick="openCommentsOverlay()">
-                    <i data-lucide="message-circle"></i> Comentarios
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    // Inicializar iconos de Lucide
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
+// Función para alternar favoritos (la misma que en dashboard)
+function toggleFavorito(btn, noticiaId) {
+    const icon = btn.querySelector('.favorito-icon');
+    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
+    
+    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
+    if (esFavorito) {
+        icon.innerHTML = '☆'; // Estrella vacía
+        btn.setAttribute('data-es-favorito', 'false');
+    } else {
+        icon.innerHTML = '★'; // Estrella rellena
+        btn.setAttribute('data-es-favorito', 'true');
+    }
+    
+    // Hacer la petición al servidor
+    fetch('<?= base_url('favoritos/agregar') ?>', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
         }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            console.log('Operación de favorito exitosa:', data.message);
+            // Si se eliminó el favorito, recargar la página para actualizar la lista
+            if (esFavorito) {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 500);
+            }
+        } else {
+            // Revertir cambios si falla
+            if (esFavorito) {
+                icon.innerHTML = '★';
+                btn.setAttribute('data-es-favorito', 'true');
+            } else {
+                icon.innerHTML = '☆';
+                btn.setAttribute('data-es-favorito', 'false');
+            }
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Revertir cambios si hay error
+        if (esFavorito) {
+            icon.innerHTML = '★';
+            btn.setAttribute('data-es-favorito', 'true');
+        } else {
+            icon.innerHTML = '☆';
+            btn.setAttribute('data-es-favorito', 'false');
+        }
+        alert('Error de conexión. Intenta nuevamente.');
     });
-    
-    // Funciones para el overlay (las mismas que en Noticias.php)
-    function openNewsOverlay(noticia) {
-        document.getElementById('overlayNewsImage').src = '../public/image/' + noticia.imagen;
-        document.getElementById('overlayNewsTitle').textContent = noticia.titulo;
-        document.getElementById('overlayNewsCategory').textContent = noticia.categoria;
-        document.getElementById('overlayNewsDate').textContent = 'Publicado el: ' + noticia.fecha;
-        document.getElementById('overlayNewsAuthor').textContent = 'Por: ' + noticia.nombre + ' ' + noticia.apellido;
-        document.getElementById('overlayNewsContent').textContent = noticia.contenido;
-        
-        // Configurar el botón de favoritos
-        const favoriteBtn = document.getElementById('overlayFavoriteBtn');
-        favoriteBtn.setAttribute('data-noticia-id', noticia.id);
-        
-        // Verificar si ya es favorito
-        checkIfFavorite(noticia.id, favoriteBtn);
-        
-        // Mostrar el overlay
-        document.getElementById('newsOverlay').style.display = 'block';
-        document.body.style.overflow = 'hidden';
+}
+
+// Inicializar iconos de Lucide
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
-    
-    function closeNewsOverlay() {
-        document.getElementById('newsOverlay').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    
-    // ... (resto de funciones JavaScript necesarias)
+    console.log('Vista de favoritos inicializada');
+});
 </script>
 
 <?= $pieDePagina ?>
