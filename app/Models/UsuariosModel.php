@@ -10,10 +10,10 @@ class UsuariosModel extends Model
 
   public function todos()
   {
-    $sql = "SELECT * FROM usuarios ORDER BY fecha_nacimiento ASC";
+    $sql = "SELECT * FROM usuarios WHERE activo = ?";
 
     // Ejecutar la consulta con parámetros escapados
-    $query = $this->db->query($sql); // 'México' reemplaza el ?
+    $query = $this->db->query($sql, [1]); // 'México' reemplaza el ?
 
     return $query->getResultArray(); // Devuelve array asociativo
   }
@@ -21,18 +21,15 @@ class UsuariosModel extends Model
 
   public function crear($datos)
   {
-
-    $sql = "INSERT INTO usuarios (nombre, apellido, email, fecha_nacimiento, genero, pais, fecha_registro, activo, saldo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO usuarios (nombre, apellido, usuario, contrasena, rol, fecha_registro, activo) VALUES (?, ?, ?, ?, ?,?,?)";
     $params = [
       $datos['nombre'],
       $datos['apellido'],
-      $datos['email'],
-      $datos['fecha_nacimiento'],
-      $datos['genero'],
-      $datos['pais'],
+      $datos['usuario'],
+      password_hash($datos['contrasena'], PASSWORD_DEFAULT),
+      $datos['rol'],
       date('Y-m-d H:i:s'),
       true,
-      $datos['saldo'],
     ];
 
     try {
@@ -67,15 +64,14 @@ class UsuariosModel extends Model
 
   public function eliminar($id)
   {
-    $sql = 'DELETE FROM usuarios WHERE id = ?';
-    $params = [$id];
+    $sql = 'UPDATE usuarios SET activo = ? WHERE id = ?';
+    $params = [false, $id];
 
     try {
       $this->db->query($sql, $params);
       return ['success' => true];
-    } catch (\Exception) {
+    } catch (\Exception $e) {
       $result = $this->db->error()['message'];
-
       return [
         "success" => false,
         'error' => 'Error al eliminar ' . $result,
@@ -86,16 +82,11 @@ class UsuariosModel extends Model
 
   public function editar($id, $params)
   {
-    $sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, fecha_nacimiento = ?, genero = ?, pais = ?, activo = ?, saldo = ? WHERE id = ?";
+    $sql = "UPDATE usuarios SET nombre = ?, apellido = ?, rol = ? WHERE id = ?";
     $params = [
       $params['nombre'],
       $params['apellido'],
-      $params['email'],
-      $params['fecha_nacimiento'],
-      $params['genero'],
-      $params['pais'],
-      $params['activo'],
-      $params['saldo'],
+      $params['rol'],
       $id
     ];
     try {

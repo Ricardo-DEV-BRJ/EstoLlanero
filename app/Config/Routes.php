@@ -5,17 +5,45 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('/quienessomos', 'Home::quienessomos');
+$routes->get('/', 'DashboardController::index');
+$routes->get('/quienessomos', 'DashboardController::quienessomos');
+$routes->get('/noticiaspublic', 'DashboardController::noticias');
+$routes->get('/noticiaspublic/(:num)', 'DashboardController::detalle/$1');
 
-$routes->get('/landing', 'LandingPage::index');
+$routes->get('favoritos', 'FavoritosController::index');
+$routes->get('favoritos/ver/(:num)', 'FavoritosController::ver/$1');
+$routes->post('favoritos/agregar', 'FavoritosController::agregar');
+$routes->get('favoritos/verificar/(:num)', 'FavoritosController::verificar/$1'); 
+
+
+// Rutas para comentarios
+$routes->get('comentarios/ver/(:num)', 'ComentariosController::ver/$1');
+$routes->post('crearComentario/(:num)', 'ComentariosController::agregar/$1');
+$routes->post('comentarios/(:num)', 'ComentariosController::comentarios/$1');
+
+
 $routes->get('usuarios', 'UsuariosController::index');
-$routes->get('crear', 'UsuariosController::crear');
 $routes->post('crear', 'UsuariosController::crear');
 $routes->get('eliminar/(:num)', 'UsuariosController::eliminar/$1');
 $routes->post('editar/(:num)', 'UsuariosController::editar/$1');
-// $routes->post('guardarUsuario', 'UsuariosController::GuardarUsuario');
+
 $routes->get('noticias', 'NoticiasController::index');
+$routes->get('noticiasPrueba', 'NoticiasController::noticiasPrueba');
 $routes->get('crearNoticias', 'NoticiasController::crearNoticias');
 $routes->post('crearNoticias', 'NoticiasController::crear');
-// $routes->post('crearNoticias', 'NoticiasController::crear');
+$routes->post('editNoticias/(:num)/(:segment)', 'NoticiasController::edit/$1/$2');
+$routes->get('eliminarNoticia/(:num)', 'NoticiasController::eliminar/$1');
+
+$routes->get('categorias', 'CategoriasController::index');
+$routes->get('crearCategoria', 'CategoriasController::crear');
+$routes->post('crearCategoria', 'CategoriasController::crear');
+$routes->post('eliminarCategoria/(:num)', 'CategoriasController::eliminar/$1');
+$routes->post('editarCategoria/(:num)', 'CategoriasController::editar/$1');
+
+$routes->get('login', 'AuthController::index');
+$routes->post('login', 'AuthController::login');
+$routes->get('sign', 'AuthController::signView');
+$routes->post('sign', 'AuthController::sign');
+$routes->get('logout', 'AuthController::logout');
+
+$routes->get('errorAuth', 'ErrorAuthController::index');

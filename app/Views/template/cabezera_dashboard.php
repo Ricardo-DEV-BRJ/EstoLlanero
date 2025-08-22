@@ -2,158 +2,97 @@
 ?>
 <!DOCTYPE html>
 <html lang="es">
-<head>  
-   
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EstoLLanos - Dashboard</title>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRIUNFOBET - Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#3d567c',
-                        secondary: '#000000',
-                        accent: '#1c0f41',
-                        white: "#ffffff",
-                    }
-                }
-            }
-        }
-        </script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .news-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .news-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .carousel-item {
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-        }
-        .carousel-item.active {
-            opacity: 1;
-        }
-        .category-card {
-            transition: all 0.3s ease;
-        }
-        .category-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .nav-link {
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #fff;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .btn-hover {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .btn-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-        }
-        .stats-card {
-            transition: all 0.3s ease;
-        }
-        .stats-card:hover {
-            transform: translateY(-5px);
-        }
-    </style>
- 
+
+  <link href="<?= base_url('css/custom.css') ?>" rel="stylesheet">
+  <link href="<?= base_url('css/styledashboard.css') ?>" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+
+  <!-- 6) Bootstrap JS: preferimos local (js/bootstrap.bundle.min.js) con fallback a CDN -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!window.bootstrap) {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js';
+        s.defer = true;
+        document.head.appendChild(s);
+      }
+    });
+  </script>
+
+  <!-- 7) Init Lucide icons cuando esté disponible -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
+    });
+  </script>
 </head>
-<body class="bg-gray-50">
-    <!-- Barra de navegación -->
-    <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <span class="text-2xl font-bold text-white flex items-center">
-                        <i data-lucide="trophy" class="w-6 h-6 mr-2 text-white"></i>
-                        TRIUNFOBET
-                    </span>
-                </div>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="<?= base_url('/') ?>" class="nav-link font-bold text-white">INICIO</a>
-                    <a href="noticias" class="nav-link hover:text-white transition-colors">NOTICIAS</a>
-                    <a href="quienessomos" class="nav-link hover:text-white transition-colors">QUIENES SOMOS</a>
-                </div>
-                
-                <div class="flex items-center">
-                    <a href="usuarios" class="bg-accent text-white px-4 py-2 rounded-lg btn-hover flex items-center">
-                        <i data-lucide="user" class="w-4 h-4 mr-2"></i> Admin Panel
-                    </a>
-                </div>
-            </div>
+
+<body>
+  <!-- NAVBAR (Bootstrap) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <i data-lucide="trophy" class="me-1"></i>
+        <span>EstoLlanos</span>
+      </a>
+
+      <!-- Botón responsive -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Mostrar menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <!-- Links principales -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link fw-bold" href="<?= base_url('/') ?>">INICIO</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('noticiaspublic') ?>">NOTICIAS</a></li>
+          <li class="nav-item"><a class="nav-link" href="<?= base_url('quienessomos') ?>">QUIENES SOMOS</a></li>
+          <?php if (session()->get('rol') != 'lector' && session()->get('rol') != null): ?>
+            <li class="nav-item"><a class="nav-link" href="usuarios">PANEL ADMIN</a></li>
+          <?php endif; ?>
+          <!-- Favoritos ahora también visible en móvil -->
+          <li class="nav-item d-lg-none">
+            <a class="nav-link text-warning" href="<?= base_url('favoritos') ?>">
+              <i data-lucide="star" class="me-1"></i> Favoritos
+            </a>
+          </li>
+        </ul>
+
+        <!-- Lado derecho -->
+        <div class="d-flex align-items-center gap-2">
+          <!-- Favoritos (solo escritorio) -->
+          <a class="nav-link text-warning d-none d-lg-inline-flex align-items-center" href="<?= base_url('favoritos') ?>" title="Favoritos">
+            <i data-lucide="star" class="me-1"></i> Favoritos
+          </a>
+
+          <!-- Botón Admin -->
+          <?php if (session()->get('isLoggedIn') === null): ?>
+            <a class="btn nav-btn d-inline-flex align-items-center" href="<?= base_url('login') ?>">
+              <i data-lucide="user" class="me-1"></i>
+              Iniciar sesión
+            </a>
+          <?php else : ?>
+            <a class="btn btn-danger d-inline-flex align-items-center" href="<?= base_url('logout') ?>">
+              <i data-lucide="user" class="me-1"></i>
+              Cerrar sesión
+            </a>
+          <?php endif; ?>
         </div>
-    </nav>
-<?php
-// app/Views/Template/pie_pagina_dashboard.php
-?>
-    <script>
-        // Inicializar Lucide Icons
-        lucide.createIcons();
-        
-        // Simulación de carrusel
-        document.addEventListener('DOMContentLoaded', function() {
-            const indicators = document.querySelectorAll('.carousel-indicator');
-            const items = document.querySelectorAll('.carousel-item');
-            
-            // Inicializar primer indicador
-            if(indicators.length > 0) indicators[0].classList.remove('bg-opacity-50');
-            
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    // Remover clases activas
-                    document.querySelector('.carousel-item.active')?.classList.remove('active');
-                    document.querySelector('.carousel-indicator:not(.bg-opacity-50)')?.classList.add('bg-opacity-50');
-                    
-                    // Añadir clases activas
-                    items[index].classList.add('active');
-                    indicator.classList.remove('bg-opacity-50');
-                });
-            });
-            
-            // Auto carrusel cada 5 segundos
-            if(items.length > 1) {
-                setInterval(() => {
-                    const activeIndex = Array.from(items).findIndex(item => item.classList.contains('active'));
-                    const nextIndex = (activeIndex + 1) % items.length;
-                    
-                    items[activeIndex].classList.remove('active');
-                    items[nextIndex].classList.add('active');
-                    
-                    indicators[activeIndex].classList.add('bg-opacity-50');
-                    indicators[nextIndex].classList.remove('bg-opacity-50');
-                }, 5000);
-            }
-        });
-    </script>
+      </div>
+    </div>
+  </nav>
+
+
 </body>
+
 </html>

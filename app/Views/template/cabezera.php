@@ -1,37 +1,157 @@
+<?php
+
+$usuario = [
+  'access' => session()->get('isLoggedIn'),
+  'usuario' => session()->get('usuario'),
+  'nombre' => session()->get('nombre'),
+  'apellido' => session()->get('apellido'),
+];
+
+$links = array(
+  array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
+  array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
+  array('link' => 'noticias', 'icon' => 'newspaper', 'nombre' => 'Noticias'),
+  array('link' => '/', 'icon' => 'home', 'nombre' => 'Inicio'),
+  array('link' => 'login', 'icon' => 'key-round', 'nombre' => 'Iniciar Sesión'),
+  array('link' => 'sign', 'icon' => 'lock-keyhole-open', 'nombre' => 'Registrarse'),
+  array('link' => 'logout', 'icon' => 'door-open', 'nombre' => 'Cerrar sesión'),
+);
+
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme='light'>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../public/css/main.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/tablesResponsive.css">
   <title><?= $titulo ?></title>
 </head>
 
 <body>
-  <main class="flex flex-col justify-center items-center w-12/12 fondo">
-    <header class="flex justify-between items-center w-12/12 p-4">
-      <div>
-        <img src="../public/Media/Logo.png" alt="" width="100">
+  <main class="d-flex flex-column flex-md-row min-vh-100">
+
+    <?php if ($header == true): ?>
+      <header class="d-flex flex-column gap-4 border-end d-none d-md-block " id="menuNav">
+        <div class="sticky-top">
+          <div class="" style="min-height: 25dvh;">
+            <div class="d-flex align-items-center p-4 gap-2 d-none contenido">
+              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <div>
+                <h5 class="card-title">EstoLlanos</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
+              </div>
+            </div>
+            <?php if ($usuario['access']): ?>
+              <div class="card-body ps-4 d-none contenido">
+                <h5><strong> Bienvenido </strong> <?= $usuario['usuario'] ?></h5>
+
+              </div>
+            <?php endif; ?>
+
+
+          </div>
+          <ul class="d-flex flex-column list-unstyled ps-2 pe-2">
+            <?php foreach ($links as $link): ?>
+              <?php if ($link['link'] != 'login' && $link['link'] != 'sign' && $link['link'] != 'logout'): ?>
+                <li class="d-flex align-items-center justify-content-center ">
+                  <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                    <i data-lucide="<?= $link['icon'] ?>"></i>
+                    <p class="mb-0 d-none contenido"><?= $link['nombre'] ?></p>
+                  </a>
+                </li>
+              <?php else: ?>
+                <?php if (session()->get('isLoggedIn') === null): ?>
+                  <?php if ($link['link'] == 'login' || $link['link'] == 'sign'): ?>
+                    <li class="d-flex align-items-center justify-content-center">
+                      <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                        <i data-lucide="<?= $link['icon'] ?>"></i>
+                        <p class="mb-0 d-none contenido"><?= $link['nombre'] ?></p>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                <?php else: ?>
+                  <?php if ($link['link'] == 'logout'): ?>
+                    <li class="d-flex align-items-center justify-content-center">
+                      <a href="<?= base_url($link['link']) ?>" class="text-danger w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                        <i data-lucide="<?= $link['icon'] ?>"></i>
+                        <p class="mb-0 text-danger d-none contenido"><?= $link['nombre'] ?></p>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                <?php endif; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+
+          </ul>
+        </div>
+      </header>
+
+      <header class="w-100 border-bottom d-md-none sticky-top bg-body">
+        <div class="p-2 d-flex justify-content-between">
+          <button type="button" class="btn btn-primary" onclick="togleMenu()">
+            <i data-lucide="menu"></i>
+          </button>
+          <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
+            <i data-lucide="moon" id="icon"></i>
+          </button>
+        </div>
+        <div class="bg-body border-end border-top d-none p-2" id="menuRes">
+          <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center gap-2 d-none contenido">
+              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <div>
+                <h5 class="card-title">EstoLlanos</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
+              </div>
+            </div>
+          </div>
+          <ul class="d-flex flex-column list-unstyled ps-2 pe-2">
+            <?php foreach ($links as $link): ?>
+              <?php if ($link['link'] != 'login' && $link['link'] != 'sign' && $link['link'] != 'logout'): ?>
+                <li class="d-flex align-items-center justify-content-center ">
+                  <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                    <i data-lucide="<?= $link['icon'] ?>"></i>
+                    <p class="mb-0 d-none contenido"><?= $link['nombre'] ?></p>
+                  </a>
+                </li>
+              <?php else: ?>
+                <?php if (session()->get('isLoggedIn') === null): ?>
+                  <?php if ($link['link'] == 'login' || $link['link'] == 'sign'): ?>
+                    <li class="d-flex align-items-center justify-content-center">
+                      <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                        <i data-lucide="<?= $link['icon'] ?>"></i>
+                        <p class="mb-0 d-none contenido"><?= $link['nombre'] ?></p>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                <?php else: ?>
+                  <?php if ($link['link'] == 'logout'): ?>
+                    <li class="d-flex align-items-center justify-content-center">
+                      <a href="<?= base_url($link['link']) ?>" class="text-danger w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                        <i data-lucide="<?= $link['icon'] ?>"></i>
+                        <p class="mb-0 d-none contenido text-danger"><?= $link['nombre'] ?></p>
+                      </a>
+                    </li>
+                  <?php endif; ?>
+                <?php endif; ?>
+              <?php endif; ?>
+            <?php endforeach; ?>
+
+          </ul>
+        </div>
+
+
+      </header>
+    <?php endif; ?>
+    <section class="w-100 d-flex flex-column flex-justify-center align-items-center p-4">
+      <div class="w-100 p-2 d-flex justify-content-end d-none d-md-flex">
+        <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
+          <i data-lucide="moon" id="icon"></i>
+        </button>
       </div>
-      <ul class="flex gap-2">
-        <li>
-          <a href="<?= base_url('usuarios') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"> <i data-lucide="users"></i> Usuario</a>
-        </li>
-        <li>
-          <a href="<?= base_url('crear') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="user-round-plus"></i> Crear Usuario</a>
-        </li>
-          <li>
-          <a href="<?= base_url('noticias') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="newspaper"></i> Noticias</a>
-        </li>
-          <li>
-          <a href="<?= base_url('/') ?>" class="btn rounded-full hover:bg-blue-400 bg-blue-500 text-white"><i data-lucide="home"></i> Inicio</a>
-        </li>
-      </ul>
-    </header>

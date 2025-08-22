@@ -1,0 +1,294 @@
+
+:root {
+  --brand-primary: #3d567c;    /* color principal - navbar y títulos */
+  --brand-secondary: #000000;  /* texto secundario */
+  --brand-accent: #1c0f41;     /* botones destacados */
+  --brand-white: #ffffff;
+  --brand-warning: #ffc107;
+  --brand-success: #198754;
+
+  --bs-primary: var(--brand-primary);
+  --bs-secondary: var(--brand-secondary);
+  --bs-body-bg: #f8fafc; 
+  --bs-body-color: #212529;
+
+  --radius-base: 8px;
+  --shadow-sm: 0 4px 6px rgba(0,0,0,0.08);
+  --shadow-md: 0 10px 15px rgba(0,0,0,0.12);
+
+}
+
+/* 2) Tipografía global */
+body {
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  margin: 0;
+}
+
+/* 3) Utilidades de color (aseguran que el texto use tu paleta) */
+.text-primary { color: var(--brand-primary) !important; }
+.text-accent  { color: var(--brand-accent) !important; }
+.text-white   { color: var(--brand-white) !important; }
+.text-secondary { color: var(--brand-secondary) !important; }
+
+/* 4) Background & border utilidades */
+.bg-brand { background-color: var(--brand-primary) !important; color: var(--brand-white) !important; }
+.bg-accent { background-color: var(--brand-accent) !important; color: var(--brand-white) !important; }
+.bg-warning { background-color: var(--brand-warning) !important; color: #000 !important; }
+
+.border-brand { border-color: var(--brand-primary) !important; }
+
+/* 5) Botón de marca (usa junto a clases Bootstrap si quieres) */
+.btn-brand {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border: none;
+  padding: .45rem .9rem;
+  border-radius: var(--radius-base);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn-brand:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+/* 6) Navbar overrides (solo estilos necesarios, Bootstrap maneja estructura y responsive) */
+.navbar.bg-primary {
+  background-color: var(--brand-primary) !important;
+}
+.navbar .navbar-brand { color: var(--brand-white); font-weight: 600; }
+.navbar .nav-link { color: rgba(255,255,255,.92); }
+.navbar .nav-link:hover { color: var(--brand-white); }
+
+/* Estilo del boton admin dentro del navbar (usa clase .nav-btn en HTML) */
+.nav-btn {
+  background-color: #fff;        /* Blanco */
+  color: var(--brand-accent);      /* Azul Bootstrap */
+  font-weight: 500;
+  border: 2px solid var(--bs-primary);
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+/* Hover suave (no cambia bruscamente de color, solo sombra) */
+.nav-btn:hover {
+  background-color:var(--brand-accent);
+  color: var(--bs-primary);
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+}
+
+/* Animación de subrayado en el navbar */
+.navbar .nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, .92);
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: var(--brand-white);
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: var(--brand-white);
+}
+
+.navbar .nav-link:hover::after,
+.navbar .nav-link:focus::after,
+.navbar .nav-link:active::after {
+  width: 100%;
+}
+
+/* 7) Carousel captions: asegurar legibilidad y usar utilidades de color si quieres */
+.carousel-caption h1,
+.carousel-caption h5,
+.carousel-caption p {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* 8) Tarjetas y efectos hover */
+.card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+.card-hover:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+/* 9) Tablas - resaltar monto de deuda */
+.table .debt-amount {
+  font-weight: 700;
+  color: var(--brand-accent);
+  background: rgba(28,15,65,0.06);
+  padding: .25rem .5rem;
+  border-radius: 6px;
+}
+
+/* 10) Ajustes responsive puntuales (limpios y necesarios) */
+@media (max-width: 768px) {
+  .navbar .nav-link.d-none.d-lg-inline-flex { display: none !important; }
+}
+
+/* 11) Utilidades pequeñas */
+.gap-sm { gap: .5rem !important; }
+.p-xxs { padding: .35rem !important; }
+
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header del modal usa el color accent del dashboard */
+.modal-header {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border-bottom: none;
+}
+
+/* Botón de cierre claro para header oscuro (Bootstrap 5 soporta btn-close-white) */
+.modal-header .btn-close {
+  filter: none;
+}
+
+/* Body del modal */
+.modal-body {
+  color: var(--bs-body-color);
+  padding: 1.25rem 1.5rem;
+}
+
+/* Footer sin borde y centrado */
+.modal-footer {
+  border-top: none;
+  justify-content: center;
+  padding-bottom: 1.25rem;
+}
+
+/* Icono grande de confirmación */
+.modal-success-icon {
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--brand-white);
+  color: var(--brand-accent);
+  margin-bottom: .6rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Botón dentro del modal usa la variable btn-brand */
+.modal .btn-brand {
+  background: var(--brand-accent);
+  color: var(--brand-white);
+  border: none;
+}
+
+/* Input inválido simple */
+.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .2rem rgba(220,53,69,.12) !important;
+}
+
+/* Ajustes responsive (por si el footer-form stacked) */
+@media (max-width: 767.98px) {
+  .footer .footer-form { flex-direction: column; gap: .5rem; }
+  .footer .footer-form .footer-btn { width: 100%; }
+}
+
+
+/* Footer */
+.footer {
+  background-color: var(--brand-primary);
+  color: var(--brand-white);
+}
+
+.footer h3,
+.footer h4,
+.footer p,
+.footer a,
+.footer .footer-bottom {
+  color: var(--brand-white) !important;
+}
+
+.footer a.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer .social-icon {
+  color: var(--text-light);
+  transition: color 0.3s ease;
+}
+
+.footer .social-icon:hover {
+  color: #f1f1f1; /* un blanco más claro al pasar el mouse */
+}
+
+.footer .footer-btn {
+  background-color: var(--text-light);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.footer .footer-btn:hover {
+  background-color: #e0e0e0;
+}
+
+  .text-justify {
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+  
+
+  .article-content p {
+    margin-bottom: 1.2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+.favorito-btn {
+    transition: all 0.2s ease;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorito-btn:hover {
+    transform: scale(1.1);
+    background-color: #fff3cd !important;
+}
+
+.favorito-icon {
+    font-size: 18px;
+    line-height: 1;
+    color: #6c757d; /* Color gris por defecto */
+}
+
+[data-es-favorito="true"] .favorito-icon {
+    color: #ffc107; /* Color amarillo para favoritos */
+}
+
+/* Estilos para las estrellas */
+.favorito-icon {
+    font-size: 1.2rem;
+}
+
+.seccion-con-scroll {
+    height: 60vh;
+    /* Altura fija */
+    overflow-y: auto;
+    /* Scroll vertical si es necesario */
+}
