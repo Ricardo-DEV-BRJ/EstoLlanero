@@ -1,7 +1,8 @@
 <?= $cabezera ?>
-<?php if (session('alerta')): ?>
-  <?= view('Template/Alertas', session('alerta')) ?>
-<?php endif; ?>
+<?php 
+$alertaData = session('alerta') ?? ['modal' => false];
+echo view('Template/Alertas', $alertaData);
+?>
 <style>
   .botonComment:hover {
     transform: scale(1.5);
@@ -324,7 +325,7 @@
 </div>
 
 <script>
-  // Función para alternar favoritos (versión mejorada)
+   // Función para alternar favoritos (versión mejorada) - ESTA ES LA ÚNICA MODIFICACIÓN
   function toggleFavorito(btn, noticiaId) {
     const icon = btn.querySelector('.favorito-icon');
     const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
@@ -358,8 +359,18 @@
 
           // Si hay un mensaje de alerta, mostrarlo
           if (data.alerta) {
-            // Crear y mostrar alerta con el mismo estilo que login
-            mostrarAlerta(data.alerta);
+            // Mostrar alerta con el componente Alertas
+            if (data.alerta.redireccion) {
+              // Usar la función personalizada para alertas con redirección
+              mostrarAlertaPersonalizada(
+                data.alerta.tipo === 'error' ? 'Error' : 'Éxito', 
+                data.alerta.mensaje, 
+                data.alerta.redireccion
+              );
+            } else {
+              // Usar la función existente para otras alertas
+              mostrarAlerta(data.alerta);
+            }
           }
         } else {
           // Revertir cambios si falla
@@ -373,7 +384,11 @@
 
           // Mostrar alerta de error si viene en la respuesta
           if (data.alerta) {
-            mostrarAlerta(data.alerta);
+            if (data.alerta.redireccion) {
+              mostrarAlertaPersonalizada('Error', data.alerta.mensaje, data.alerta.redireccion);
+            } else {
+              mostrarAlerta(data.alerta);
+            }
           }
         }
       })
@@ -397,35 +412,42 @@
   }
 
   // Función para mostrar alertas con el mismo estilo que login
-  function mostrarAlerta(alerta) {
-    // Crear contenedor de alerta si no existe
-    let alertContainer = document.getElementById('alert-container');
-    if (!alertContainer) {
-      alertContainer = document.createElement('div');
-      alertContainer.id = 'alert-container';
-      alertContainer.className = 'fixed-top mt-5'; // Posicionamiento fijo en la parte superior
-      document.body.prepend(alertContainer);
-    }
-
-    // Crear elemento de alerta
-    const alertElement = document.createElement('div');
-    alertElement.className = `alert alert-${alerta.tipo === 'error' ? 'danger' : 'success'} alert-dismissible fade show m-3`;
-    alertElement.setAttribute('role', 'alert');
-    alertElement.innerHTML = `
-        ${alerta.mensaje}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
-
-    // Agregar alerta al contenedor
-    alertContainer.appendChild(alertElement);
-
-    // Auto-eliminar después de 5 segundos
-    setTimeout(() => {
-      if (alertElement.parentNode) {
-        alertElement.remove();
-      }
-    }, 5000);
+function mostrarAlerta(alerta) {
+  // PRIMERO intentar usar el sistema de alertas personalizadas
+  if (alerta.redireccion && typeof mostrarAlertaPersonalizada !== 'undefined') {
+    mostrarAlertaPersonalizada(
+      alerta.tipo === 'error' ? 'Error' : 'Éxito', 
+      alerta.mensaje, 
+      alerta.redireccion
+    );
+    return;
   }
+  
+  // Si no, usar el sistema de alertas Bootstrap de respaldo
+  let alertContainer = document.getElementById('alert-container');
+  if (!alertContainer) {
+    alertContainer = document.createElement('div');
+    alertContainer.id = 'alert-container';
+    alertContainer.className = 'fixed-top mt-5';
+    document.body.prepend(alertContainer);
+  }
+
+  const alertElement = document.createElement('div');
+  alertElement.className = `alert alert-${alerta.tipo === 'error' ? 'danger' : 'success'} alert-dismissible fade show m-3`;
+  alertElement.setAttribute('role', 'alert');
+  alertElement.innerHTML = `
+      ${alerta.mensaje}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `;
+
+  alertContainer.appendChild(alertElement);
+
+  setTimeout(() => {
+    if (alertElement.parentNode) {
+      alertElement.remove();
+    }
+  }, 5000);
+}
 
   // Función para inicializar los botones de favoritos
   function inicializarBotonesFavoritos() {

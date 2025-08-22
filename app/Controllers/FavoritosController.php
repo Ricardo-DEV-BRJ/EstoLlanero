@@ -74,7 +74,8 @@ class FavoritosController extends BaseController
                 'message' => 'Debe iniciar sesión para agregar favoritos',
                 'alerta' => [
                     'tipo' => 'error',
-                    'mensaje' => 'Debes iniciar sesión para agregar favoritos'
+                    'mensaje' => 'Debes iniciar sesión para agregar favoritos',
+                    'redireccion' => base_url('login')
                 ]
             ]);
         }

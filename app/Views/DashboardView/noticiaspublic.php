@@ -1,4 +1,9 @@
 <?= $cabezera ?>
+<?php 
+$alertaData = session('alerta') ?? ['modal' => false];
+echo view('Template/Alertas', $alertaData);
+?>
+
 
 <section class="py-5" aria-label="Todas las noticias">
   <div class="container">
@@ -95,66 +100,89 @@
 </section>
 
 <script>
-// Función para alternar favoritos (la misma que en favoritos.php)
+// Función para alternar favoritos (versión mejorada) - ESTA ES LA ÚNICA MODIFICACIÓN
 function toggleFavorito(btn, noticiaId) {
-    const icon = btn.querySelector('.favorito-icon');
-    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
-    
-    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
-    if (esFavorito) {
-        icon.innerHTML = '☆'; // Estrella vacía
-        btn.setAttribute('data-es-favorito', 'false');
-    } else {
-        icon.innerHTML = '★'; // Estrella rellena
-        btn.setAttribute('data-es-favorito', 'true');
-    }
-    
-    // Hacer la petición al servidor
-    fetch('<?= base_url('favoritos/agregar') ?>', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
+  const icon = btn.querySelector('.favorito-icon');
+  const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
+
+  // Cambiar apariencia inmediatamente para mejor experiencia de usuario
+  if (esFavorito) {
+    icon.innerHTML = '☆'; // Estrella vacía
+    btn.setAttribute('data-es-favorito', 'false');
+  } else {
+    icon.innerHTML = '★'; // Estrella rellena
+    btn.setAttribute('data-es-favorito', 'true');
+  }
+
+  // Hacer la petición al servidor
+  fetch('<?= base_url('favoritos/agregar') ?>', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
-        }
-        return response.json();
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servidor');
+      }
+      return response.json();
     })
     .then(data => {
-        if (data.success) {
-            console.log('Operación de favorito exitosa:', data.message);
-            // Si se eliminó el favorito y estamos en la página de favoritos, recargar
-            if (esFavorito && window.location.pathname.includes('favoritos')) {
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
-            }
-        } else {
-            // Revertir cambios si falla
-            if (esFavorito) {
-                icon.innerHTML = '★';
-                btn.setAttribute('data-es-favorito', 'true');
-            } else {
-                icon.innerHTML = '☆';
-                btn.setAttribute('data-es-favorito', 'false');
-            }
-            alert('Error: ' + data.message);
+      if (data.success) {
+        console.log('Operación de favorito exitosa:', data.message);
+
+        // Si hay un mensaje de alerta, mostrarlo
+        if (data.alerta) {
+          // Mostrar alerta con el componente Alertas
+          if (data.alerta.redireccion) {
+            // Usar la función personalizada para alertas con redirección
+            mostrarAlertaPersonalizada(
+              data.alerta.tipo === 'error' ? 'Error' : 'Éxito', 
+              data.alerta.mensaje, 
+              data.alerta.redireccion
+            );
+          } else {
+            // Usar la función existente para otras alertas
+            mostrarAlerta(data.alerta);
+          }
         }
+      } else {
+        // Revertir cambios si falla
+        if (esFavorito) {
+          icon.innerHTML = '★';
+          btn.setAttribute('data-es-favorito', 'true');
+        } else {
+          icon.innerHTML = '☆';
+          btn.setAttribute('data-es-favorito', 'false');
+        }
+
+        // Mostrar alerta de error si viene en la respuesta
+        if (data.alerta) {
+          if (data.alerta.redireccion) {
+            mostrarAlertaPersonalizada('Error', data.alerta.mensaje, data.alerta.redireccion);
+          } else {
+            mostrarAlerta(data.alerta);
+          }
+        }
+      }
     })
     .catch(error => {
-        console.error('Error:', error);
-        // Revertir cambios si hay error
-        if (esFavorito) {
-            icon.innerHTML = '★';
-            btn.setAttribute('data-es-favorito', 'true');
-        } else {
-            icon.innerHTML = '☆';
-            btn.setAttribute('data-es-favorito', 'false');
-        }
-        alert('Error de conexión. Intenta nuevamente.');
+      console.error('Error:', error);
+      // Revertir cambios si hay error
+      if (esFavorito) {
+        icon.innerHTML = '★';
+        btn.setAttribute('data-es-favorito', 'true');
+      } else {
+        icon.innerHTML = '☆';
+        btn.setAttribute('data-es-favorito', 'false');
+      }
+
+      // Mostrar alerta de error genérico
+      mostrarAlerta({
+        tipo: 'error',
+        mensaje: 'Error de conexión. Intenta nuevamente.'
+      });
     });
 }
 
