@@ -58,7 +58,7 @@
           <li class="nav-item"><a class="nav-link" href="<?= base_url('noticiaspublic') ?>">NOTICIAS</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('quienessomos') ?>">QUIENES SOMOS</a></li>
           <?php if (session()->get('rol') != 'lector' && session()->get('rol') != null): ?>
-            <li class="nav-item"><a class="nav-link" href="usuarios">PANEL ADMIN</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('usuarios') ?>">PANEL ADMIN</a></li>
           <?php endif; ?>
           <!-- Favoritos ahora también visible en móvil -->
           <li class="nav-item d-lg-none">

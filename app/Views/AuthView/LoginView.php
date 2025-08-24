@@ -23,7 +23,7 @@
         <h4 class="card-subtitle mb-2 text-body-secondary">¡Bienvenido!</h4>
         <h3>Inicia sesion con tu cuenta</h3>
       </div>
-      <form action="" method="post" class="d-flex flex-column gap-2 w-100">
+      <form action="<?= base_url('login')?>" method="post" class="d-flex flex-column gap-2 w-100">
         <div class="form-group">
           <label for="usuarios">
             <strong>

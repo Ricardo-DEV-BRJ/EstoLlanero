@@ -6,99 +6,88 @@ use App\Models\NoticiasModel;
 
 class DashboardController extends BaseController
 {
-    public function index()
-{
+  public function index()
+  {
     $noticiasModel = new NoticiasModel();
     $favoritosModel = new \App\Models\FavoritosModel();
-    
+
     $datos['noticias'] = $noticiasModel->noticias();
-    
-    // Verificar si el usuario está logueado y obtener sus favoritos
-    $usuario_id = session()->get('id');
-    if ($usuario_id) {
-        $datos['favoritos_usuario'] = $favoritosModel->where('usuario_id', $usuario_id)->findAll();
-    } else {
-        $datos['favoritos_usuario'] = [];
-    }
-    
-    // Cabecera específica para dashboard
     $datos['cabezera'] = view('Template/cabezera_dashboard', [
-        'titulo' => 'EstoLlanos - Panel de Control',
-        'header' => true
+      'titulo' => 'EstoLlanos - Dashboard',
+      'header' => true
     ]);
-    
     // Mismo pie de página (reutilizado)
     $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
-    
-    return view('DashboardView/dashboard', $datos);
-}
 
-    public function noticias()
-{
+    return view('DashboardView/dashboard', $datos);
+  }
+
+  public function noticias()
+  {
     $noticiasModel = new NoticiasModel();
     $favoritosModel = new \App\Models\FavoritosModel();
-    
+
     $datos['noticias'] = $noticiasModel->noticias();
-    
+
     // Verificar si el usuario está logueado y obtener sus favoritos
     $usuario_id = session()->get('id');
     if ($usuario_id) {
-        $datos['favoritos_usuario'] = $favoritosModel->where('usuario_id', $usuario_id)->findAll();
+      $datos['favoritos_usuario'] = $favoritosModel->where('usuario_id', $usuario_id)->findAll();
     } else {
-        $datos['favoritos_usuario'] = [];
-    }
-        
-        // Cabecera específica para dashboard
-        $datos['cabezera'] = view('Template/cabezera_dashboard', [
-            'titulo' => 'EstoLlanos - Panel de Control',
-            'header' => true
-        ]);
-        
-        // Mismo pie de página (reutilizado)
-        $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
-        
-        return view('DashboardView/noticiaspublic', $datos);
+      $datos['favoritos_usuario'] = [];
     }
 
-    public function detalle($id = null)
-{
+    // Cabecera específica para dashboard
+    $datos['cabezera'] = view('Template/cabezera_dashboard', [
+      'titulo' => 'EstoLlanos - Panel de Control',
+      'header' => true
+    ]);
+
+    // Mismo pie de página (reutilizado)
+    $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
+
+    return view('DashboardView/noticiaspublic', $datos);
+  }
+
+  public function detalle($id = null)
+  {
     $noticiasModel = new NoticiasModel();
     $noticia = $noticiasModel->obtenerPorId($id);
 
-        // Validación simple si no existe la noticia
-        if (empty($noticia)) {
-        // Puedes redirigir a la página de noticias con un mensaje de error
-        session()->setFlashdata('error', 'La noticia que buscas no existe o ha sido eliminada.');
-        return redirect()->to('noticiaspublic');
-        
-        // O mostrar una vista de error directamente:
-        // return view('errors/noticia_no_encontrada');
-    }   
+    // Validación simple si no existe la noticia
+    if (empty($noticia)) {
+      // Puedes redirigir a la página de noticias con un mensaje de error
+      session()->setFlashdata('error', 'La noticia que buscas no existe o ha sido eliminada.');
+      return redirect()->to('noticiaspublic');
+
+      // O mostrar una vista de error directamente:
+      // return view('errors/noticia_no_encontrada');
+    }
 
     // Si es acceso normal renderizamos la vista de detalle
     $datos['noticia'] = $noticia;
 
     // Reusar las cabecera/pie del dashboard (igual que en tus otros métodos)
     $datos['cabezera'] = view('Template/cabezera_dashboard', [
-        'titulo' => 'EstoLlanos - ' . $noticia['titulo'], // Agregar título dinámico
-        'header' => true
+      'titulo' => 'EstoLlanos - ' . $noticia['titulo'], // Agregar título dinámico
+      'header' => true
     ]);
     $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
 
     return view('DashboardView/noticiasDetalle', $datos);
-}
+  }
 
-    public function quienessomos()
-    {
-        // Cabecera específica para dashboard
-        $datos['cabezera'] = view('Template/cabezera_dashboard', [
-            'titulo' => 'EstoLlanos - Panel de Control',
-            'header' => true
-        ]);
-        
-        // Mismo pie de página (reutilizado)
-        $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
-        
-        return view('DashboardView/quienessomos', $datos);
-    }
+  public function quienessomos()
+  {
+    // Cabecera específica para dashboard
+    $datos['cabezera'] = view('Template/cabezera_dashboard', [
+      'titulo' => 'EstoLlanos - Panel de Control',
+      'header' => true
+    ]);
+
+    // Mismo pie de página (reutilizado)
+    $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
+
+    return view('DashboardView/quienessomos', $datos);
+  }
 }

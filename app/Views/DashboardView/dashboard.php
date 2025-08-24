@@ -1,8 +1,10 @@
 <?= $cabezera ?>
-<?php 
-$alertaData = session('alerta') ?? ['modal' => false];
-echo view('Template/Alertas', $alertaData);
-?>
+<?php if (session('comment')): ?>
+  <?= view('Template/AlertaComment', session('comment')) ?>
+<?php endif; ?>
+<?php if (session('alertaFav')): ?>
+  <?= view('Template/AlertaFav', session('alertaFav')) ?>
+<?php endif; ?>
 <style>
   .botonComment:hover {
     transform: scale(1.5);
@@ -147,31 +149,14 @@ echo view('Template/Alertas', $alertaData);
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm card-hover position-relative">
               <!-- Botón de favoritos -->
-              <div class="position-absolute top-0 end-0 m-2">
-                <?php
-                $esFavorito = false;
-                if (!empty($favoritos_usuario)) {
-                  foreach ($favoritos_usuario as $fav) {
-                    if ($fav['noticia_id'] == $noticia['id']) {
-                      $esFavorito = true;
-                      break;
-                    }
-                  }
-                }
-                ?>
-                <button class="btn btn-sm p-1 bg-white rounded-circle shadow-sm favorito-btn"
-                  data-noticia-id="<?= $noticia['id'] ?>"
-                  data-es-favorito="<?= $esFavorito ? 'true' : 'false' ?>"
-                  onclick="toggleFavorito(this, <?= $noticia['id'] ?>)"
-                  style="width: 32px; height: 32px;">
-                  <span class="favorito-icon">
-                    <?php if ($esFavorito): ?>
-                      ★ <!-- Estrella rellena (favorito) -->
-                    <?php else: ?>
-                      ☆ <!-- Estrella vacía (no favorito) -->
-                    <?php endif; ?>
-                  </span>
-                </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <a href="<?= base_url($noticia['favorito'] ? 'favoritos/eliminar/' . $noticia['id'] : 'favoritos/agregar/' . $noticia['id']) ?>" >
+                  <button class="bg-transparent border-0 botonComment" style="color:<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?> ;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?>" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark">
+                      <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+                    </svg>
+                  </button>
+                </a>
               </div>
 
               <?php if (!empty($noticia['imagen'])): ?>
@@ -303,10 +288,10 @@ echo view('Template/Alertas', $alertaData);
             </div>
             <div>
               <form action="" method="post" class="p-2 d-flex gap-2" id='formComment'>
-              <div class="form-group">
-                <input type="text" class="form-control" name="comentario" id="comentario" aria-describedby="helpId" placeholder="Escribir un comentario">
-              </div>  
-              <button
+                <div class="form-group">
+                  <input type="text" required class="form-control" name="comentario" id="comentario" aria-describedby="helpId" placeholder="Escribir un comentario">
+                </div>
+                <button
                   type="submit"
                   class="btn btn-outline-primary">
                   enviar
@@ -314,9 +299,7 @@ echo view('Template/Alertas', $alertaData);
               </form>
             </div>
             <div class="d-flex flex-column ">
-
             </div>
-
           </div>
         </div>
       </div>
@@ -324,145 +307,13 @@ echo view('Template/Alertas', $alertaData);
   </div>
 </div>
 
+
+
+
+
 <script>
-   // Función para alternar favoritos (versión mejorada) - ESTA ES LA ÚNICA MODIFICACIÓN
-  function toggleFavorito(btn, noticiaId) {
-    const icon = btn.querySelector('.favorito-icon');
-    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
-
-    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
-    if (esFavorito) {
-      icon.innerHTML = '☆'; // Estrella vacía
-      btn.setAttribute('data-es-favorito', 'false');
-    } else {
-      icon.innerHTML = '★'; // Estrella rellena
-      btn.setAttribute('data-es-favorito', 'true');
-    }
-
-    // Hacer la petición al servidor
-    fetch('<?= base_url('favoritos/agregar') ?>', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error en la respuesta del servidor');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          console.log('Operación de favorito exitosa:', data.message);
-
-          // Si hay un mensaje de alerta, mostrarlo
-          if (data.alerta) {
-            // Mostrar alerta con el componente Alertas
-            if (data.alerta.redireccion) {
-              // Usar la función personalizada para alertas con redirección
-              mostrarAlertaPersonalizada(
-                data.alerta.tipo === 'error' ? 'Error' : 'Éxito', 
-                data.alerta.mensaje, 
-                data.alerta.redireccion
-              );
-            } else {
-              // Usar la función existente para otras alertas
-              mostrarAlerta(data.alerta);
-            }
-          }
-        } else {
-          // Revertir cambios si falla
-          if (esFavorito) {
-            icon.innerHTML = '★';
-            btn.setAttribute('data-es-favorito', 'true');
-          } else {
-            icon.innerHTML = '☆';
-            btn.setAttribute('data-es-favorito', 'false');
-          }
-
-          // Mostrar alerta de error si viene en la respuesta
-          if (data.alerta) {
-            if (data.alerta.redireccion) {
-              mostrarAlertaPersonalizada('Error', data.alerta.mensaje, data.alerta.redireccion);
-            } else {
-              mostrarAlerta(data.alerta);
-            }
-          }
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Revertir cambios si hay error
-        if (esFavorito) {
-          icon.innerHTML = '★';
-          btn.setAttribute('data-es-favorito', 'true');
-        } else {
-          icon.innerHTML = '☆';
-          btn.setAttribute('data-es-favorito', 'false');
-        }
-
-        // Mostrar alerta de error genérico
-        mostrarAlerta({
-          tipo: 'error',
-          mensaje: 'Error de conexión. Intenta nuevamente.'
-        });
-      });
-  }
-
-  // Función para mostrar alertas con el mismo estilo que login
-function mostrarAlerta(alerta) {
-  // PRIMERO intentar usar el sistema de alertas personalizadas
-  if (alerta.redireccion && typeof mostrarAlertaPersonalizada !== 'undefined') {
-    mostrarAlertaPersonalizada(
-      alerta.tipo === 'error' ? 'Error' : 'Éxito', 
-      alerta.mensaje, 
-      alerta.redireccion
-    );
-    return;
-  }
-  
-  // Si no, usar el sistema de alertas Bootstrap de respaldo
-  let alertContainer = document.getElementById('alert-container');
-  if (!alertContainer) {
-    alertContainer = document.createElement('div');
-    alertContainer.id = 'alert-container';
-    alertContainer.className = 'fixed-top mt-5';
-    document.body.prepend(alertContainer);
-  }
-
-  const alertElement = document.createElement('div');
-  alertElement.className = `alert alert-${alerta.tipo === 'error' ? 'danger' : 'success'} alert-dismissible fade show m-3`;
-  alertElement.setAttribute('role', 'alert');
-  alertElement.innerHTML = `
-      ${alerta.mensaje}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  `;
-
-  alertContainer.appendChild(alertElement);
-
-  setTimeout(() => {
-    if (alertElement.parentNode) {
-      alertElement.remove();
-    }
-  }, 5000);
-}
-
-  // Función para inicializar los botones de favoritos
-  function inicializarBotonesFavoritos() {
-    const botonesFavoritos = document.querySelectorAll('.favorito-btn');
-
-    botonesFavoritos.forEach(btn => {
-      console.log('Botón de favorito inicializado:', btn.getAttribute('data-noticia-id'));
-    });
-  }
-
   // Inicializar cuando el DOM esté listo
   document.addEventListener('DOMContentLoaded', function() {
-    inicializarBotonesFavoritos();
-    console.log('Sistema de favoritos inicializado');
-
     async function getComment(id) {
       const url = '<?= base_url('comentarios') ?>/' + id
       try {
@@ -474,7 +325,6 @@ function mostrarAlerta(alerta) {
             'Credentials': 'include'
           }
         });
-
         const data = await response.json();
         return data
       } catch (error) {
@@ -498,7 +348,7 @@ function mostrarAlerta(alerta) {
 
   const toggleImage = async (media, id) => {
     const formulario = document.getElementById('formComment')
-    formulario.action = '<?= base_url('crearComentario/')?>' + id 
+    formulario.action = '<?= base_url('crearComentario/') ?>' + id
     const result = await getComment(id)
     const content = document.getElementById('comentarios')
     let render = ''
@@ -523,13 +373,19 @@ function mostrarAlerta(alerta) {
       </div>`
       })
     } else {
-      render = 'Sin mensajes'
+      render = `<div class="d-flex flex-column align-items-center justify-content-center gap-2" style='height:100%;'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-off-icon lucide-message-circle-off"><path d="m2 2 20 20"/><path d="M4.93 4.929a10 10 0 0 0-1.938 11.412 2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 0 0 11.302-1.989"/><path d="M8.35 2.69A10 10 0 0 1 21.3 15.65"/></svg>
+                  <p>
+                    No hay comentarios
+                  </p>
+                </div>`
     }
 
     content.innerHTML = render
-
     const img = document.getElementById('imageNoticia')
     img.setAttribute('src', '../public/image/' + media)
+    const input = document.getElementById('comentario')
+    input.value = ''
   }
 </script>
 
