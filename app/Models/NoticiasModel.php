@@ -8,17 +8,64 @@ class NoticiasModel extends Model
 {
     protected $table      = 'noticias';
 
-    public function noticias()
-    {
-        $usuario = session()->get('id');
-        if (!$usuario) {
-            $usuario = [0];
-        }
-
-        $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, c.nombre as categoria, c.id as categoria_id, u.nombre, u.apellido, IF(f.usuario_id IS NOT NULL, TRUE, FALSE) AS favorito FROM noticias n INNER JOIN categorias c ON n.categoria_id = c.id INNER JOIN usuarios u ON n.autor_id = u.id LEFT JOIN favoritos f ON f.noticia_id = n.id AND f.usuario_id = ? WHERE n.eliminada = 0 ORDER BY n.fecha DESC';
-        $query = $this->db->query($sql, $usuario);
-        return $query->getResultArray();
+public function noticias($filtros = [])
+{
+    $categoriaCond = '';
+    $tituloCond = '';
+    $params = [];
+    
+    $usuario = session()->get('id');
+    if (!$usuario) {
+        $usuario = 0;
     }
+    
+    $params[] = $usuario;
+
+    // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
+    $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
+    $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
+
+    // Filtro por categoría
+    if (!empty($categoria) && $categoria != '0') {
+        $categoriaCond = 'AND c.id = ?';
+        $params[] = $categoria;
+    }
+
+    // Filtro por título
+    if (!empty($titulo)) {
+        $tituloCond = 'AND n.titulo LIKE ?';
+        $params[] = '%' . $titulo . '%';
+    }
+
+    $sql = 'SELECT
+                n.id,
+                n.titulo,
+                n.contenido,
+                n.imagen,
+                n.fecha,
+                c.nombre AS categoria,
+                c.id AS categoria_id,
+                u.nombre,
+                u.apellido,
+                IF(f.usuario_id IS NOT NULL, TRUE, FALSE) AS favorito
+            FROM
+                noticias n
+            INNER JOIN categorias c ON
+                n.categoria_id = c.id
+            INNER JOIN usuarios u ON
+                n.autor_id = u.id
+            LEFT JOIN favoritos f ON
+                f.noticia_id = n.id AND f.usuario_id = ?
+            WHERE
+                n.eliminada = 0 ' . $categoriaCond . ' ' . $tituloCond . '
+            ORDER BY
+                n.fecha
+            DESC';
+
+    $query = $this->db->query($sql, $params);
+    return $query->getResultArray();
+}
+
 
     public function obtenerPorId(int $id)
     {

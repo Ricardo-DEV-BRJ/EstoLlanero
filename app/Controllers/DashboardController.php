@@ -3,13 +3,13 @@
 namespace App\Controllers;
 
 use App\Models\NoticiasModel;
+use App\Models\CategoriasModel;
 
 class DashboardController extends BaseController
 {
   public function index()
   {
     $noticiasModel = new NoticiasModel();
-    $favoritosModel = new \App\Models\FavoritosModel();
 
     $datos['noticias'] = $noticiasModel->noticias();
     $datos['cabezera'] = view('Template/cabezera_dashboard', [
@@ -22,32 +22,30 @@ class DashboardController extends BaseController
     return view('DashboardView/dashboard', $datos);
   }
 
-  public function noticias()
-  {
+public function noticias()
+{
     $noticiasModel = new NoticiasModel();
-    $favoritosModel = new \App\Models\FavoritosModel();
-
-    $datos['noticias'] = $noticiasModel->noticias();
-
-    // Verificar si el usuario está logueado y obtener sus favoritos
-    $usuario_id = session()->get('id');
-    if ($usuario_id) {
-      $datos['favoritos_usuario'] = $favoritosModel->where('usuario_id', $usuario_id)->findAll();
-    } else {
-      $datos['favoritos_usuario'] = [];
-    }
-
-    // Cabecera específica para dashboard
+    $categoriaModel = new CategoriasModel();
+    
+    // Obtener filtros del request (tanto GET como POST)
+    $filtros = [
+        'categoria' => $this->request->getVar('id_cat') ?: $this->request->getGet('categoria'),
+        'titulo' => $this->request->getGet('titulo')
+    ];
+    
+    // Usar la nueva función del modelo que acepta array de filtros
+    $datos['noticias'] = $noticiasModel->noticias($filtros);
+    
     $datos['cabezera'] = view('Template/cabezera_dashboard', [
-      'titulo' => 'EstoLlanos - Panel de Control',
-      'header' => true
+        'titulo' => 'EstoLlanos - Panel de Control',
+        'header' => true
     ]);
-
-    // Mismo pie de página (reutilizado)
     $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
-
+    $datos['categorias'] = $categoriaModel->todos();
+    $datos['filtros'] = $filtros; // Pasar filtros a la vista
+    
     return view('DashboardView/noticiaspublic', $datos);
-  }
+}
 
   public function detalle($id = null)
   {

@@ -105,19 +105,19 @@
 </main>
 
 <div class="modal fade" id="noticiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center" style="max-width: 60%;">
-    <div class="modal-content w-80">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center w-100 w-lg-80 w-xl-60" style="max-width: 100%;">
+    <div class="modal-content w-100 w-sm-90 w-md-80">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="d-flex gap-2 justify-content-between">
-          <div class="w-60 text-center">
+          <div class="w-60 text-center d-none d-md-block">
             <img id="imageNoticia" class="w-95">
           </div>
-          <div class="d-flex flex-column gap-2 justify-content-between w-40">
-            <div class="seccion-con-scroll" id="comentarios">
+          <div class="d-flex flex-column gap-2 justify-content-between w-100 w-md-40">
+            <div class="seccion-con-scroll-comment" id="comentarios">
             </div>
             <div>
               <form action="" method="post" class="p-2 d-flex gap-2" id='formComment'>

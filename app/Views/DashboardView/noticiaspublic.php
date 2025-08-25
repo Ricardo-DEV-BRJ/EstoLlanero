@@ -18,7 +18,40 @@
     <div class="text-center mb-5">
       <h2 class="h2 fw-bold text-primary">TODAS LAS NOTICIAS</h2>
       <div class="mx-auto mt-2" style="width:80px;height:4px;background:var(--brand-accent);border-radius:2px;"></div>
+      <div class="w-100 p-2">
+        <form action="<?= base_url('noticiaspublic') ?>" method="get" class="p-2 d-flex align-items-center gap-2 flex-column flex-md-row">
+          <!-- Filtro por título -->
+          <input type="text"
+            name="titulo"
+            class="form-control w-100 w-md-25"
+            placeholder="Buscar por título"
+            value="<?= isset($filtros['titulo']) ? $filtros['titulo'] : '' ?>">
+
+          <!-- Filtro por categoría -->
+          <select class="form-select form-select w-100 w-md-25" name="categoria">
+            <option value="0">Todas las categorías</option>
+            <?php foreach ($categorias as $categoria): ?>
+              <option value="<?= $categoria['id'] ?>"
+                <?= (isset($filtros['categoria']) && $filtros['categoria'] == $categoria['id']) ? 'selected' : '' ?>>
+                <?= $categoria['nombre'] ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-outline-primary">
+              <i data-lucide="text-search"></i>
+              Buscar
+            </button>
+            <a href="<?= base_url('noticiaspublic') ?>" class="btn btn-outline-secondary">
+              <i data-lucide="eraser"></i>
+              Limpiar
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
+
 
     <?php if (!empty($noticias)): ?>
       <div class="row g-4">
@@ -101,19 +134,19 @@
 </section>
 
 <div class="modal fade" id="noticiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center" style="max-width: 60%;">
-    <div class="modal-content w-80">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center w-100 w-lg-80 w-xl-60" style="max-width: 100%;">
+    <div class="modal-content w-100 w-sm-90 w-md-80">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="d-flex gap-2 justify-content-between">
-          <div class="w-60 text-center">
+          <div class="w-60 text-center d-none d-md-block">
             <img id="imageNoticia" class="w-95">
           </div>
-          <div class="d-flex flex-column gap-2 justify-content-between w-40">
-            <div class="seccion-con-scroll" id="comentarios">
+          <div class="d-flex flex-column gap-2 justify-content-between w-100 w-md-40">
+            <div class="seccion-con-scroll-comment" id="comentarios">
             </div>
             <div>
               <form action="" method="post" class="p-2 d-flex gap-2" id='formComment'>

@@ -286,8 +286,8 @@ body {
     font-size: 1.2rem;
 }
 
-.seccion-con-scroll {
-    height: 60vh;
+.seccion-con-scroll-comment {
+    height: 70vh;
     /* Altura fija */
     overflow-y: auto;
     /* Scroll vertical si es necesario */

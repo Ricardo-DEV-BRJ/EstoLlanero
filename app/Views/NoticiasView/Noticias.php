@@ -3,17 +3,52 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<div class="card w-100 w-md-80">
-  <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 ">
+<div class="card w-100 w-md-90">
+  <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 ">
     <h3 class="card-title">
       Noticias
     </h3>
-    <div class="text-center" data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      title="Agregar">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="addNot()">
-        <i data-lucide="plus"> </i> Agregar Noticias
-      </button>
+    <div class="d-flex flex-column flex-md-row gap-2">
+      <form method="get" class="d-flex flex-column flex-md-row gap-2 w-100">
+        <div class="d-flex flex-column flex-xl-row justify-content-center align-items-center gap-2">
+          <div class="form-group">
+            <input type="text"
+              name="titulo"
+              class="form-control"
+              placeholder="Buscar por título"
+              value="<?= isset($filtros['titulo']) ? $filtros['titulo'] : '' ?>">
+          </div>
+          <div class="form-group">
+            <select class="form-select" name="categoria">
+              <option value="">Todas las categorías</option>
+              <?php foreach ($categorias as $categoria): ?>
+                <option value="<?= $categoria['id'] ?>"
+                  <?= (isset($filtros['categoria']) && $filtros['categoria'] == $categoria['id']) ? 'selected' : '' ?>>
+                  <?= $categoria['nombre'] ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column flex-xl-row justify-content-center align-items-center gap-2">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="<?= base_url('noticias') ?>" class="btn btn-secondary">Limpiar</a>
+          </div>
+          <div class="text-center" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Agregar">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="addNot()">
+              <i data-lucide="plus"> </i> Agregar Noticias
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+
     </div>
   </div>
 
