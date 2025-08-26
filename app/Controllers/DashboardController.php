@@ -4,19 +4,20 @@ namespace App\Controllers;
 
 use App\Models\NoticiasModel;
 use App\Models\CategoriasModel;
+use App\Models\DashboardModel;
 
 class DashboardController extends BaseController
 {
   public function index()
   {
     $noticiasModel = new NoticiasModel();
-
+    $dash = new DashboardModel();
     $datos['noticias'] = $noticiasModel->noticias();
+    $datos['carrusel'] = $dash->carrusel();
     $datos['cabezera'] = view('Template/cabezera_dashboard', [
       'titulo' => 'EstoLlanos - Dashboard',
       'header' => true
     ]);
-    // Mismo pie de página (reutilizado)
     $datos['pieDePagina'] = view('Template/pieDepagina_dashboard');
 
     return view('DashboardView/dashboard', $datos);

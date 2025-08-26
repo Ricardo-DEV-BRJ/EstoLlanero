@@ -73,7 +73,7 @@
               <!-- Imagen o placeholder -->
               <?php if (!empty($noticia['imagen'])): ?>
                 <img
-                  src="<?= base_url('image/').$noticia['imagen'] ?>"
+                  src="<?= base_url('image/') . $noticia['imagen'] ?>"
                   class="card-img-top"
                   alt="<?= esc($noticia['titulo']) ?>"
                   style="height:220px; object-fit:cover;" />
@@ -101,7 +101,7 @@
 
                 <!-- Enlace (mismo estilo que dashboard) -->
                 <div class="mt-auto">
-                  <a href="noticiaspublic/<?= $noticia['id'] ?>"
+                  <a href="<?= base_url('noticiaspublic/' . $noticia['id'])  ?>"
                     class="text-accent fw-semibold text-decoration-none">
                     Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
                   </a>
@@ -243,7 +243,7 @@
 
     content.innerHTML = render
     const img = document.getElementById('imageNoticia')
-    img.setAttribute('src', '<?=base_url('image/') ?>' + media)
+    img.setAttribute('src', '<?= base_url('image/') ?>' + media)
     const input = document.getElementById('comentario')
     input.value = ''
 

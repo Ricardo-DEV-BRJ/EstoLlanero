@@ -8,36 +8,36 @@ class NoticiasModel extends Model
 {
     protected $table      = 'noticias';
 
-public function noticias($filtros = [])
-{
-    $categoriaCond = '';
-    $tituloCond = '';
-    $params = [];
-    
-    $usuario = session()->get('id');
-    if (!$usuario) {
-        $usuario = 0;
-    }
-    
-    $params[] = $usuario;
+    public function noticias($filtros = [])
+    {
+        $categoriaCond = '';
+        $tituloCond = '';
+        $params = [];
 
-    // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
-    $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
-    $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
+        $usuario = session()->get('id');
+        if (!$usuario) {
+            $usuario = 0;
+        }
 
-    // Filtro por categoría
-    if (!empty($categoria) && $categoria != '0') {
-        $categoriaCond = 'AND c.id = ?';
-        $params[] = $categoria;
-    }
+        $params[] = $usuario;
 
-    // Filtro por título
-    if (!empty($titulo)) {
-        $tituloCond = 'AND n.titulo LIKE ?';
-        $params[] = '%' . $titulo . '%';
-    }
+        // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
+        $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
+        $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
 
-    $sql = 'SELECT
+        // Filtro por categoría
+        if (!empty($categoria) && $categoria != '0') {
+            $categoriaCond = 'AND c.id = ?';
+            $params[] = $categoria;
+        }
+
+        // Filtro por título
+        if (!empty($titulo)) {
+            $tituloCond = 'AND n.titulo LIKE ?';
+            $params[] = '%' . $titulo . '%';
+        }
+
+        $sql = 'SELECT
                 n.id,
                 n.titulo,
                 n.contenido,
@@ -62,9 +62,59 @@ public function noticias($filtros = [])
                 n.fecha
             DESC';
 
-    $query = $this->db->query($sql, $params);
-    return $query->getResultArray();
-}
+        $query = $this->db->query($sql, $params);
+        return $query->getResultArray();
+    }
+    public function noticiasAdmin($filtros = [])
+    {
+        $categoriaCond = '';
+        $tituloCond = '';
+        $params = [];
+        // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
+        $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
+        $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
+
+        // Filtro por categoría
+        if (!empty($categoria) && $categoria != '0') {
+            $categoriaCond = 'AND c.id = ?';
+            $params[] = $categoria;
+        }
+
+        // Filtro por título
+        if (!empty($titulo)) {
+            $tituloCond = 'AND n.titulo LIKE ?';
+            $params[] = '%' . $titulo . '%';
+        }
+
+        $sql = 'SELECT
+                n.id,
+                n.titulo,
+                n.contenido,
+                n.imagen,
+                n.fecha,
+                c.nombre AS categoria,
+                c.id AS categoria_id,
+                u.nombre,
+                u.apellido,
+                ca.id as id_cat,
+                IF(ca.noticia_id IS NOT NULL, TRUE, FALSE) AS carrusel
+            FROM
+                noticias n
+            INNER JOIN categorias c ON
+                n.categoria_id = c.id
+            INNER JOIN usuarios u ON
+                n.autor_id = u.id
+            LEFT JOIN carrusel ca ON ca.noticia_id = n.id
+            WHERE
+                n.eliminada = 0 ' . $categoriaCond . ' ' . $tituloCond . '
+            ORDER BY
+                n.fecha
+            DESC';
+
+        $query = $this->db->query($sql, $params);
+        return $query->getResultArray();
+    }
+
 
 
     public function obtenerPorId(int $id)

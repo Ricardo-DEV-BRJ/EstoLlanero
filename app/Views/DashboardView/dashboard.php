@@ -12,7 +12,15 @@
   }
 </style>
 <!-- CARRUSEL PRINCIPAL (3 diapositivas) -->
+
 <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Carrusel de noticias">
+  <?php if (session('rol') == 'superadmin' || session('rol') == 'admin'): ?>
+    <div class="position-absolute p-4 text-end w-100" style="z-index:99999;">
+      <a href='<?= base_url('carrusel') ?>' class="border-0 bg-body p-2 rounded-pill text-body" href="#" role="button">
+        <i data-lucide="notebook-pen"></i>
+      </a>
+    </div>
+  <?php endif; ?>
   <!-- Indicadores -->
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -23,15 +31,15 @@
   <div class="carousel-inner">
     <!-- Slide 1 -->
     <div class="carousel-item active" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[0]['imagen']) ?>'); background-size:cover; background-position:center;">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);"></div>
 
         <div class="container h-100 d-flex align-items-center">
           <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">NOTICIA DESTACADA</span>
-            <h1 class="display-5 fw-bold text-white">EL EQUIPO DE FÚTBOL GANA EL CAMPEONATO</h1>
-            <p class="lead text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
+            <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[0]['categoria']) ?> </span>
+            <h1 class="display-5 fw-bold text-white"> <?= $carrusel[0]['titulo_presentacion'] ?> </h1>
+            <p class="lead text-white mb-4"> <?= $carrusel[0]['descripcion_corta'] ?> </p>
+            <a href="<?= base_url('noticiaspublic/' . $carrusel[0]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
               Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
             </a>
           </div>
@@ -41,16 +49,16 @@
 
     <!-- Slide 2 -->
     <div class="carousel-item" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1542736667-069246bdbc6d?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[1]['imagen']) ?>'); background-size:cover; background-position:center;">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);"></div>
 
         <div class="container h-100 d-flex align-items-center">
           <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">ENTREVISTA</span>
-            <h2 class="display-6 fw-bold text-white">ENTREVISTA AL ENTRENADOR CAMPEÓN</h2>
-            <p class="lead text-white mb-4">Una charla exclusiva con el entrenador que llevó al equipo a la victoria.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
-              Leer entrevista <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+            <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[1]['categoria']) ?> </span>
+            <h1 class="display-5 fw-bold text-white"> <?= $carrusel[1]['titulo_presentacion'] ?> </h1>
+            <p class="lead text-white mb-4"> <?= $carrusel[1]['descripcion_corta'] ?> </p>
+            <a href="<?= base_url('noticiaspublic/' . $carrusel[1]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
+              Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
             </a>
           </div>
         </div>
@@ -59,16 +67,16 @@
 
     <!-- Slide 3 -->
     <div class="carousel-item" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
+      <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[2]['imagen']) ?>'); background-size:cover; background-position:center;">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 100%);"></div>
 
         <div class="container h-100 d-flex align-items-center">
           <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">RESULTADOS</span>
-            <h2 class="display-6 fw-bold text-white">RESUMEN DE LA TEMPORADA</h2>
-            <p class="lead text-white mb-4">Los mejores momentos, estadísticas y análisis de la temporada completa.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
-              Ver resumen <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+            <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[2]['categoria']) ?> </span>
+            <h1 class="display-5 fw-bold text-white"> <?= $carrusel[2]['titulo_presentacion'] ?> </h1>
+            <p class="lead text-white mb-4"> <?= $carrusel[2]['descripcion_corta'] ?> </p>
+            <a href="<?= base_url('noticiaspublic/' . $carrusel[2]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
+              Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
             </a>
           </div>
         </div>

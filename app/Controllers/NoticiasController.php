@@ -27,7 +27,7 @@ class NoticiasController extends Controller
             'titulo' => $this->request->getGet('titulo')
         ];
         
-        $datos['noticias'] = $noticias->noticias($filtros);
+        $datos['noticias'] = $noticias->noticiasAdmin($filtros);
         $datos['categorias'] = $noticias->categorias();
         $datos['filtros'] = $filtros; // Pasar filtros a la vista
         

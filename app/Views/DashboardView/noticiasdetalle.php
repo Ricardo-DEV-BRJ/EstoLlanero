@@ -36,7 +36,7 @@
             <img src="<?= base_url('image/' . $noticia['imagen']) ?>"
               alt="<?= esc($noticia['titulo']) ?>"
               class="img-fluid rounded shadow"
-              style="max-height:500px; width:100%; object-fit:cover;">
+              style="max-height:700px; width:100%; object-fit:cover;">
           </div>
         <?php endif; ?>
 
