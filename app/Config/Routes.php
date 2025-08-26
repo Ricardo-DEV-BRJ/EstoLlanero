@@ -48,5 +48,8 @@ $routes->get('sign', 'AuthController::signView');
 $routes->post('sign', 'AuthController::sign');
 $routes->get('logout', 'AuthController::logout');
 
+// Carrusel
+$routes->get('carrusel', 'CarruselController::index');
+
 //Error
 $routes->get('errorAuth', 'ErrorAuthController::index');

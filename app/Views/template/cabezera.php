@@ -11,6 +11,7 @@ $links = array(
   array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
   array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
   array('link' => 'noticias', 'icon' => 'newspaper', 'nombre' => 'Noticias'),
+  array('link' => 'carrusel', 'icon' => 'images', 'nombre' => 'Carrusel'),
   array('link' => '/', 'icon' => 'home', 'nombre' => 'Inicio'),
   array('link' => 'login', 'icon' => 'key-round', 'nombre' => 'Iniciar Sesión'),
   array('link' => 'sign', 'icon' => 'lock-keyhole-open', 'nombre' => 'Registrarse'),
@@ -41,7 +42,7 @@ $links = array(
         <div class="sticky-top">
           <div class="" style="min-height: 25dvh;">
             <div class="d-flex align-items-center p-4 gap-2 d-none contenido">
-              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <img src="<?= base_url('media/LogoCircular.png')?> " alt="" width="100">
               <div>
                 <h5 class="card-title">EstoLlanos</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
@@ -104,7 +105,7 @@ $links = array(
         <div class="bg-body border-end border-top d-none p-2" id="menuRes">
           <div class="d-flex justify-content-center">
             <div class="d-flex align-items-center gap-2 d-none contenido">
-              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <img src="<?= base_url('media/LogoCircular.png')?> " alt="" width="100">
               <div>
                 <h5 class="card-title">EstoLlanos</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>

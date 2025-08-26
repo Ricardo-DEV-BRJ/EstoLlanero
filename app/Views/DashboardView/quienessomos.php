@@ -12,7 +12,7 @@
         <div class="row g-4 align-items-center">
           <div class="col-12 col-md-4 text-center">
             <div class="p-3 bg-white rounded-3 d-inline-block" style="max-width:320px;">
-              <img src="../public/media/LogoCompletoCircular.png" alt="logo EstoLlanos" class="img-fluid" style="max-height:220px; object-fit:contain;">
+              <img src="<?=base_url('media/LogoCompletoCircular.png')?> " alt="logo EstoLlanos" class="img-fluid" style="max-height:220px; object-fit:contain;">
             </div>
           </div>
 

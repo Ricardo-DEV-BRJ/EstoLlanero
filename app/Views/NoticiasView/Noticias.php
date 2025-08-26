@@ -70,7 +70,7 @@
             </div>
             <div class="card-body p-0">
               <figure class="text-center">
-                <img style="object-fit: cover; aspect-ratio:1/1;" src="../public/image/<?= $noticia['imagen'] ?>" width="60%" onclick="handleImage('<?= $noticia['imagen'] ?>')" />
+                <img style="object-fit: cover; aspect-ratio:1/1;" src="<?= base_url('image/' . $noticia['imagen']) ?>" width="60%" onclick="handleImage('<?= $noticia['imagen'] ?>')" />
               </figure>
             </div>
             <div class="card-body">
@@ -178,7 +178,7 @@
         <button type="button" class="btn-close" aria-label="Close" onclick="cerrar()"></button>
       </div>
       <div class="modal-body p-3 text-center">
-        <img src="" alt="Imagen" id="imageModal" width="80%" style="object-fit: auto; aspect-ratio:1/1;">
+        <img src="" alt="Imagen" id="imageModal" width="60%">
       </div>
     </div>
   </div>
@@ -325,14 +325,13 @@
     };
 
     const handleImage = (imagen) => {
-      console.log(imagen);
       if (modalCarta) modalCarta.classList.remove('salida');
       if (modalCarta) modalCarta.classList.add('entrada');
       if (modalAlert) modalAlert.classList.remove('backOut');
       if (modalAlert) modalAlert.classList.add('backInt');
       if (modalAlert) modalAlert.classList.remove('d-none');
       if (imageModal) {
-        imageModal.setAttribute('src', '../public/image/' + imagen);
+        imageModal.setAttribute('src', '<?= base_url('image/') ?>' + imagen)
         imageModal.setAttribute('alt', imagen);
       }
     };

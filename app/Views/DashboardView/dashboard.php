@@ -150,7 +150,7 @@
             <div class="card h-100 shadow-sm card-hover position-relative">
               <!-- Botón de favoritos -->
               <div class="position-absolute top-0 end-0 p-2">
-                <a href="<?= base_url($noticia['favorito'] ? 'favoritos/eliminar/' . $noticia['id'] : 'favoritos/agregar/' . $noticia['id']) ?>" >
+                <a href="<?= base_url($noticia['favorito'] ? 'favoritos/eliminar/' . $noticia['id'] : 'favoritos/agregar/' . $noticia['id']) ?>">
                   <button class="bg-transparent border-0 botonComment" style="color:<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?> ;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?>" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark">
                       <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
@@ -379,7 +379,7 @@
 
     content.innerHTML = render
     const img = document.getElementById('imageNoticia')
-    img.setAttribute('src', '../public/image/' + media)
+    img.setAttribute('src', '<?= base_url('image/') ?>' + media)
     const input = document.getElementById('comentario')
     input.value = ''
   }

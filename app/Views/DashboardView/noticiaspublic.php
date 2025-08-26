@@ -73,7 +73,7 @@
               <!-- Imagen o placeholder -->
               <?php if (!empty($noticia['imagen'])): ?>
                 <img
-                  src="../public/image/<?= $noticia['imagen'] ?>"
+                  src="<?= base_url('image/').$noticia['imagen'] ?>"
                   class="card-img-top"
                   alt="<?= esc($noticia['titulo']) ?>"
                   style="height:220px; object-fit:cover;" />
@@ -243,7 +243,7 @@
 
     content.innerHTML = render
     const img = document.getElementById('imageNoticia')
-    img.setAttribute('src', '../public/image/' + media)
+    img.setAttribute('src', '<?=base_url('image/') ?>' + media)
     const input = document.getElementById('comentario')
     input.value = ''
 

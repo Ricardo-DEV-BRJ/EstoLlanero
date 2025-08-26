@@ -1,8 +1,9 @@
 <?= $cabezera ?>
 <?php if (session('alertaFav')): ?>
   <?= view('Template/AlertaFav', session('alertaFav')) ?>
-<?php endif; ?>
-
+  <?php endif; ?>
+  
+  
 <main class="min-vh-100 bg-gray-50 py-5">
   <div class="container">
     <!-- Título y alertas -->
@@ -51,7 +52,7 @@
                 <?php else: ?>
                   <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
                     <span class="text-white fs-1 opacity-50">
-                      <?= substr($noticia['autor_nombre'] ?? 'N', 0, 1) . substr($noticia['autor_apellido'] ?? 'A', 0, 1) ?>
+                      <?= substr($noticia['nombre'] ?? 'N', 0, 1) . substr($noticia['apellido'] ?? 'A', 0, 1) ?>
                     </span>
                   </div>
                 <?php endif; ?>
@@ -211,7 +212,7 @@
 
     content.innerHTML = render
     const img = document.getElementById('imageNoticia')
-    img.setAttribute('src', '../public/image/' + media)
+    img.setAttribute('src', '<?=base_url('image/') ?>' + media)
     const input = document.getElementById('comentario')
     input.value = ''
 
