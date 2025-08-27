@@ -84,7 +84,19 @@ DESC';
       $nombreImage,
       $usuario['id']
     ];
+
+    $sqlVeri = 'SELECT * FROM carrusel WHERE noticia_id = ?';
+    $paramsVeri = [$datos['noticia_id']];
+
     try {
+      $queryCheck  = $this->db->query($sqlVeri, $paramsVeri);
+      if (count($queryCheck->getResultArray()) > 0) {
+        return [
+          'success' => false,
+          'error' => 'Noticia ya asociada',
+          'message' => "Esta noticia ya esta asociada"
+        ];
+      }
       $this->db->query($sql, $params);
       $image->move(FCPATH . 'image/', $nombreImage);
       return ['success' => true];
@@ -121,7 +133,18 @@ DESC';
       $nombreImage,
       $usuario['id']
     ];
+    $sqlVeri = 'SELECT * FROM carrusel WHERE noticia_id = ?';
+    $paramsVeri = [$id];
+
     try {
+      $queryCheck  = $this->db->query($sqlVeri, $paramsVeri);
+      if (count($queryCheck->getResultArray()) > 0) {
+        return [
+          'success' => false,
+          'error' => 'Noticia ya asociada',
+          'message' => "Esta noticia ya esta asociada"
+        ];
+      }
       $this->db->query($sql, $params);
       $image->move(FCPATH . 'image/', $nombreImage);
       return ['success' => true];
