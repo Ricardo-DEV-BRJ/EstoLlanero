@@ -3,17 +3,52 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<div class="card w-100 w-md-80">
-  <div class="card-header d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2 ">
+<div class="card w-100 w-md-90">
+  <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 ">
     <h3 class="card-title">
       Noticias
     </h3>
-    <div class="text-center" data-bs-toggle="tooltip"
-      data-bs-placement="top"
-      title="Agregar">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="addNot()">
-        <i data-lucide="plus"> </i> Agregar Noticias
-      </button>
+    <div class="d-flex flex-column flex-md-row gap-2">
+      <form method="get" class="d-flex flex-column flex-md-row gap-2 w-100">
+        <div class="d-flex flex-column flex-xl-row justify-content-center align-items-center gap-2">
+          <div class="form-group">
+            <input type="text"
+              name="titulo"
+              class="form-control"
+              placeholder="Buscar por título"
+              value="<?= isset($filtros['titulo']) ? $filtros['titulo'] : '' ?>">
+          </div>
+          <div class="form-group">
+            <select class="form-select" name="categoria">
+              <option value="">Todas las categorías</option>
+              <?php foreach ($categorias as $categoria): ?>
+                <option value="<?= $categoria['id'] ?>"
+                  <?= (isset($filtros['categoria']) && $filtros['categoria'] == $categoria['id']) ? 'selected' : '' ?>>
+                  <?= $categoria['nombre'] ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column flex-xl-row justify-content-center align-items-center gap-2">
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+            <a href="<?= base_url('noticias') ?>" class="btn btn-secondary">Limpiar</a>
+          </div>
+          <div class="text-center" data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Agregar">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="addNot()">
+              <i data-lucide="plus"> </i> Agregar Noticias
+            </button>
+          </div>
+        </div>
+
+
+      </form>
+
+
     </div>
   </div>
 
@@ -25,51 +60,84 @@
         <p class="text-muted mb-3">Comienza agregando una nueva noticia</p>
       </div>
     <?php else: ?>
-      <div class="d-flex flex-wrap gap-4">
+      <div class="row g-4">
         <?php foreach ($noticias as $noticia): ?>
-          <div class="card w-100 card-md-50 w-lg-33">
-            <div class="card-header bg-secondary d-flex align-items-center justify-content-between">
-              <h5 class="card-title text-light">
-                <?= $noticia['titulo'] ?>
-              </h5>
-            </div>
-            <div class="card-body p-0">
-              <figure class="text-center">
-                <img style="object-fit: cover; aspect-ratio:1/1;" src="../public/image/<?= $noticia['imagen'] ?>" width="60%" onclick="handleImage('<?= $noticia['imagen'] ?>')" />
-              </figure>
-            </div>
-            <div class="card-body">
 
-              <div class="seccion-con-scroll">
-                <p><?= $noticia['contenido'] ?> </p>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm position-relative">
+              <div class="position-absolute top-0 end-0 p-2">
+                <?php if ($noticia['carrusel'] == 0): ?>
+                  <div data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Agregar al carrusel">
+                    <button type="button" class="btn btn-success rounded-pill p-2" data-bs-toggle="modal" data-bs-target="#modalCarrusel" onclick="hadleCarrusel(<?= $noticia['id'] ?>)">
+                      <i data-lucide="images"></i>
+                      </svg>
+                    </button>
+                  </div>
+                <?php else: ?>
+                  <div data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Eliminar del carrusel">
+                    <a href='<?= base_url('eliminarCarrusel/'. $noticia['id_cat'])?>' type="button" class="btn btn-danger rounded-pill p-2">
+                      <i data-lucide="image-off"></i>
+                      </svg>
+                    </a>
+                  </div>
+                <?php endif; ?>
               </div>
-              <br>
-              <div class=" d-flex">
-                <div class="bg-primary p-2 rounded-pill fw-bold text-light fs-6 text" data-bs-toggle="tooltip" data-bs-placement="top" title="Categoría">
-                  <?= $noticia['categoria'] ?>
+              <?php if (!empty($noticia['imagen'])): ?>
+                <img
+                  src="<?= base_url('image/') . $noticia['imagen'] ?>"
+                  class="card-img-top"
+                  alt="<?= esc($noticia['titulo']) ?>"
+                  style="height:220px; object-fit:cover;" onclick="handleImage('<?= $noticia['imagen'] ?>')" />
+              <?php else: ?>
+                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height:220px;">
+                  <span class="text-white fs-1 opacity-50">
+                    <?= substr($noticia['nombre'] ?? 'N', 0, 1) ?>
+                  </span>
                 </div>
-              </div>
-              <p><strong>Autor:</strong> <?= $noticia['nombre'] ?> <?= $noticia['apellido'] ?></p>
-              <p><strong>Fecha</strong> <?= date('d/m/Y', strtotime(str_replace('/', '-', $noticia['fecha']))) ?></p>
-            </div>
-            <div class="d-flex justify-content-end gap-2 p-4">
-              <div data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Editar">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="editNot(<?= htmlspecialchars(json_encode($noticia), ENT_QUOTES, 'UTF-8') ?>)">
-                  <i data-lucide="pencil"> </i>
-                </button>
-              </div>
-              <div data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Eliminar">
-                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="confirmarEliminar('<?= base_url('eliminarNoticia/' . $noticia['id']) ?>')">
-                  <i data-lucide="trash"> </i>
-                </button>
+              <?php endif; ?>
+              <div class="card-body d-flex flex-column">
+                <div class="mb-2">
+                  <span class="badge bg-primary text-white"><?= esc($noticia['categoria'] ?? 'General') ?></span>
+                </div>
+                <h5 class="card-title text-body"><?= esc($noticia['titulo']) ?></h5>
+                <p class="card-text text-secondary mb-3">
+                  <?= esc($noticia['descripcion'] ?? substr($noticia['contenido'], 0, 100)) ?>...
+                </p>
+                <div class="mt-auto">
+                  <a href="noticiaspublic/<?= $noticia['id'] ?>"
+                    class="text-accent fw-semibold text-decoration-none">
+                    Ver detalles <i data-lucide="arrow-right" class="ms-1" style="width:16px;height:16px;"></i>
+                  </a>
+                </div>
+                <div class="mt-auto">
+                  <div class="text-accent fw-semibold text-decoration-none">
+                    <i data-lucide="camera" class="ms-1" style="width:16px;height:16px;"></i> Autor: <?= ucfirst($noticia['nombre']) ?> <?= ucfirst($noticia['apellido']) ?>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                  <div data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Editar">
+                    <button type="button" class="border-0 bg-transparent text-primary" data-bs-toggle="modal" data-bs-target="#modalNoticias" onclick="editNot(<?= htmlspecialchars(json_encode($noticia), ENT_QUOTES, 'UTF-8') ?>)">
+                      <i data-lucide="pencil"> </i>
+                    </button>
+                  </div>
+                  <div data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Eliminar">
+                    <button type="button" class="border-0 bg-transparent text-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar" onclick="confirmarEliminar('<?= base_url('eliminarNoticia/' . $noticia['id']) ?>')">
+                      <i data-lucide="trash"> </i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        <?php endforeach ?>
+        <?php endforeach; ?>
       </div>
     <?php endif; ?>
 
@@ -143,7 +211,7 @@
         <button type="button" class="btn-close" aria-label="Close" onclick="cerrar()"></button>
       </div>
       <div class="modal-body p-3 text-center">
-        <img src="" alt="Imagen" id="imageModal" width="80%" style="object-fit: auto; aspect-ratio:1/1;">
+        <img src="" alt="Imagen" id="imageModal" width="60%">
       </div>
     </div>
   </div>
@@ -168,6 +236,45 @@
   </div>
 </div>
 
+
+<div class="modal fade" id="modalCarrusel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel2">Carrusel</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="<?= base_url('agregarCarrusel') ?>" method="post" id="formCarrusel" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+          <div class="form-group">
+            <label for="tituloCa"><strong>Titulo</strong></label>
+            <input required value="<?= old('tituloCa') ?>" type="text" name="tituloCa" id="tituloCa" class="form-control input" aria-describedby="helpId">
+          </div>
+          <div class="mb-3">
+            <label for="descripcion" class="form-label"><strong>Descripción breve</strong></label>
+            <textarea class="form-control" value="<?= old('descripcion') ?>" name="descripcion" id="descripcion" rows="4" style="resize: none;"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="imageCa" class="form-label"><strong>Imagen de noticia</strong></label>
+            <input required
+              type="file"
+              value="<?= old('imageCa') ?>"
+              class="form-control"
+              name="imageCa"
+              id="imageCa"
+              placeholder="Seleccione una imagen"
+              accept="image/*" />
+            <div id="error" class="text-danger"></div>
+            <div id="success" class="text-success"></div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="enviar" data-toggle="button" aria-pressed="false" autocomplete="off">Enviar</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <style>
@@ -246,6 +353,7 @@
     const modalCarta = document.getElementById('modalCarta');
     const imageModal = document.getElementById('imageModal');
     const formulario = document.getElementById('formNoticias');
+    const carruselForm = document.getElementById('formCarrusel');
 
     const nombre = document.getElementById('titulo');
     const descripcion = document.getElementById('contenido');
@@ -290,17 +398,20 @@
     };
 
     const handleImage = (imagen) => {
-      console.log(imagen);
       if (modalCarta) modalCarta.classList.remove('salida');
       if (modalCarta) modalCarta.classList.add('entrada');
       if (modalAlert) modalAlert.classList.remove('backOut');
       if (modalAlert) modalAlert.classList.add('backInt');
       if (modalAlert) modalAlert.classList.remove('d-none');
       if (imageModal) {
-        imageModal.setAttribute('src', '../public/image/' + imagen);
+        imageModal.setAttribute('src', '<?= base_url('image/') ?>' + imagen)
         imageModal.setAttribute('alt', imagen);
       }
     };
+
+    const hadleCarrusel = (id) => {
+      carruselForm.action = '<?= base_url('agregarCarrusel/') ?>' + id
+    }
 
 
     // Asegúrate de que las funciones estén disponibles en el ámbito global si se llaman desde HTML
@@ -309,6 +420,48 @@
     window.cerrar = cerrar;
     window.handleImage = handleImage;
     window.confirmarEliminar = confirmarEliminar;
+    window.hadleCarrusel = hadleCarrusel;
   });
 </script>
+
+<script>
+  const input = document.getElementById('imageCa');
+  const error = document.getElementById('error');
+  const success = document.getElementById('success');
+  const button = document.getElementById('enviar');
+
+  input.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      error.textContent = 'Por favor, selecciona una imagen válida';
+      success.textContent = '';
+      return;
+    }
+
+    const img = new Image();
+    img.onload = function() {
+      const aspectRatio = img.width / img.height;
+      const targetAspectRatio = 16 / 9;
+      const tolerance = 1; // 10% de tolerancia
+
+      if (Math.abs(aspectRatio - targetAspectRatio) > tolerance) {
+        error.textContent = `La imagen debe tener relación 16:9. 
+                                       Actual: ${img.width}x${img.height} (${aspectRatio.toFixed(2)})`;
+        success.textContent = '';
+        input.value = '';
+        button.disabled = true
+      } else {
+        error.textContent = '';
+        success.textContent = '¡Imagen válida! Relación 16:9 correcta.';
+        button.disabled = false
+      }
+    };
+
+    img.src = URL.createObjectURL(file);
+  });
+</script>
+
 <?= $pieDePagina ?>

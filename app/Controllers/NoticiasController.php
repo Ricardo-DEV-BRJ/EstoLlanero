@@ -12,46 +12,36 @@ class NoticiasController extends Controller
 
 
     public function index()
-    {
-        $usuario = [
-            'isLoggedIn' => session()->get('isLoggedIn'),
-            'rol' => session()->get('rol')
+{
+    $usuario = [
+        'isLoggedIn' => session()->get('isLoggedIn'),
+        'rol' => session()->get('rol')
+    ];
+    
+    if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
+        $noticias = new NoticiasModel();
+        
+        // Obtener filtros del request
+        $filtros = [
+            'categoria' => $this->request->getGet('categoria'),
+            'titulo' => $this->request->getGet('titulo')
         ];
-        if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
-            $noticias = new NoticiasModel();
-            $datos['noticias'] = $noticias->noticias();
-            $datos['categorias'] = $noticias->categorias();
-            $datos['cabezera'] = view('Template/cabezera', [
-                'titulo' => 'Noticias',
-                'header' => true
-            ]);
-            $datos['pieDePagina'] = view('template/pieDePagina');
-            return view('NoticiasView/Noticias', $datos);
-        } else {
-            return redirect()->to(base_url('errorAuth'));
-        }
-    }
-    public function noticiasPrueba()
-    {
-        $usuario = [
-            'isLoggedIn' => session()->get('isLoggedIn'),
-            'rol' => session()->get('rol')
-        ];
-        if ($usuario['isLoggedIn'] && ($usuario['rol'] == 'superadmin' || $usuario['rol'] == 'admin')) {
-            $noticias = new NoticiasModel();
-            $datos['noticias'] = $noticias->noticias();
-            return $this->response->setJSON([
-            'success' => true,
-            'noticias' => $datos['noticias']
+        
+        $datos['noticias'] = $noticias->noticiasAdmin($filtros);
+        $datos['categorias'] = $noticias->categorias();
+        $datos['filtros'] = $filtros; // Pasar filtros a la vista
+        
+        $datos['cabezera'] = view('Template/cabezera', [
+            'titulo' => 'Noticias',
+            'header' => true
         ]);
-        } else {
-            return $this->response->setJSON([
-            'success' => false,
-            'error' => 'No autorizado',
-            'message' => 'No tienes permisos para acceder a este recurso'
-        ])->setStatusCode(401);
-        }
+        $datos['pieDePagina'] = view('template/pieDePagina');
+        return view('NoticiasView/Noticias', $datos);
+    } else {
+        return redirect()->to(base_url('errorAuth'));
     }
+}
+  
 
     public function crear()
     {

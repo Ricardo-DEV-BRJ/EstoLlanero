@@ -21,19 +21,39 @@ class UsuariosModel extends Model
 
   public function crear($datos)
   {
+    $usuario = [
+      'id' => session()->get('id'),
+      'rol' => session()->get('rol'),
+    ];
+
     $sql = "INSERT INTO usuarios (nombre, apellido, usuario, contrasena, rol, fecha_registro, activo) VALUES (?, ?, ?, ?, ?,?,?)";
     $params = [
       $datos['nombre'],
       $datos['apellido'],
-      $datos['usuario'],
+      strtolower($datos['usuario']),
       password_hash($datos['contrasena'], PASSWORD_DEFAULT),
       $datos['rol'],
       date('Y-m-d H:i:s'),
       true,
     ];
 
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Agregar',
+      'Creado el usuario ' . $datos['usuario'] . '. Con el rol ' . $datos['rol']
+    ];
+
     try {
+      if ($usuario['rol'] != 'superadmin') {
+        return [
+          'success' => false,
+          'error' => 'No autorizado ',
+          'message' => "No estas autorizado"
+        ];
+      }
       $this->db->query($sql, $params);
+      $this->db->query($sqlLog, $log);
       return ['success' => true, 'id' => $this->db->insertID()];
     } catch (\Exception $e) {
 
@@ -59,16 +79,42 @@ class UsuariosModel extends Model
           'message' => "Faltan campos"
         ];
       };
+
+      return [
+          'success' => false,
+          'error' => 'Error',
+          'message' => $result
+        ];
     };
   }
 
   public function eliminar($id)
   {
+    $usuario = [
+      'id' => session()->get('id'),
+      'rol' => session()->get('rol'),
+    ];
     $sql = 'UPDATE usuarios SET activo = ? WHERE id = ?';
     $params = [false, $id];
-
+    $sqlCheck = 'SELECT usuario FROM usuarios WHERE id = ?';
+    $dbCheck = $this->db->query($sqlCheck, [$id]);
+    $resCa = $dbCheck->getResultArray();
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Eliminar',
+      'Eliminado el usuario ' . $resCa[0]['usuario']
+    ];
     try {
+      if ($usuario['rol'] != 'superadmin') {
+        return [
+          'success' => false,
+          'error' => 'No autorizado ',
+          'message' => "No estas autorizado"
+        ];
+      }
       $this->db->query($sql, $params);
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception $e) {
       $result = $this->db->error()['message'];
@@ -80,17 +126,40 @@ class UsuariosModel extends Model
     }
   }
 
-  public function editar($id, $params)
+  public function editar($id, $data)
   {
+    $usuario = [
+      'id' => session()->get('id'),
+      'rol' => session()->get('rol'),
+    ];
+
     $sql = "UPDATE usuarios SET nombre = ?, apellido = ?, rol = ? WHERE id = ?";
     $params = [
-      $params['nombre'],
-      $params['apellido'],
-      $params['rol'],
+      $data['nombre'],
+      $data['apellido'],
+      $data['rol'],
       $id
     ];
+
+    $user = 'SELECT usuario FROM usuarios WHERE id = ?';
+    $queryUser = $this->db->query($user, [$id]);
+    $datos = $queryUser->getResultArray();
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Modificado',
+      'Modificado el usuario ' . $datos[0]['usuario'] . '. Con el rol ' . $data['rol']
+    ];
     try {
+      if ($usuario['rol'] != 'superadmin') {
+        return [
+          'success' => false,
+          'error' => 'No autorizado ',
+          'message' => "No estas autorizado"
+        ];
+      }
       $this->db->query($sql, $params);
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception) {
       $result = $this->db->error()['message'];

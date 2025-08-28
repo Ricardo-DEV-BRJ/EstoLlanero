@@ -3,8 +3,13 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<section class="w-100 d-flex flex-column flex-justify-center mx-0 align-items-center">
-  <div class="w-100 p-2 d-flex justify-content-end d-md-none d-flex">
+<section class="w-100 d-flex justify-content-between mx-0 align-items-center">
+  <div class="d-md-none d-flex">
+    <button onclick="volver()" id='back' class="text-body bg-body-color p-2 btn rounded-circle">
+      <i data-lucide="arrow-big-left"></i>
+    </button>
+  </div>
+  <div class="d-md-none d-flex">
     <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
       <i data-lucide="moon" id="icon"></i>
     </button>
@@ -23,7 +28,7 @@
         <h4 class="card-subtitle mb-2 text-body-secondary">¡Bienvenido!</h4>
         <h3>Inicia sesion con tu cuenta</h3>
       </div>
-      <form action="" method="post" class="d-flex flex-column gap-2 w-100">
+      <form action="<?= base_url('login')?>" method="post" class="d-flex flex-column gap-2 w-100">
         <div class="form-group">
           <label for="usuarios">
             <strong>
@@ -57,4 +62,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  function volver(){
+    window.history.back()
+  }
+</script>
 <?= $pie ?>

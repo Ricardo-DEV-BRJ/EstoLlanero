@@ -7,13 +7,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EstoLLanos - Dashboard</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-
+  <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon">
   <link href="<?= base_url('css/custom.css') ?>" rel="stylesheet">
   <link href="<?= base_url('css/styledashboard.css') ?>" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="<?= base_url('css/header.css') ?>" rel="stylesheet">
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
 
@@ -58,7 +58,7 @@
           <li class="nav-item"><a class="nav-link" href="<?= base_url('noticiaspublic') ?>">NOTICIAS</a></li>
           <li class="nav-item"><a class="nav-link" href="<?= base_url('quienessomos') ?>">QUIENES SOMOS</a></li>
           <?php if (session()->get('rol') != 'lector' && session()->get('rol') != null): ?>
-            <li class="nav-item"><a class="nav-link" href="usuarios">PANEL ADMIN</a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('usuarios') ?>">PANEL ADMIN</a></li>
           <?php endif; ?>
           <!-- Favoritos ahora también visible en móvil -->
           <li class="nav-item d-lg-none">

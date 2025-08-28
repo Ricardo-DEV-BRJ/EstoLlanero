@@ -45,12 +45,12 @@ class UsuariosController extends Controller
             ]);
             return redirect()->to(base_url('usuarios'));
         } else {
-            $datos['alerta'] = view('Template/Alertas', [
+             session()->setFlashdata('alerta', [
                 'modal' => true,
                 'titulo' => 'Algo salio mal..',
                 'descripcion' => $datos['res']['message'],
             ]);
-            return view('UsuariosView/usuarios', $datos);
+            return redirect()->to(base_url('usuarios'));
         }
     }
 

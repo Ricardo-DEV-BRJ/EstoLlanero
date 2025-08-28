@@ -11,7 +11,9 @@ $links = array(
   array('link' => 'usuarios', 'icon' => 'users', 'nombre' => 'Usuarios'),
   array('link' => 'categorias', 'icon' => 'tags', 'nombre' => 'Categorías'),
   array('link' => 'noticias', 'icon' => 'newspaper', 'nombre' => 'Noticias'),
+  array('link' => 'carrusel', 'icon' => 'images', 'nombre' => 'Carrusel'),
   array('link' => '/', 'icon' => 'home', 'nombre' => 'Inicio'),
+  array('link' => 'auditoria', 'icon' => 'telescope', 'nombre' => 'Auditoria'),
   array('link' => 'login', 'icon' => 'key-round', 'nombre' => 'Iniciar Sesión'),
   array('link' => 'sign', 'icon' => 'lock-keyhole-open', 'nombre' => 'Registrarse'),
   array('link' => 'logout', 'icon' => 'door-open', 'nombre' => 'Cerrar sesión'),
@@ -41,7 +43,7 @@ $links = array(
         <div class="sticky-top">
           <div class="" style="min-height: 25dvh;">
             <div class="d-flex align-items-center p-4 gap-2 d-none contenido">
-              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <img src="<?= base_url('media/LogoCircular.png') ?> " alt="" width="100">
               <div>
                 <h5 class="card-title">EstoLlanos</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
@@ -58,7 +60,7 @@ $links = array(
           </div>
           <ul class="d-flex flex-column list-unstyled ps-2 pe-2">
             <?php foreach ($links as $link): ?>
-              <?php if ($link['link'] != 'login' && $link['link'] != 'sign' && $link['link'] != 'logout'): ?>
+              <?php if ($link['link'] != 'login' && $link['link'] != 'sign' && $link['link'] != 'logout' && $link['link'] != 'auditoria'): ?>
                 <li class="d-flex align-items-center justify-content-center ">
                   <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
                     <i data-lucide="<?= $link['icon'] ?>"></i>
@@ -84,6 +86,16 @@ $links = array(
                       </a>
                     </li>
                   <?php endif; ?>
+                  <?php if (session()->get('rol') === 'superadmin'): ?>
+                    <?php if ($link['link'] == 'auditoria'): ?>
+                      <li class="d-flex align-items-center justify-content-center">
+                        <a href="<?= base_url($link['link']) ?>" class="text-body w-100 p-2 d-flex gap-2 align-items-center list-group-item">
+                          <i data-lucide="<?= $link['icon'] ?>"></i>
+                          <p class="mb-0 text-body d-none contenido"><?= $link['nombre'] ?></p>
+                        </a>
+                      </li>
+                    <?php endif; ?>
+                  <?php endif; ?>
                 <?php endif; ?>
               <?php endif; ?>
             <?php endforeach; ?>
@@ -104,7 +116,7 @@ $links = array(
         <div class="bg-body border-end border-top d-none p-2" id="menuRes">
           <div class="d-flex justify-content-center">
             <div class="d-flex align-items-center gap-2 d-none contenido">
-              <img src="../public/Media/LogoCircular.png" alt="" width="100">
+              <img src="<?= base_url('media/LogoCircular.png') ?> " alt="" width="100">
               <div>
                 <h5 class="card-title">EstoLlanos</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">Sports</h6>
@@ -150,7 +162,10 @@ $links = array(
       </header>
     <?php endif; ?>
     <section class="w-100 d-flex flex-column flex-justify-center align-items-center p-4">
-      <div class="w-100 p-2 d-flex justify-content-end d-none d-md-flex">
+      <div class="w-100 p-2 d-flex justify-content-between d-none d-md-flex">
+        <button onclick="volver()" id='back' class="text-body bg-body-color p-2 btn rounded-circle">
+          <i data-lucide="arrow-big-left"></i>
+        </button>
         <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
           <i data-lucide="moon" id="icon"></i>
         </button>

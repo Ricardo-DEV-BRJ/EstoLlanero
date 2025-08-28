@@ -32,7 +32,9 @@
             <th>Rol</th>
             <th>Fecha registro</th>
             <th>Activo</th>
-            <th>Acciones</th>
+            <?php if (session('rol') == 'superadmin'): ?>
+              <th>Acciones</th>
+            <?php endif; ?>
           </tr>
         </thead>
         <tbody>
@@ -44,16 +46,18 @@
               <td data-columna="Rol" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= ucfirst($usuario['rol']) ?></td>
               <td data-columna="Fecha registro" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= date('d/m/Y', strtotime(str_replace('/', '-', $usuario['fecha_registro']))) ?></td>
               <td data-columna="Activo" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between"> <?= $usuario['activo'] == 1 ? 'Activo' : 'Inactivo' ?></td>
-              <td data-columna="Acciones" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between gap-2">
-                <div>
-                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
-                    <i data-lucide="pencil" style="width: 18px; height:18px;"></i>
-                  </button>
-                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#miModal" onclick="confirmarEliminar('<?= base_url('eliminar/' . $usuario['id']) ?>')">
-                    <i data-lucide="trash" style="width: 18px; height:18px;"></i>
-                  </button>
-                </div>
-              </td>
+              <?php if (session('rol') == 'superadmin'): ?>
+                <td data-columna="Acciones" class="pt-0 pb-0 pt-sm-2 pb-sm-2 text-center justify-content-between gap-2">
+                  <div>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalUsuarios" onclick="editar('<?= htmlspecialchars(json_encode($usuario), ENT_QUOTES, 'UTF-8') ?>')">
+                      <i data-lucide="pencil" style="width: 18px; height:18px;"></i>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#miModal" onclick="confirmarEliminar('<?= base_url('eliminar/' . $usuario['id']) ?>')">
+                      <i data-lucide="trash" style="width: 18px; height:18px;"></i>
+                    </button>
+                  </div>
+                </td>
+              <?php endif; ?>
             </tr>
           <?php endforeach; ?>
         </tbody>

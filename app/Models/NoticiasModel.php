@@ -8,26 +8,124 @@ class NoticiasModel extends Model
 {
     protected $table      = 'noticias';
 
-    public function noticias()
+    public function noticias($filtros = [])
     {
-        $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, c.nombre as categoria, c.id as categoria_id, u.nombre, u.apellido FROM noticias n INNER JOIN categorias c ON n.categoria_id = c.id INNER JOIN usuarios u ON n.autor_id = u.id WHERE eliminada = 0   ORDER BY n.fecha DESC';
-        $query = $this->db->query($sql); // 'México' reemplaza el ?
+        $categoriaCond = '';
+        $tituloCond = '';
+        $params = [];
 
+        $usuario = session()->get('id');
+        if (!$usuario) {
+            $usuario = 0;
+        }
+
+        $params[] = $usuario;
+
+        // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
+        $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
+        $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
+
+        // Filtro por categoría
+        if (!empty($categoria) && $categoria != '0') {
+            $categoriaCond = 'AND c.id = ?';
+            $params[] = $categoria;
+        }
+
+        // Filtro por título
+        if (!empty($titulo)) {
+            $tituloCond = 'AND n.titulo LIKE ?';
+            $params[] = '%' . $titulo . '%';
+        }
+
+        $sql = 'SELECT
+                n.id,
+                n.titulo,
+                n.contenido,
+                n.imagen,
+                n.fecha,
+                c.nombre AS categoria,
+                c.id AS categoria_id,
+                u.nombre,
+                u.apellido,
+                IF(f.usuario_id IS NOT NULL, TRUE, FALSE) AS favorito
+            FROM
+                noticias n
+            INNER JOIN categorias c ON
+                n.categoria_id = c.id
+            INNER JOIN usuarios u ON
+                n.autor_id = u.id
+            LEFT JOIN favoritos f ON
+                f.noticia_id = n.id AND f.usuario_id = ?
+            WHERE
+                n.eliminada = 0 ' . $categoriaCond . ' ' . $tituloCond . '
+            ORDER BY
+                n.fecha
+            DESC';
+
+        $query = $this->db->query($sql, $params);
+        return $query->getResultArray();
+    }
+    public function noticiasAdmin($filtros = [])
+    {
+        $categoriaCond = '';
+        $tituloCond = '';
+        $params = [];
+        // Manejar diferentes tipos de parámetros (array o valor simple para compatibilidad)
+        $categoria = is_array($filtros) ? ($filtros['categoria'] ?? '') : $filtros;
+        $titulo = is_array($filtros) ? ($filtros['titulo'] ?? '') : '';
+
+        // Filtro por categoría
+        if (!empty($categoria) && $categoria != '0') {
+            $categoriaCond = 'AND c.id = ?';
+            $params[] = $categoria;
+        }
+
+        // Filtro por título
+        if (!empty($titulo)) {
+            $tituloCond = 'AND n.titulo LIKE ?';
+            $params[] = '%' . $titulo . '%';
+        }
+
+        $sql = 'SELECT
+                n.id,
+                n.titulo,
+                n.contenido,
+                n.imagen,
+                n.fecha,
+                c.nombre AS categoria,
+                c.id AS categoria_id,
+                u.nombre,
+                u.apellido,
+                ca.id as id_cat,
+                IF(ca.noticia_id IS NOT NULL, TRUE, FALSE) AS carrusel
+            FROM
+                noticias n
+            INNER JOIN categorias c ON
+                n.categoria_id = c.id
+            INNER JOIN usuarios u ON
+                n.autor_id = u.id
+            LEFT JOIN carrusel ca ON ca.noticia_id = n.id
+            WHERE
+                n.eliminada = 0 ' . $categoriaCond . ' ' . $tituloCond . '
+            ORDER BY
+                n.fecha
+            DESC';
+
+        $query = $this->db->query($sql, $params);
         return $query->getResultArray();
     }
 
+
+
     public function obtenerPorId(int $id)
     {
-    $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, 
-                   c.nombre as categoria, c.id as categoria_id, 
-                   u.nombre as autor_nombre, u.apellido as autor_apellido
-            FROM noticias n
-            INNER JOIN categorias c ON n.categoria_id = c.id
-            INNER JOIN usuarios u ON n.autor_id = u.id
-            WHERE n.id = ? AND n.eliminada = 0
-            LIMIT 1';
-    $query = $this->db->query($sql, [(int)$id]);
-    return $query->getRowArray(); // devuelve fila o null
+        $usuario = session()->get('id');
+        if (!$usuario) {
+            $usuario = [0];
+        }
+        $sql = 'SELECT n.id, n.titulo, n.contenido, n.imagen, n.fecha, c.nombre as categoria, c.id as categoria_id, u.nombre as autor_nombre, u.apellido as autor_apellido, CASE WHEN f.usuario_id IS NOT NULL THEN TRUE ELSE FALSE END AS favorito FROM noticias n INNER JOIN categorias c ON n.categoria_id = c.id INNER JOIN usuarios u ON n.autor_id = u.id LEFT JOIN favoritos f ON f.noticia_id = n.id AND f.usuario_id = ? WHERE n.id = ? AND n.eliminada = 0 LIMIT 1';
+        $query = $this->db->query($sql, [$usuario, (int)$id,]);
+        return $query->getRowArray(); // devuelve fila o null
     }
 
 
@@ -56,6 +154,12 @@ class NoticiasModel extends Model
             $usuario['id'],
             $datos['categoria_id'],
         ];
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Agregar',
+            'Creada la noticia ' . $datos['titulo'] . '. descripción: ' . $datos['contenido']
+        ];
 
         try {
             if ($usuario['rol'] == 'lector' || empty($usuario['id'])) {
@@ -67,6 +171,7 @@ class NoticiasModel extends Model
             }
             $this->db->query($sql, $params);
             $image->move(FCPATH . 'image/', $nombreImage);
+            $this->db->query($sqlLog, $log);
             return ['success' => true];
         } catch (\Exception) {
             $result = $this->db->error()['message'];
@@ -110,6 +215,12 @@ class NoticiasModel extends Model
             $id
         ];
 
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Modifación',
+            'Se modifico la noticia ' . $data['titulo'] . '. descripción: ' . $data['contenido']
+        ];
         try {
             $this->db->query($sql, $params);
 
@@ -119,7 +230,7 @@ class NoticiasModel extends Model
                     unlink(FCPATH . 'image/' . $oldImage);
                 }
             }
-
+            $this->db->query($sqlLog, $log);
             return ['success' => true];
         } catch (\Exception $e) {
             return [
@@ -145,9 +256,19 @@ class NoticiasModel extends Model
             ];
         }
         $sql = 'CALL eliminar_noticia(?)';
+        $sqlCheck = 'SELECT * FROM noticias WHERE id = ?';
+        $dbCheck = $this->db->query($sqlCheck, [$id]);
+        $resCa = $dbCheck->getResultArray();
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Eliminar',
+            'Se elimino la noticia ' . $resCa[0]['titulo'] . '. descripción: ' . $resCa[0]['contenido']
+        ];
         try {
             $result = $this->db->query($sql, $id);
             $mensaje = $result->getResultArray();
+            $this->db->query($sqlLog, $log);
             return ['success' => true, 'message' => $mensaje[0]['resultado']];
         } catch (\Exception $e) {
             return [

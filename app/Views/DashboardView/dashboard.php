@@ -1,8 +1,11 @@
 <?= $cabezera ?>
-<?php 
-$alertaData = session('alerta') ?? ['modal' => false];
-echo view('Template/Alertas', $alertaData);
-?>
+<?php if (session('comment')): ?>
+  <?= view('Template/AlertaComment', session('comment')) ?>
+<?php endif; ?>
+<?php if (session('alertaFav')): ?>
+  <?= view('Template/AlertaFav', session('alertaFav')) ?>
+<?php endif; ?>
+
 <style>
   .botonComment:hover {
     transform: scale(1.5);
@@ -10,79 +13,111 @@ echo view('Template/Alertas', $alertaData);
   }
 </style>
 <!-- CARRUSEL PRINCIPAL (3 diapositivas) -->
+
 <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" aria-label="Carrusel de noticias">
+  <?php if (session('rol') == 'superadmin' || session('rol') == 'admin'): ?>
+    <div class="position-absolute p-4 text-end w-100" style="z-index:99999;">
+      <a href='<?= base_url('carrusel') ?>' class="border-0 bg-body p-2 rounded-pill text-body" href="#" role="button">
+        <i data-lucide="notebook-pen"></i>
+      </a>
+    </div>
+  <?php endif; ?>
   <!-- Indicadores -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
+  <?php if (count($carrusel) > 2): ?>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
 
-  <div class="carousel-inner">
-    <!-- Slide 1 -->
-    <div class="carousel-item active" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
-        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);"></div>
+    <div class="carousel-inner">
+      <!-- Slide 1 -->
+      <div class="carousel-item active" style="height:500px;">
+        <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[0]['imagen']) ?>'); background-size:cover; background-position:center;">
+          <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);"></div>
 
-        <div class="container h-100 d-flex align-items-center">
-          <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">NOTICIA DESTACADA</span>
-            <h1 class="display-5 fw-bold text-white">EL EQUIPO DE FÚTBOL GANA EL CAMPEONATO</h1>
-            <p class="lead text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
-              Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
-            </a>
+          <div class="container h-100 d-flex align-items-center">
+            <div class="text-white" style="max-width:720px; z-index:2;">
+              <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[0]['categoria']) ?> </span>
+              <h1 class="display-5 fw-bold text-white"> <?= $carrusel[0]['titulo_presentacion'] ?> </h1>
+              <p class="lead text-white mb-4"> <?= $carrusel[0]['descripcion_corta'] ?> </p>
+              <a href="<?= base_url('noticiaspublic/' . $carrusel[0]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
+                Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item" style="height:500px;">
+        <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[1]['imagen']) ?>'); background-size:cover; background-position:center;">
+          <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);"></div>
+
+          <div class="container h-100 d-flex align-items-center">
+            <div class="text-white" style="max-width:720px; z-index:2;">
+              <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[1]['categoria']) ?> </span>
+              <h1 class="display-5 fw-bold text-white"> <?= $carrusel[1]['titulo_presentacion'] ?> </h1>
+              <p class="lead text-white mb-4"> <?= $carrusel[1]['descripcion_corta'] ?> </p>
+              <a href="<?= base_url('noticiaspublic/' . $carrusel[1]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
+                Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item" style="height:500px;">
+        <div class="w-100 h-100 position-relative" style="background-image: url('<?= base_url('image/' . $carrusel[2]['imagen']) ?>'); background-size:cover; background-position:center;">
+          <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 100%);"></div>
+
+          <div class="container h-100 d-flex align-items-center">
+            <div class="text-white" style="max-width:720px; z-index:2;">
+              <span class="badge bg-accent text-white fw-bold mb-3"> <?= strtoupper($carrusel[2]['categoria']) ?> </span>
+              <h1 class="display-5 fw-bold text-white"> <?= $carrusel[2]['titulo_presentacion'] ?> </h1>
+              <p class="lead text-white mb-4"> <?= $carrusel[2]['descripcion_corta'] ?> </p>
+              <a href="<?= base_url('noticiaspublic/' . $carrusel[2]['noticia_id'])  ?>" class="btn btn-brand d-inline-flex align-items-center">
+                Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2 -->
-    <div class="carousel-item" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1542736667-069246bdbc6d?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
-        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);"></div>
-
-        <div class="container h-100 d-flex align-items-center">
-          <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">ENTREVISTA</span>
-            <h2 class="display-6 fw-bold text-white">ENTREVISTA AL ENTRENADOR CAMPEÓN</h2>
-            <p class="lead text-white mb-4">Una charla exclusiva con el entrenador que llevó al equipo a la victoria.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
-              Leer entrevista <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
-            </a>
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  <?php else: ?>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="height:500px;">
+        <div class="w-100 h-100 position-relative" style="background-image: url('https://i0.wp.com/redux.com.bo/wp-content/plugins/elementor/assets/images/placeholder.png?w=750&ssl=1'); background-size:cover; background-position:center;">
+          <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 100%);"></div>
+          <div class="container h-100 d-flex align-items-center">
+            <div class="text-white" style="max-width:720px; z-index:2;">
+              <span class="badge bg-accent text-white fw-bold mb-3"> Categoria </span>
+              <h1 class="display-5 fw-bold text-white">Aun no hay noticias</h1>
+              <p class="lead text-white mb-4">Estamos trabajando en ello..</p>
+              <?php if (session('rol') == 'admin' || session('rol') == 'superadmin'): ?>
+                <p class="lead text-white mb-4">Debes tener al menos 3 noticias agregadas al carrusel</p>
+              <?php endif; ?>
+              <a href="#" class="btn btn-brand d-inline-flex align-items-center">
+                Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  <?php endif; ?>
 
-    <!-- Slide 3 -->
-    <div class="carousel-item" style="height:500px;">
-      <div class="w-100 h-100 position-relative" style="background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2071&auto=format&fit=crop'); background-size:cover; background-position:center;">
-        <div class="position-absolute top-0 start-0 w-100 h-100" style="background:linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 100%);"></div>
-
-        <div class="container h-100 d-flex align-items-center">
-          <div class="text-white" style="max-width:720px; z-index:2;">
-            <span class="badge bg-accent text-white fw-bold mb-3">RESULTADOS</span>
-            <h2 class="display-6 fw-bold text-white">RESUMEN DE LA TEMPORADA</h2>
-            <p class="lead text-white mb-4">Los mejores momentos, estadísticas y análisis de la temporada completa.</p>
-            <a href="#" class="btn btn-brand d-inline-flex align-items-center">
-              Ver resumen <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Controles -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Siguiente</span>
-  </button>
 </div>
 
 <!-- ESTADÍSTICAS -->
@@ -147,31 +182,14 @@ echo view('Template/Alertas', $alertaData);
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm card-hover position-relative">
               <!-- Botón de favoritos -->
-              <div class="position-absolute top-0 end-0 m-2">
-                <?php
-                $esFavorito = false;
-                if (!empty($favoritos_usuario)) {
-                  foreach ($favoritos_usuario as $fav) {
-                    if ($fav['noticia_id'] == $noticia['id']) {
-                      $esFavorito = true;
-                      break;
-                    }
-                  }
-                }
-                ?>
-                <button class="btn btn-sm p-1 bg-white rounded-circle shadow-sm favorito-btn"
-                  data-noticia-id="<?= $noticia['id'] ?>"
-                  data-es-favorito="<?= $esFavorito ? 'true' : 'false' ?>"
-                  onclick="toggleFavorito(this, <?= $noticia['id'] ?>)"
-                  style="width: 32px; height: 32px;">
-                  <span class="favorito-icon">
-                    <?php if ($esFavorito): ?>
-                      ★ <!-- Estrella rellena (favorito) -->
-                    <?php else: ?>
-                      ☆ <!-- Estrella vacía (no favorito) -->
-                    <?php endif; ?>
-                  </span>
-                </button>
+              <div class="position-absolute top-0 end-0 p-2">
+                <a href="<?= base_url($noticia['favorito'] ? 'favoritos/eliminar/' . $noticia['id'] : 'favoritos/agregar/' . $noticia['id']) ?>">
+                  <button class="bg-transparent border-0 botonComment" style="color:<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?> ;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="<?= $noticia['favorito'] ? '#FFC107' : '#909192' ?>" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark">
+                      <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+                    </svg>
+                  </button>
+                </a>
               </div>
 
               <?php if (!empty($noticia['imagen'])): ?>
@@ -287,26 +305,26 @@ echo view('Template/Alertas', $alertaData);
 </section>
 
 <div class="modal fade" id="noticiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center" style="max-width: 60%;">
-    <div class="modal-content w-80">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable d-flex align-items-center justify-content-center w-100 w-lg-80 w-xl-60" style="max-width: 100%;">
+    <div class="modal-content w-100 w-sm-90 w-md-80">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Comentarios</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="d-flex gap-2 justify-content-between">
-          <div class="w-60 text-center">
+          <div class="w-60 text-center d-none d-md-block">
             <img id="imageNoticia" class="w-95">
           </div>
-          <div class="d-flex flex-column gap-2 justify-content-between w-40">
-            <div class="seccion-con-scroll" id="comentarios">
+          <div class="d-flex flex-column gap-2 justify-content-between w-100 w-md-40">
+            <div class="seccion-con-scroll-comment" id="comentarios">
             </div>
             <div>
               <form action="" method="post" class="p-2 d-flex gap-2" id='formComment'>
-              <div class="form-group">
-                <input type="text" class="form-control" name="comentario" id="comentario" aria-describedby="helpId" placeholder="Escribir un comentario">
-              </div>  
-              <button
+                <div class="form-group">
+                  <input type="text" required class="form-control" name="comentario" id="comentario" aria-describedby="helpId" placeholder="Escribir un comentario">
+                </div>
+                <button
                   type="submit"
                   class="btn btn-outline-primary">
                   enviar
@@ -314,9 +332,7 @@ echo view('Template/Alertas', $alertaData);
               </form>
             </div>
             <div class="d-flex flex-column ">
-
             </div>
-
           </div>
         </div>
       </div>
@@ -325,144 +341,8 @@ echo view('Template/Alertas', $alertaData);
 </div>
 
 <script>
-   // Función para alternar favoritos (versión mejorada) - ESTA ES LA ÚNICA MODIFICACIÓN
-  function toggleFavorito(btn, noticiaId) {
-    const icon = btn.querySelector('.favorito-icon');
-    const esFavorito = btn.getAttribute('data-es-favorito') === 'true';
-
-    // Cambiar apariencia inmediatamente para mejor experiencia de usuario
-    if (esFavorito) {
-      icon.innerHTML = '☆'; // Estrella vacía
-      btn.setAttribute('data-es-favorito', 'false');
-    } else {
-      icon.innerHTML = '★'; // Estrella rellena
-      btn.setAttribute('data-es-favorito', 'true');
-    }
-
-    // Hacer la petición al servidor
-    fetch('<?= base_url('favoritos/agregar') ?>', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `noticia_id=${noticiaId}&es_favorito=${esFavorito ? 1 : 0}`
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error en la respuesta del servidor');
-        }
-        return response.json();
-      })
-      .then(data => {
-        if (data.success) {
-          console.log('Operación de favorito exitosa:', data.message);
-
-          // Si hay un mensaje de alerta, mostrarlo
-          if (data.alerta) {
-            // Mostrar alerta con el componente Alertas
-            if (data.alerta.redireccion) {
-              // Usar la función personalizada para alertas con redirección
-              mostrarAlertaPersonalizada(
-                data.alerta.tipo === 'error' ? 'Error' : 'Éxito', 
-                data.alerta.mensaje, 
-                data.alerta.redireccion
-              );
-            } else {
-              // Usar la función existente para otras alertas
-              mostrarAlerta(data.alerta);
-            }
-          }
-        } else {
-          // Revertir cambios si falla
-          if (esFavorito) {
-            icon.innerHTML = '★';
-            btn.setAttribute('data-es-favorito', 'true');
-          } else {
-            icon.innerHTML = '☆';
-            btn.setAttribute('data-es-favorito', 'false');
-          }
-
-          // Mostrar alerta de error si viene en la respuesta
-          if (data.alerta) {
-            if (data.alerta.redireccion) {
-              mostrarAlertaPersonalizada('Error', data.alerta.mensaje, data.alerta.redireccion);
-            } else {
-              mostrarAlerta(data.alerta);
-            }
-          }
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Revertir cambios si hay error
-        if (esFavorito) {
-          icon.innerHTML = '★';
-          btn.setAttribute('data-es-favorito', 'true');
-        } else {
-          icon.innerHTML = '☆';
-          btn.setAttribute('data-es-favorito', 'false');
-        }
-
-        // Mostrar alerta de error genérico
-        mostrarAlerta({
-          tipo: 'error',
-          mensaje: 'Error de conexión. Intenta nuevamente.'
-        });
-      });
-  }
-
-  // Función para mostrar alertas con el mismo estilo que login
-function mostrarAlerta(alerta) {
-  // PRIMERO intentar usar el sistema de alertas personalizadas
-  if (alerta.redireccion && typeof mostrarAlertaPersonalizada !== 'undefined') {
-    mostrarAlertaPersonalizada(
-      alerta.tipo === 'error' ? 'Error' : 'Éxito', 
-      alerta.mensaje, 
-      alerta.redireccion
-    );
-    return;
-  }
-  
-  // Si no, usar el sistema de alertas Bootstrap de respaldo
-  let alertContainer = document.getElementById('alert-container');
-  if (!alertContainer) {
-    alertContainer = document.createElement('div');
-    alertContainer.id = 'alert-container';
-    alertContainer.className = 'fixed-top mt-5';
-    document.body.prepend(alertContainer);
-  }
-
-  const alertElement = document.createElement('div');
-  alertElement.className = `alert alert-${alerta.tipo === 'error' ? 'danger' : 'success'} alert-dismissible fade show m-3`;
-  alertElement.setAttribute('role', 'alert');
-  alertElement.innerHTML = `
-      ${alerta.mensaje}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  `;
-
-  alertContainer.appendChild(alertElement);
-
-  setTimeout(() => {
-    if (alertElement.parentNode) {
-      alertElement.remove();
-    }
-  }, 5000);
-}
-
-  // Función para inicializar los botones de favoritos
-  function inicializarBotonesFavoritos() {
-    const botonesFavoritos = document.querySelectorAll('.favorito-btn');
-
-    botonesFavoritos.forEach(btn => {
-      console.log('Botón de favorito inicializado:', btn.getAttribute('data-noticia-id'));
-    });
-  }
-
   // Inicializar cuando el DOM esté listo
   document.addEventListener('DOMContentLoaded', function() {
-    inicializarBotonesFavoritos();
-    console.log('Sistema de favoritos inicializado');
-
     async function getComment(id) {
       const url = '<?= base_url('comentarios') ?>/' + id
       try {
@@ -474,7 +354,6 @@ function mostrarAlerta(alerta) {
             'Credentials': 'include'
           }
         });
-
         const data = await response.json();
         return data
       } catch (error) {
@@ -498,7 +377,7 @@ function mostrarAlerta(alerta) {
 
   const toggleImage = async (media, id) => {
     const formulario = document.getElementById('formComment')
-    formulario.action = '<?= base_url('crearComentario/')?>' + id 
+    formulario.action = '<?= base_url('crearComentario/') ?>' + id
     const result = await getComment(id)
     const content = document.getElementById('comentarios')
     let render = ''
@@ -523,13 +402,19 @@ function mostrarAlerta(alerta) {
       </div>`
       })
     } else {
-      render = 'Sin mensajes'
+      render = `<div class="d-flex flex-column align-items-center justify-content-center gap-2" style='height:100%;'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-off-icon lucide-message-circle-off"><path d="m2 2 20 20"/><path d="M4.93 4.929a10 10 0 0 0-1.938 11.412 2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 0 0 11.302-1.989"/><path d="M8.35 2.69A10 10 0 0 1 21.3 15.65"/></svg>
+                  <p>
+                    No hay comentarios
+                  </p>
+                </div>`
     }
 
     content.innerHTML = render
-
     const img = document.getElementById('imageNoticia')
-    img.setAttribute('src', '../public/image/' + media)
+    img.setAttribute('src', '<?= base_url('image/') ?>' + media)
+    const input = document.getElementById('comentario')
+    input.value = ''
   }
 </script>
 

@@ -3,13 +3,19 @@
   <?= view('Template/Alertas', session('alerta')) ?>
 <?php endif; ?>
 
-<section class="w-100 d-flex flex-column flex-justify-center mx-0 align-items-center">
-  <div class="w-100 p-2 d-flex justify-content-end d-md-none d-flex">
+<section class="w-100 d-flex justify-content-between mx-0 align-items-center">
+  <div class="d-md-none d-flex">
+    <button onclick="volver()" id='back' class="text-body bg-body-color p-2 btn rounded-circle">
+      <i data-lucide="arrow-big-left"></i>
+    </button>
+  </div>
+  <div class="d-md-none d-flex">
     <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
       <i data-lucide="moon" id="icon"></i>
     </button>
   </div>
 </section>
+
 <section class="w-100 d-flex justify-content-center align-items-center" style="height: 80dvh;">
 
   <div class="card w-sm-90 w-md-75 w-lg-50 w-xs-90 bg-gray-200 d-flex align-items-center justify-content-center" style="min-height: 70dvh;">
@@ -61,7 +67,11 @@
     </div>
   </div>
 </section>
-
+<script>
+  function volver(){
+    window.history.back()
+  }
+</script>
 
 
 <?= $pie ?>
