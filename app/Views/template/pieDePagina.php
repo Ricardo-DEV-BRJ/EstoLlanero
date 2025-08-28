@@ -115,6 +115,10 @@
     const contraseña = document.getElementById('contrasena')
     contraseña.setAttribute('type', 'password')
   }
+
+  function volver(){
+    window.history.back()
+  }
 </script>
 </section>
 

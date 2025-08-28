@@ -162,7 +162,10 @@ $links = array(
       </header>
     <?php endif; ?>
     <section class="w-100 d-flex flex-column flex-justify-center align-items-center p-4">
-      <div class="w-100 p-2 d-flex justify-content-end d-none d-md-flex">
+      <div class="w-100 p-2 d-flex justify-content-between d-none d-md-flex">
+        <button onclick="volver()" id='back' class="text-body bg-body-color p-2 btn rounded-circle">
+          <i data-lucide="arrow-big-left"></i>
+        </button>
         <button onclick="toggleTheme()" class="text-body bg-body-color p-2 btn rounded-circle">
           <i data-lucide="moon" id="icon"></i>
         </button>
