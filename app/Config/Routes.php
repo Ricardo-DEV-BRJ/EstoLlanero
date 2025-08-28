@@ -55,6 +55,8 @@ $routes->post('agregarCarrusel/(:num)', 'CarruselController::noticias/$1');
 $routes->get('eliminarCarrusel/(:num)', 'CarruselController::eliminar/$1');
 $routes->post('editCarrusel/(:num)/(:segment)', 'CarruselController::editar/$1/$2');
 
+// Auditoria
+$routes->get('auditoria', 'AuditoriaController::index');
 
 //Error
 $routes->get('errorAuth', 'ErrorAuthController::index');

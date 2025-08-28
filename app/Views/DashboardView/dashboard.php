@@ -105,6 +105,9 @@
               <span class="badge bg-accent text-white fw-bold mb-3"> Categoria </span>
               <h1 class="display-5 fw-bold text-white">Aun no hay noticias</h1>
               <p class="lead text-white mb-4">Estamos trabajando en ello..</p>
+              <?php if (session('rol') == 'admin' || session('rol') == 'superadmin'): ?>
+                <p class="lead text-white mb-4">Debes tener al menos 3 noticias agregadas al carrusel</p>
+              <?php endif; ?>
               <a href="#" class="btn btn-brand d-inline-flex align-items-center">
                 Leer más <i data-lucide="arrow-right-from-line" class="ms-2" style="width:18px;height:18px;"></i>
               </a>

@@ -27,29 +27,29 @@ class CarruselModel extends Model
     }
     $sqlNot = 'SELECT id, titulo FROM noticias  WHERE eliminada = 0';
     $sql = 'SELECT
-    ca.id AS id_ca,
-    n.id AS id_not,
-    ca.titulo_presentacion AS titulo,
-    ca.descripcion_corta AS contenido,
-    n.imagen,
-    n.fecha,
-    c.nombre AS categoria,
-    c.id AS categoria_id,
-    u.nombre,
-    u.apellido
-FROM
-    carrusel ca
-INNER JOIN noticias n ON
-    noticia_id = ca.noticia_id
-INNER JOIN categorias c ON
-    n.categoria_id = c.id
-INNER JOIN usuarios u ON
-    n.autor_id = u.id
-WHERE
-    n.eliminada = 0 AND ca.noticia_id = n.id
-ORDER BY
-    ca.id
-DESC';
+                ca.id AS id_ca,
+                n.id AS id_not,
+                ca.titulo_presentacion AS titulo,
+                ca.descripcion_corta AS contenido,
+                ca.imagen,
+                n.fecha,
+                c.nombre AS categoria,
+                c.id AS categoria_id,
+                u.nombre,
+                u.apellido
+                FROM
+                    carrusel ca
+                INNER JOIN noticias n ON
+                    noticia_id = ca.noticia_id
+                INNER JOIN categorias c ON
+                    n.categoria_id = c.id
+                INNER JOIN usuarios u ON
+                    n.autor_id = u.id
+                WHERE
+                    n.eliminada = 0 AND ca.noticia_id = n.id
+                ORDER BY
+                    ca.id
+                DESC';
     $query = [
       $this->db->query($sql),
       $this->db->query($sqlNot),
@@ -77,6 +77,12 @@ DESC';
 
     $nombreImage = $image->getRandomName();
     $sql = 'INSERT INTO carrusel (noticia_id, titulo_presentacion, descripcion_corta, imagen, agregado_por ) VALUES (?,?,?,?,?)';
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Agregar',
+      'Agregada noticia ' . $datos['titulo'] . '. descripción: ' . $datos['descripcion'] . ' al carrusel'
+    ];
     $params = [
       $datos['noticia_id'],
       $datos['titulo'],
@@ -84,7 +90,6 @@ DESC';
       $nombreImage,
       $usuario['id']
     ];
-
     $sqlVeri = 'SELECT * FROM carrusel WHERE noticia_id = ?';
     $paramsVeri = [$datos['noticia_id']];
 
@@ -99,6 +104,7 @@ DESC';
       }
       $this->db->query($sql, $params);
       $image->move(FCPATH . 'image/', $nombreImage);
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception) {
       $result = $this->db->error()['message'];
@@ -109,6 +115,7 @@ DESC';
       ];
     }
   }
+
   public function noticias($datos, $id, $image)
   {
     $usuario = [
@@ -123,6 +130,12 @@ DESC';
         'message' => "No estas autorizado"
       ];
     }
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Agregar',
+      'Agregada noticia ' . $datos['tituloCa'] . '. descripción: ' . $datos['descripcion'] . ' al carrusel'
+    ];
 
     $nombreImage = $image->getRandomName();
     $sql = 'INSERT INTO carrusel (noticia_id, titulo_presentacion, descripcion_corta, imagen, agregado_por ) VALUES (?,?,?,?,?)';
@@ -147,6 +160,7 @@ DESC';
       }
       $this->db->query($sql, $params);
       $image->move(FCPATH . 'image/', $nombreImage);
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception) {
       $result = $this->db->error()['message'];
@@ -172,9 +186,19 @@ DESC';
         'message' => "No estas autorizado"
       ];
     }
+    $sqlCheck = 'SELECT * FROM carrusel WHERE id = ?';
+    $dbCheck = $this->db->query($sqlCheck, [$id]);
+    $resCa = $dbCheck->getResultArray();
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Eliminar',
+      'Se elimino ' . $resCa[0]['titulo_presentacion'] . '. descripción: ' . $resCa[0]['descripcion_corta'] . ' del carrusel'
+    ];
     $sql = 'DELETE FROM carrusel WHERE id = ?';
     try {
       $this->db->query($sql, [$id]);
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception) {
       $result = $this->db->error()['message'];
@@ -207,6 +231,13 @@ DESC';
       $nombreImage = $imagen->getRandomName();
     }
 
+    $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+    $log = [
+      $usuario['id'],
+      'Modificacion',
+      'Se modifico ' . $data['titulo'] . '. descripción: ' . $data['descripcion'] . ' del carrusel'
+    ];
+
     $sql = 'UPDATE carrusel SET noticia_id = ?, titulo_presentacion = ?, descripcion_corta = ?, imagen = ? WHERE id = ?';
     $params = [
       $data['noticia_id'],
@@ -223,7 +254,7 @@ DESC';
           unlink(FCPATH . 'image/' . $oldImage);
         }
       }
-
+      $this->db->query($sqlLog, $log);
       return ['success' => true];
     } catch (\Exception $e) {
       return [

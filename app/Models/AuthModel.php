@@ -14,7 +14,7 @@ class AuthModel extends Model
   {
     $sql = 'SELECT * FROM usuarios WHERE usuario = ?';
     $params = [
-      $datos['usuario'],
+      strtolower($datos['usuario']),
     ];
 
     try {
@@ -50,7 +50,7 @@ class AuthModel extends Model
     $params = [
       $datos['nombre'],
       $datos['apellido'],
-      $datos['usuario'],
+      strtolower($datos['usuario']),
       password_hash($datos['contrasena'], PASSWORD_DEFAULT),
       'lector',
       date('Y-m-d H:i:s'),

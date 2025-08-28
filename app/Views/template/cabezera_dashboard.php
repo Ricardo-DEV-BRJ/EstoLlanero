@@ -7,7 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EstoLLanos - Dashboard</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<?= base_url('favicon.ico') ?>" type="image/x-icon">
   <link href="<?= base_url('css/custom.css') ?>" rel="stylesheet">
   <link href="<?= base_url('css/styledashboard.css') ?>" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

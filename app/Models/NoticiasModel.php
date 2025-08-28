@@ -154,6 +154,12 @@ class NoticiasModel extends Model
             $usuario['id'],
             $datos['categoria_id'],
         ];
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Agregar',
+            'Creada la noticia ' . $datos['titulo'] . '. descripción: ' . $datos['contenido']
+        ];
 
         try {
             if ($usuario['rol'] == 'lector' || empty($usuario['id'])) {
@@ -165,6 +171,7 @@ class NoticiasModel extends Model
             }
             $this->db->query($sql, $params);
             $image->move(FCPATH . 'image/', $nombreImage);
+            $this->db->query($sqlLog, $log);
             return ['success' => true];
         } catch (\Exception) {
             $result = $this->db->error()['message'];
@@ -208,6 +215,12 @@ class NoticiasModel extends Model
             $id
         ];
 
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Modifación',
+            'Se modifico la noticia ' . $data['titulo'] . '. descripción: ' . $data['contenido']
+        ];
         try {
             $this->db->query($sql, $params);
 
@@ -217,7 +230,7 @@ class NoticiasModel extends Model
                     unlink(FCPATH . 'image/' . $oldImage);
                 }
             }
-
+            $this->db->query($sqlLog, $log);
             return ['success' => true];
         } catch (\Exception $e) {
             return [
@@ -243,9 +256,19 @@ class NoticiasModel extends Model
             ];
         }
         $sql = 'CALL eliminar_noticia(?)';
+        $sqlCheck = 'SELECT * FROM noticias WHERE id = ?';
+        $dbCheck = $this->db->query($sqlCheck, [$id]);
+        $resCa = $dbCheck->getResultArray();
+        $sqlLog = 'INSERT INTO logs (usuario_id, accion, detalles) VALUES (?,?,?)';
+        $log = [
+            $usuario['id'],
+            'Eliminar',
+            'Se elimino la noticia ' . $resCa[0]['titulo'] . '. descripción: ' . $resCa[0]['contenido']
+        ];
         try {
             $result = $this->db->query($sql, $id);
             $mensaje = $result->getResultArray();
+            $this->db->query($sqlLog, $log);
             return ['success' => true, 'message' => $mensaje[0]['resultado']];
         } catch (\Exception $e) {
             return [
